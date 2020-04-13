@@ -2,7 +2,7 @@
 name: Feature Request (機能追加)
 about: Suggest an idea for this project
 title: ''
-labels: ''
+labels: 'enhancement'
 assignees: ''
 
 ---
