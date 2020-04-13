@@ -1,5 +1,6 @@
 {
-    "cSpell.words": [
-        "nuricame"
-    ]
+  "cSpell.words": [
+    "nuricame"
+  ],
+  "python.pythonPath": "venv/bin/python3"
 }
