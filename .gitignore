@@ -327,3 +327,6 @@ modules.xml
 ### VisualStudioCode Patch ###
 # Ignore all local history of files
 .history
+
+### Google Cloud Platform ###
+nuricame-web-*.json
