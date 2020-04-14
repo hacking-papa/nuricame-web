@@ -2,16 +2,20 @@
 
 Make a contour by pictures, Web version.
 
-- [Environment](#environment)
+- [Dependencies](#dependencies)
 - [How to](#how-to)
   - [Develop](#develop)
+  - [Test](#test)
   - [Deploy](#deploy)
+- [Misc](#misc)
+  - [License](#license)
 
-## Environment
+## Dependencies
 
 - Google App Engine
   - Python3
-  - OpenCV
+    - OpenCV
+    - NumPy
 
 ## How to
 
@@ -20,6 +24,14 @@ Make a contour by pictures, Web version.
 ```shell
 pip install --upgrade -r requirements.txt
 ```
+
+### Test
+
+```shell
+pytest
+```
+
+The above command will search for all `test_*.py` to test.
 
 ### Deploy
 
@@ -38,3 +50,9 @@ If you want to check logs, type below.
 ```shell
 gcloud app logs tail -s default
 ```
+
+## Misc
+
+### License
+
+[GOOD HACKING DADDY LICENSE](LICENSE.md)
