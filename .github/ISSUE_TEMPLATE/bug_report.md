@@ -2,7 +2,7 @@
 name: Bug Report (不具合報告)
 about: Create a report to help us improve
 title: ''
-labels: ''
+labels: 'bug'
 assignees: ''
 
 ---
