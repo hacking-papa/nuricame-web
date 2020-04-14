@@ -27,7 +27,7 @@ pip install --upgrade -r requirements.txt
 gcloud app deploy --project nuricame-web
 ```
 
-And then, you can browse `https://nuricame-web.an.r.appspot.com/`, or type below.
+And then, you can browse `https://nuricame-web.appspot.com/`, or type below.
 
 ```shell
 gcloud app browse --project nuricame-web

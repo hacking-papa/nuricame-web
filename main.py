@@ -16,9 +16,9 @@ else:
 app = Flask(__name__)
 
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def index():
-    app.logger.info("/index from app.logger")
+    app.logger.info("GET /index")
     return render_template("index.html", title="ぬりカメ")
 
 
