@@ -10,7 +10,8 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     """Return a friendly HTTP greeting."""
-    return render_template("index.html")
+    title = 'ぬりカメ WEBばん'
+    return render_template("index.html", title=title)
 
 
 if __name__ == "__main__":
