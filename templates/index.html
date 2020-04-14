@@ -30,9 +30,12 @@
     <h2 class="title is-2">\ さっそくぬりえをつくる /</h2>
     <div class="columns is-multiline is-centered">
       <div class="column is-narrow has-text-centered">
-        <button class="button">
-          <span>image: 写真を撮る</span>
-        </button>
+        <div x-data="camera()">
+          <button class="button" x-on:click="open()">image: 写真を撮る</button>
+          <div x-show="isOpen()" x-on:click.away="close()">
+              image area:
+          </div>
+        </div>
       </div>
       <div class="column is-narrow has-text-centered">
         <button class="button">
