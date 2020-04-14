@@ -1,10 +1,10 @@
+## Describe the PR
+
+Related issue and a clear and concise description of what the PR is.
+
 ## Screenshots
 
 If applicable, add screenshots to help explain your problem.
-
-## Describe the PR
-
-A clear and concise description of what the PR is.
 
 ## Detail of the change
 
