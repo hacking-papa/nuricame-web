@@ -12,6 +12,7 @@
 # from your .gitignore file, remove the corresponding line
 # below:
 .git
+.github
 .gitignore
 
 # Python pycache:
