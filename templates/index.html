@@ -1,13 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="container">
-  <div class="notification">
-    <form enctype="multipart/form-data" method="post">
-      <input accept="image/*" name="image" required type="file">
-      <input type="submit">
-    </form>
-  </div>
-</div>
 <section class="section">
   <div class="has-text-left">
     <span>ロゴ: はっきんぐパパ</span>
@@ -45,10 +37,12 @@
           </div>
         </div>
       </div>
-      <div class="column is-narrow has-text-centered">
-        <button class="button">
-          <span>image: 画像をアップする</span>
-        </button>
+      <div class="column is-narrow has-text-centered has-background-light">
+        <p>image: 画像をアップする</p>
+        <form enctype="multipart/form-data" method="post">
+          <input accept="image/*" name="image" required type="file">
+          <input type="submit">
+        </form>
       </div>
     </div>
   </div>
