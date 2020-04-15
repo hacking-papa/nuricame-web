@@ -1,5 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
+<div class="container">
+  <div class="notification">
+    <form enctype="multipart/form-data" method="post">
+      <input accept="image/*" name="image" required type="file">
+      <input type="submit">
+    </form>
+  </div>
+</div>
 <section class="section">
   <div class="has-text-left">
     <span>ロゴ: はっきんぐパパ</span>
