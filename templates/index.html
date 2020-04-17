@@ -99,7 +99,11 @@
             src="https://placehold.jp/300x250.png?text=画像をアップする(300x250)"
             alt="画像をアップする"
         /></a>
-        <div class="modal is-active" x-show="isOpen()" @click.away="closeAndInit()">
+        <div
+          class="modal is-active"
+          x-show="isOpen()"
+          @click.away="closeAndInit()"
+        >
           <div class="modal-background" @click="closeAndInit()"></div>
           <div class="modal-content">
             <figure class="image" x-show="hasImage()">
@@ -113,7 +117,13 @@
               <div class="column">
                 <div class="file is-large is-light is-centered">
                   <label class="file-label">
-                    <input class="file-input" type="file" name="resume" id="file-input" x-on:change="preview()">
+                    <input
+                      class="file-input"
+                      type="file"
+                      name="resume"
+                      id="file-input"
+                      x-on:change="preview()"
+                    />
                     <span class="file-cta">
                       <span class="file-label">
                         画像を選ぶ
@@ -123,10 +133,9 @@
                 </div>
               </div>
               <div class="column">
-                <button class="button is-large is-primary" @click="post()">つくる</button>
-              </div>
-              <div class="column">
-                <button class="button is-large is-info" @click="download()">保存する</button>
+                <button class="button is-large is-primary" @click="post()">
+                  つくる
+                </button>
               </div>
             </div>
           </div>

@@ -77,14 +77,5 @@ function selectPhoto() {
           console.log(error);
         });
     },
-    download() {
-      console.log("selectPhoto.download()");
-      var link = document.createElement("a");
-      document.body.appendChild(link);
-      link.href = this.image_url;
-      link.download = "nurie";
-      link.click();
-      document.body.removeChild(link);
-    },
   };
 }
