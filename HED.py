@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
+from typing import Any, Union
 
 import cv2 as cv
 
-A4_WIDTH = 2894
-A4_HEIGHT = 4092
+A4_WIDTH: int = 2894
+A4_HEIGHT: int = 4092
 
 
-class CropLayer(object):
+class CropLayer:
     def __init__(self, params, blobs):
         self.x_start = 0
         self.x_end = 0
@@ -39,8 +40,8 @@ class HED:
 
     def convert(self, image):
         cv.dnn_registerLayer("Crop", CropLayer)
-        scale = max(A4_WIDTH / image.shape[1], A4_HEIGHT / image.shape[0])
-        cv.resize(image, dsize=None, fx=scale, fy=scale)
+        scale: Union[float, Any] = max(A4_WIDTH / image.shape[1], A4_HEIGHT / image.shape[0])
+        self.image = cv.resize(image, dsize=None, fx=scale, fy=scale, interpolation=cv.INTER_CUBIC)
 
 
 if __name__ == "__main__":
