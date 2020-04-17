@@ -99,12 +99,8 @@
             src="https://placehold.jp/300x250.png?text=画像をアップする(300x250)"
             alt="画像をアップする"
         /></a>
-        <div
-          class="modal is-active"
-          x-show="isOpen()"
-          @click.away="closeAndInit()"
-        >
-          <div class="modal-background" @click="closeAndInit()"></div>
+        <div class="modal is-active" x-show="isOpen()" @click.away="close()">
+          <div class="modal-background" @click="close()"></div>
           <div class="modal-content">
             <figure class="image" x-show="hasImage()">
               <img

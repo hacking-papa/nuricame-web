@@ -32,10 +32,6 @@ function selectPhoto() {
       console.log("selectPhoto.close()");
       this.show = false;
     },
-    closeAndInit() {
-      this.close();
-      this.init();
-    },
     isOpen() {
       console.log("selectPhoto.isOpen()");
       return this.show;
@@ -43,11 +39,6 @@ function selectPhoto() {
     hasImage() {
       console.log("selectPhoto.hasImage(): " + this.image_url);
       return Boolean(this.image_url);
-    },
-    init() {
-      console.log("selectPhoto.init()");
-      this.image_url = "";
-      image.src = "";
     },
     preview() {
       console.log("selectPhoto.preview()");
