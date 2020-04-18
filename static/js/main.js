@@ -18,12 +18,14 @@ function takePhoto() {
 
 var url = window.URL || window.webkitURL;
 var fileInput = document.getElementById("file-input");
-var image = document.getElementById("image-preview");
+var imagePreview = document.getElementById("image-preview");
+var imageResult = document.getElementById("image-result");
 
 function selectPhoto() {
   return {
     show: false,
-    image_url: "",
+    loading: "",
+    result_url: "",
     open() {
       console.log("selectPhoto.open()");
       this.show = true;
@@ -36,20 +38,34 @@ function selectPhoto() {
       console.log("selectPhoto.isOpen()");
       return this.show;
     },
-    hasImage() {
-      console.log("selectPhoto.hasImage(): " + this.image_url);
-      return Boolean(this.image_url);
+    startLoading() {
+      console.log("selectPhoto.startLoading()");
+      this.loading = "is-active";
+    },
+    stopLoading() {
+      console.log("selectPhoto.stopLoading()");
+      this.loading = "";
+    },
+    activeLoading() {
+      console.log("selectPhoto.activeLoading()");
+      return this.loading;
+    },
+    hasResult() {
+      console.log("selectPhoto.hasImage(): " + this.result_url);
+      return Boolean(this.result_url);
     },
     preview() {
       console.log("selectPhoto.preview()");
-      this.image_url = url.createObjectURL(fileInput.files[0]);
-      image.src = this.image_url;
+      imagePreview.src = url.createObjectURL(fileInput.files[0]);
+    },
+    previewAndOpen() {
+      console.log("selectPhoto.previewAndOpen()");
+      this.preview();
+      this.open();
     },
     post() {
       console.log("selectPhoto.post()");
       var params = new FormData();
-      image.src = url.createObjectURL(fileInput.files[0]);
-
       params.append("image", fileInput.files[0]);
       console.log(params);
       axios
@@ -59,10 +75,13 @@ function selectPhoto() {
           },
           responseType: "blob",
         })
+        .then(this.startLoading())
         .then((response) => {
           var blob = new Blob([response.data], { type: "image/png" });
-          this.image_url = url.createObjectURL(blob);
-          image.src = this.image_url;
+          this.result_url = url.createObjectURL(blob);
+          imageResult.src = this.result_url;
+          this.close();
+          this.stopLoading();
         })
         .catch((error) => {
           console.log(error);
