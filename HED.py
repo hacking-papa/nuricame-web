@@ -36,12 +36,16 @@ class HED:
             import logging
             self.logger = logging.getLogger(__name__)
             self.logger.setLevel(logging.DEBUG)
+        self.image = None
+        self.output = None
         self.net = cv.dnn.readNetFromCaffe("deploy.prototxt", "hed_pretrained_bsds.caffemodel")
+        cv.dnn_registerLayer("Crop", CropLayer)
 
     def convert(self, image):
-        cv.dnn_registerLayer("Crop", CropLayer)
         scale: Union[float, Any] = max(A4_WIDTH / image.shape[1], A4_HEIGHT / image.shape[0])
         self.image = cv.resize(image, dsize=None, fx=scale, fy=scale, interpolation=cv.INTER_CUBIC)
+        self.output = self.image
+        return self.output
 
 
 if __name__ == "__main__":
