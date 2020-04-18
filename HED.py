@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from typing import Any, Union
 
-import cv2 as cv
+import cv2
 
 A4_WIDTH: int = 2894
 A4_HEIGHT: int = 4092
@@ -38,15 +38,25 @@ class HED:
             self.logger.setLevel(logging.DEBUG)
         self.image = None
         self.output = None
-        self.net = cv.dnn.readNetFromCaffe("deploy.prototxt", "hed_pretrained_bsds.caffemodel")
-        cv.dnn_registerLayer("Crop", CropLayer)
+        self.net = cv2.dnn.readNetFromCaffe("deploy.prototxt", "hed_pretrained_bsds.caffemodel")
+        cv2.dnn_registerLayer("Crop", CropLayer)
 
     def convert(self, image):
-        scale: Union[float, Any] = max(A4_WIDTH / image.shape[1], A4_HEIGHT / image.shape[0])
-        self.image = cv.resize(image, dsize=None, fx=scale, fy=scale, interpolation=cv.INTER_CUBIC)
+        scale: Union[float, Any] = max(A4_WIDTH / image.shape[1], A4_WIDTH / image.shape[0])
+        self.image = cv2.resize(image, dsize=None, fx=scale, fy=scale, interpolation=cv2.INTER_CUBIC)
         self.output = self.image
         return self.output
 
 
 if __name__ == "__main__":
+    from pathlib import Path
+    import main
+
+    sample_dir = Path("./sample")
+    output_dir = Path("./sample/output")
+
     hed = HED()
+
+    for sample_img in (x for x in sample_dir.glob("*") if main.allowed_file(x.name)):
+        print(f"Converting: {sample_img}")
+        cv2.imwrite(str(output_dir / sample_img.name), hed.convert(cv2.imread(str(sample_img))))

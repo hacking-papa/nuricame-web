@@ -17,7 +17,8 @@ else:
     # Local execution
     pass
 
-ALLOWED_EXTENSIONS = {"jpg", "jpeg", "png"}
+ALLOWED_EXTENSIONS = {"bmp", "dib", "jpg", "jpeg", "jpe", "jp2", "png", "webp", "pbm", "pgm", "ppm", "pxm", "pnm",
+                      "pfm", "sr", "ras", "tiff", "tif", "exr", "hdr", "pic"}
 
 
 def allowed_file(filename):
@@ -55,6 +56,8 @@ def index():
 
         img = np.frombuffer(image.read(), dtype=np.uint8)
         img = cv2.imdecode(img, 1)
+        app.logger.debug(f"{img}")
+        app.logger.debug(f"Type: {type(img)}")
         img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
         data = cv2.imencode(".jpg", img)[1].tostring()
         response = make_response()
