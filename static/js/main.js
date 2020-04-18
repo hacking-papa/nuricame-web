@@ -1,21 +1,3 @@
-function takePhoto() {
-  return {
-    show: false,
-    open() {
-      console.log("takePhoto.open()");
-      this.show = true;
-    },
-    close() {
-      console.log("takePhoto.close()");
-      this.show = false;
-    },
-    isOpen() {
-      console.log("takePhoto.isOpen()");
-      return this.show;
-    },
-  };
-}
-
 var url = window.URL || window.webkitURL;
 var fileInput = document.getElementById("file-input");
 var imagePreview = document.getElementById("image-preview");

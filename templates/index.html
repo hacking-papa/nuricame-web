@@ -56,95 +56,58 @@
 <section>
   <div class="container has-text-centered">
     <h1 class="title">＼さっそくぬりえをつくる／</h1>
-    <div class="level">
-      <div class="level-item" x-data="takePhoto()">
-        <a @click="open()"
-          ><img
-            src="https://placehold.jp/300x250.png?text=写真を撮る(300x250)"
-            alt="写真を撮る"
-        /></a>
-        <div class="modal is-active" x-show="isOpen()" @click.away="close()">
-          <div class="modal-background" @click="close()"></div>
-          <div class="modal-content">
-            <figure class="image">
-              <img
-                src="https://placehold.jp/4032x3024.png?text=撮影された写真(4032x3024)"
-                alt="撮影された写真"
-              />
-            </figure>
-            <div class="columns">
-              <div class="column">
-                <button
-                  class="button is-large is-primary is-inverted"
-                  @click="close()"
-                >
-                  やり直す
-                </button>
-              </div>
-              <div class="column">
-                <button class="button is-large is-primary">つくる</button>
-              </div>
-            </div>
-          </div>
-          <button
-            class="modal-close is-large"
-            @click="close()"
-            aria-label="close"
-          ></button>
-        </div>
+    <div x-data="selectPhoto()">
+      <div class="pageloader is-warning" x-bind:class="activeLoading()">
+        <span class="title">ぬりえを作ってるよ！ちょっと待っててね。</span>
       </div>
-      <div class="level-item" x-data="selectPhoto()">
-        <div class="pageloader is-warning" x-bind:class="activeLoading()">
-          <span class="title">ぬりえを作ってるよ！ちょっと待っててね。</span>
-        </div>
-        <div class="file is-large is-light is-centered">
-          <label class="file-label">
-            <input
-              class="file-input"
-              type="file"
-              name="resume"
-              id="file-input"
-              x-on:change="previewAndOpen()"
-            />
-            <img
-              src="https://placehold.jp/300x250.png?text=画像をアップする(300x250)"
-              alt="画像をアップする"
-            />
-          </label>
-        </div>
-        <div class="modal is-active" x-show="isOpen()" @click.away="close()">
-          <div class="modal-background" @click="close()"></div>
-          <div class="modal-content">
-            <figure class="image">
-              <img
-                src="https://placehold.jp/3024x4032.png?text=アップされた写真(3024x4032)"
-                alt="アップされた写真"
-                id="image-preview"
-              />
-            </figure>
-            <div class="columns">
-              <div class="column">
-                <button class="button is-large is-primary" @click="post()">
-                  つくる
-                </button>
-              </div>
-            </div>
-          </div>
-          <button
-            class="modal-close is-large"
-            @click="close()"
-            aria-label="close"
-          ></button>
-        </div>
-        <div x-show="hasResult()">
+      <div class="file is-large is-light is-centered">
+        <label class="file-label">
+          <input
+            class="file-input"
+            type="file"
+            name="resume"
+            id="file-input"
+            x-on:change="previewAndOpen()"
+          />
+          <img
+            src="https://placehold.jp/300x250.png?text=画像をアップする(300x250)"
+            alt="画像をアップする"
+          />
+        </label>
+      </div>
+      <div class="modal is-active" x-show="isOpen()" @click.away="close()">
+        <div class="modal-background" @click="close()"></div>
+        <div class="modal-content">
           <figure class="image">
             <img
-              src=""
-              alt="ぬりえになった画像"
-              id="image-result"
+              src="https://placehold.jp/3024x4032.png?text=アップされた写真(3024x4032)"
+              alt="アップされた写真"
+              id="image-preview"
             />
           </figure>
+          <div class="columns">
+            <div class="column">
+              <button class="button is-large is-primary" @click="post()">
+                つくる
+              </button>
+            </div>
+          </div>
         </div>
+        <button
+          class="modal-close is-large"
+          @click="close()"
+          aria-label="close"
+        ></button>
+      </div>
+      <div x-show="hasResult()">
+        <h2 class="title">完成！</h2>
+        <figure class="image">
+          <img
+            src=""
+            alt="ぬりえになった画像"
+            id="image-result"
+          />
+        </figure>
       </div>
     </div>
   </div>
