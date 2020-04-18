@@ -85,10 +85,15 @@
               id="image-preview"
             />
           </figure>
-          <div class="columns">
-            <div class="column">
+          <div class="level is-mobile">
+            <div class="level-left">
+              <button class="button is-large" @click="close()">
+                やめる
+              </button>
+            </div>
+            <div class="level-right">
               <button class="button is-large is-primary" @click="post()">
-                つくる
+                これでぬりえをつくる
               </button>
             </div>
           </div>
@@ -100,13 +105,9 @@
         ></button>
       </div>
       <div x-show="hasResult()">
-        <h2 class="title">完成！</h2>
+        <h2 class="title">ぬりえの完成！</h2>
         <figure class="image">
-          <img
-            src=""
-            alt="ぬりえになった画像"
-            id="image-result"
-          />
+          <img src="" alt="ぬりえになった画像" id="image-result" />
         </figure>
       </div>
     </div>

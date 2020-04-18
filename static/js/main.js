@@ -33,12 +33,14 @@ function selectPhoto() {
       return this.loading;
     },
     hasResult() {
-      console.log("selectPhoto.hasImage(): " + this.result_url);
+      console.log("selectPhoto.hasResult(): " + this.result_url);
       return Boolean(this.result_url);
     },
     preview() {
       console.log("selectPhoto.preview()");
-      imagePreview.src = url.createObjectURL(fileInput.files[0]);
+      if (fileInput) {
+        imagePreview.src = url.createObjectURL(fileInput.files[0]);
+      }
     },
     previewAndOpen() {
       console.log("selectPhoto.previewAndOpen()");
