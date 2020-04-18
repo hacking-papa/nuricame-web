@@ -15,8 +15,18 @@
 .github
 .gitignore
 
-# Python pycache:
+# Python:
 __pycache__/
+.pytest_cache/
+venv/
 
 # Ignored by the build system
 /setup.cfg
+
+# Mac OS:
+.DS_Store
+
+# Editor:
+.idea/
+.vscode/
+.editorconfig

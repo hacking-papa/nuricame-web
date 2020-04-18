@@ -7,14 +7,16 @@ import cv2
 import numpy as np
 from flask import Flask, flash, render_template, request, redirect, make_response
 
+import HED
+
 if os.getenv("GAE_ENV", "").startswith("standard"):
-    # Production in the standard environment
+    """ Production in the standard environment """
     from google.cloud import logging
 
     client = logging.Client()
     client.setup_logging()
 else:
-    # Local execution
+    """ Local execution """
     pass
 
 ALLOWED_EXTENSIONS = {"bmp", "dib", "jpg", "jpeg", "jpe", "jp2", "png", "webp", "pbm", "pgm", "ppm", "pxm", "pnm",
@@ -56,9 +58,9 @@ def index():
 
         img = np.frombuffer(image.read(), dtype=np.uint8)
         img = cv2.imdecode(img, 1)
-        app.logger.debug(f"{img}")
-        app.logger.debug(f"Type: {type(img)}")
-        img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+        app.logger.debug(f"Image: {img}")
+        app.logger.debug(f"Image Type: {type(img)}")
+        img = HED.convert(img)
         data = cv2.imencode(".jpg", img)[1].tostring()
         response = make_response()
         response.data = data
