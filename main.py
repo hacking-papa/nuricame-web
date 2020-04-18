@@ -58,14 +58,12 @@ def index():
 
         img = np.frombuffer(image.read(), dtype=np.uint8)
         img = cv2.imdecode(img, 1)
-        app.logger.debug(f"Image: {img}")
-        app.logger.debug(f"Image Type: {type(img)}")
         img = HED.convert(img)
         data = cv2.imencode(".jpg", img)[1].tostring()
         response = make_response()
         response.data = data
         response.mimetype = "image/jpeg"
-        app.logger.debug(f"Elapsed Time: {time.time() - start}")
+        app.logger.info(f"Elapsed Time: {time.time() - start}")
         return response
 
 

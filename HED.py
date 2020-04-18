@@ -32,25 +32,17 @@ class CropLayer:
         return [inputs[0][:, :, self.start_y:self.end_y, self.start_x:self.end_x]]
 
 
-def __init__():
-    cv2.dnn_registerLayer("Crop", CropLayer)
-
-
-def scale_to_fit(image, length):
-    scale = max(length / image.shape[1], length / image.shape[0])
-    return cv2.resize(image, dsize=None, fx=scale, fy=scale, interpolation=cv2.INTER_CUBIC)
-
-
 def convert(image):
-    net = cv2.dnn.readNet("deploy.prototxt", "hed_pretrained_bsds.caffemodel")
+    cv2.dnn_registerLayer("Crop", CropLayer)
+    net = cv2.dnn.readNetFromCaffe("deploy.prototxt", "hed_pretrained_bsds.caffemodel")
     blob = cv2.dnn.blobFromImage(image, scalefactor=1.0, size=(PROCESSING_RESOLUTION, PROCESSING_RESOLUTION),
                                  mean=(104.00698793, 116.66876762, 122.67891434), swapRB=False, crop=True)
     net.setInput(blob)
     hed = net.forward()
-    hed = hed[0, 0]
+    hed = cv2.resize(hed[0, 0], (A4_WIDTH, A4_WIDTH), interpolation=cv2.INTER_LINEAR_EXACT)
     hed = (255 * hed).astype("uint8")
-    hed = scale_to_fit(hed, A4_WIDTH)
     output = cv2.bitwise_not(hed)
+    cv2.dnn_unregisterLayer("Crop")
     return output
 
 
