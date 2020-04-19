@@ -42,6 +42,8 @@ def convert(image):
     hed = cv2.resize(hed[0, 0], (A4_WIDTH, A4_WIDTH), interpolation=cv2.INTER_LINEAR_EXACT)
     hed = (255 * hed).astype("uint8")
     output = cv2.bitwise_not(hed)
+    print(f"Output Type: {type(output)}")  # TODO: for Debug!
+    print(f"Output Shape: {output.shape}")  # TODO: for Debug!
     cv2.dnn_unregisterLayer("Crop")
     return output
 
