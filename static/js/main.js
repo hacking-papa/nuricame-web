@@ -7,7 +7,10 @@ const imageResult = document.getElementById("image-result");
 
 function trace(s) {
   if (DEBUG_MODE && this.console && typeof console.log != "undefined") {
-      console.log(s);
+    console.log(s);
+    console.log(imageResult.src)
+    console.log(window.location.href)
+    console.log(document.URL)
   }
 }
 
@@ -15,7 +18,6 @@ function selectPhoto() {
   return {
     show: false,
     loading: "",
-    result_url: "",
     open() {
       trace("selectPhoto.open()");
       this.show = true;
@@ -41,8 +43,8 @@ function selectPhoto() {
       return this.loading;
     },
     hasResult() {
-      trace("selectPhoto.hasResult(): " + this.result_url);
-      return Boolean(this.result_url);
+      trace("selectPhoto.hasResult()");
+      return imageResult.src !== window.location.href;
     },
     preview() {
       trace("selectPhoto.preview()");
@@ -70,8 +72,7 @@ function selectPhoto() {
         .then(this.startLoading())
         .then((response) => {
           const blob = new Blob([response.data], { type: "image/png" });
-          this.result_url = url.createObjectURL(blob);
-          imageResult.src = this.result_url;
+          imageResult.src = url.createObjectURL(blob);
           this.close();
           this.stopLoading();
         })
