@@ -8,9 +8,6 @@ const imageResult = document.getElementById("image-result");
 function trace(s) {
   if (DEBUG_MODE && this.console && typeof console.log != "undefined") {
     console.log(s);
-    console.log(imageResult.src)
-    console.log(window.location.href)
-    console.log(document.URL)
   }
 }
 
