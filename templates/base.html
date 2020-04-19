@@ -1,35 +1,53 @@
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js" lang="ja">
-<head>
-  <meta charset="utf-8">
-  <meta content="ie=edge" http-equiv="x-ua-compatible">
-  <title>{{ title }}</title>
-  <meta content="説明文" name="description">
-  <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
-  <link href="{{ url_for('static', filename='css/bulma-0.8.2/css/bulma.min.css') }}" rel="stylesheet">
-</head>
-<body>
-<!-- IE9未満への配慮が不要であれば、削除 -->
-<!--[if lte IE 9]>
-<p class="browserupgrade">IE9未満用のメッセージ</p>
-<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <meta content="ie=edge" http-equiv="x-ua-compatible" />
+    <title>{{ title }}</title>
+    <!-- TODO: OGP -->
+    <meta content="TODO: 説明文" name="description" />
+    <meta
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+      name="viewport"
+    />
+    <link
+      href="{{ url_for('static', filename='css/bulma-0.8.2/css/bulma.min.css') }}"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- TODO: IE9未満への配慮が不要であれば、削除 -->
+    <!--[if lte IE 9]>
+      <p class="browserupgrade">IE9未満用のメッセージ</p>
+    <![endif]-->
 
-{% block content %}
-<!-- Contents Here! -->
-{% endblock %}
+    <!-- Flash Message -->
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %} {% for category, message in messages %}
+    <div class="notification {{ category }}">
+      <button @click="$el.innerHTML=''" class="delete"></button>
+      {{ message }}
+    </div>
+    {% endfor %} {% endif %} {% endwith %} {% block content %}
+    <!-- Contents Here! -->
+    {% endblock %}
 
-<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
-<!-- Google Analytics -->
-<script>
-  window.ga = function () {
-    ga.q.push(arguments)
-  };
-  ga.q = [];
-  ga.l = +new Date;
-  ga('create', 'UA-XXXXX-Y', 'auto');
-  ga('send', 'pageview')
-</script>
-<script async defer src="https://www.google-analytics.com/analytics.js"></script>
-</body>
+    <!-- TODO: Google Analytics -->
+    <script>
+      window.ga = function () {
+        ga.q.push(arguments);
+      };
+      ga.q = [];
+      ga.l = +new Date();
+      ga("create", "UA-XXXXX-Y", "auto");
+      ga("send", "pageview");
+    </script>
+    <script
+      async
+      defer
+      src="https://www.google-analytics.com/analytics.js"
+    ></script>
+  </body>
 </html>
