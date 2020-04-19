@@ -1,9 +1,9 @@
-var DEBUG_MODE = window.location.href.indexOf("nuricame") <= 0;
+const DEBUG_MODE = window.location.href.indexOf("nuricame") <= 0;
 
-var url = window.URL || window.webkitURL;
-var fileInput = document.getElementById("file-input");
-var imagePreview = document.getElementById("image-preview");
-var imageResult = document.getElementById("image-result");
+const url = window.URL || window.webkitURL;
+const fileInput = document.getElementById("file-input");
+const imagePreview = document.getElementById("image-preview");
+const imageResult = document.getElementById("image-result");
 
 function trace(s) {
   if (DEBUG_MODE && this.console && typeof console.log != "undefined") {
@@ -57,7 +57,7 @@ function selectPhoto() {
     },
     post() {
       trace("selectPhoto.post()");
-      var params = new FormData();
+      const params = new FormData();
       params.append("image", fileInput.files[0]);
       trace(params);
       axios
@@ -69,7 +69,7 @@ function selectPhoto() {
         })
         .then(this.startLoading())
         .then((response) => {
-          var blob = new Blob([response.data], { type: "image/png" });
+          const blob = new Blob([response.data], { type: "image/png" });
           this.result_url = url.createObjectURL(blob);
           imageResult.src = this.result_url;
           this.close();
