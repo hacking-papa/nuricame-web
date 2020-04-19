@@ -3,6 +3,7 @@
 """ Holistically-Nested Edge Detection """
 
 import cv2
+cv2.setUseOptimized(True)
 
 A4_WIDTH: int = 2894
 A4_HEIGHT: int = 4092
@@ -42,8 +43,6 @@ def convert(image):
     hed = cv2.resize(hed[0, 0], (A4_WIDTH, A4_WIDTH), interpolation=cv2.INTER_LINEAR_EXACT)
     hed = (255 * hed).astype("uint8")
     output = cv2.bitwise_not(hed)
-    print(f"Output Type: {type(output)}")  # TODO: for Debug!
-    print(f"Output Shape: {output.shape}")  # TODO: for Debug!
     cv2.dnn_unregisterLayer("Crop")
     return output
 
@@ -51,11 +50,22 @@ def convert(image):
 if __name__ == "__main__":
     from pathlib import Path
     import main
+    import time
 
     sample_dir = Path("./sample")
     output_dir = Path("./sample/output")
 
     for sample_img in (x for x in sample_dir.glob("*") if main.allowed_file(x.name)):
+        start = time.time()
         print(f"Converting: {sample_img}")
-        img = cv2.imread(str(sample_img))
-        cv2.imwrite(str(output_dir / sample_img.name), convert(img))
+        original_img = cv2.imread(str(sample_img))
+        converted_img = convert(original_img)
+        cv2.imwrite(str(output_dir / sample_img.name), converted_img)
+        print(f"Converting Elapsed Time: {time.time() - start}")
+        print(f"Thinning: {sample_img}")
+        start = time.time()
+        converted_img = cv2.bitwise_not(converted_img)
+        thinning_img = cv2.ximgproc.thinning(converted_img)
+        thinning_img = cv2.bitwise_not(thinning_img)
+        cv2.imwrite(str(output_dir / "thinning" / sample_img.name), thinning_img)
+        print(f"Thinning Elapsed Time: {time.time() - start}")
