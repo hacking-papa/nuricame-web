@@ -1,7 +1,15 @@
+var DEBUG_MODE = window.location.href.indexOf("nuricame") <= 0;
+
 var url = window.URL || window.webkitURL;
 var fileInput = document.getElementById("file-input");
 var imagePreview = document.getElementById("image-preview");
 var imageResult = document.getElementById("image-result");
+
+function trace(s) {
+  if (DEBUG_MODE && this.console && typeof console.log != "undefined") {
+      console.log(s);
+  }
+}
 
 function selectPhoto() {
   return {
@@ -9,49 +17,49 @@ function selectPhoto() {
     loading: "",
     result_url: "",
     open() {
-      console.log("selectPhoto.open()");
+      trace("selectPhoto.open()");
       this.show = true;
     },
     close() {
-      console.log("selectPhoto.close()");
+      trace("selectPhoto.close()");
       this.show = false;
     },
     isOpen() {
-      console.log("selectPhoto.isOpen()");
+      trace("selectPhoto.isOpen()");
       return this.show;
     },
     startLoading() {
-      console.log("selectPhoto.startLoading()");
+      trace("selectPhoto.startLoading()");
       this.loading = "is-active";
     },
     stopLoading() {
-      console.log("selectPhoto.stopLoading()");
+      trace("selectPhoto.stopLoading()");
       this.loading = "";
     },
     activeLoading() {
-      console.log("selectPhoto.activeLoading()");
+      trace("selectPhoto.activeLoading()");
       return this.loading;
     },
     hasResult() {
-      console.log("selectPhoto.hasResult(): " + this.result_url);
+      trace("selectPhoto.hasResult(): " + this.result_url);
       return Boolean(this.result_url);
     },
     preview() {
-      console.log("selectPhoto.preview()");
+      trace("selectPhoto.preview()");
       if (fileInput) {
         imagePreview.src = url.createObjectURL(fileInput.files[0]);
       }
     },
     previewAndOpen() {
-      console.log("selectPhoto.previewAndOpen()");
+      trace("selectPhoto.previewAndOpen()");
       this.preview();
       this.open();
     },
     post() {
-      console.log("selectPhoto.post()");
+      trace("selectPhoto.post()");
       var params = new FormData();
       params.append("image", fileInput.files[0]);
-      console.log(params);
+      trace(params);
       axios
         .post("/", params, {
           headers: {
@@ -68,7 +76,7 @@ function selectPhoto() {
           this.stopLoading();
         })
         .catch((error) => {
-          console.log(error);
+          trace(error);
         });
     },
   };
