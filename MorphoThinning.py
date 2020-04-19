@@ -12,7 +12,7 @@ print(f"Threshold: {ret}")
 cv2.imwrite("sample/output/threshold.jpg", img)
 
 size = np.size(img)
-skelton = np.zeros(img.shape, np.uint8)
+skeleton = np.zeros(img.shape, np.uint8)
 
 element = cv2.getStructuringElement(cv2.MORPH_CROSS, (3, 3))
 
@@ -20,9 +20,9 @@ while True:
     open = cv2.morphologyEx(img, cv2.MORPH_OPEN, element)
     temp = cv2.subtract(img, open)
     eroded = cv2.erode(img, element)
-    skelton = cv2.bitwise_or(skelton, temp)
+    skeleton = cv2.bitwise_or(skeleton, temp)
     img = eroded.copy()
     if cv2.countNonZero(img) == 0:
         break
 
-cv2.imwrite("sample/output/skelton.jpg", cv2.bitwise_not(skelton))
+cv2.imwrite("sample/output/MorphoThinning.jpg", cv2.bitwise_not(skeleton))

@@ -30,3 +30,6 @@ venv/
 .idea/
 .vscode/
 .editorconfig
+
+# Sample
+sample/
