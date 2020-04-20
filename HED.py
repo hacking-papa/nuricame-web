@@ -3,6 +3,7 @@
 """ Holistically-Nested Edge Detection """
 
 import cv2
+
 cv2.setUseOptimized(True)
 
 A4_WIDTH: int = 2894
@@ -53,7 +54,10 @@ if __name__ == "__main__":
     import time
 
     sample_dir = Path("./sample")
-    output_dir = Path("./sample/output")
+    output_dir = sample_dir / "output"
+    output_dir.mkdir(parents=True)
+    thinning_dir = output_dir / "thinning"
+    thinning_dir.mkdir(parents=True)
 
     for sample_img in (x for x in sample_dir.glob("*") if main.allowed_file(x.name)):
         start = time.time()
@@ -67,5 +71,5 @@ if __name__ == "__main__":
         converted_img = cv2.bitwise_not(converted_img)
         thinning_img = cv2.ximgproc.thinning(converted_img)
         thinning_img = cv2.bitwise_not(thinning_img)
-        cv2.imwrite(str(output_dir / "thinning" / sample_img.name), thinning_img)
+        cv2.imwrite(str(thinning_dir / sample_img.name), thinning_img)
         print(f"Thinning Elapsed Time: {time.time() - start}")
