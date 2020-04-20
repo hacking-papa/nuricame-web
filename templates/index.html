@@ -72,7 +72,7 @@
             accept="image/*"
             name="image"
             id="file-input"
-            x-on:change="previewAndOpen()"
+            x-on:change="preview()"
           />
           <img
             src="https://placehold.jp/300x250.png?text=画像をアップする(300x250)"
@@ -80,34 +80,27 @@
           />
         </label>
       </div>
-      <div class="modal is-active" x-show="isOpen()" @click.away="close()">
-        <div class="modal-background" @click="close()"></div>
-        <div class="modal-content">
-          <figure class="image">
-            <img
-              src="https://placehold.jp/3024x4032.png?text=アップされた写真(3024x4032)"
-              alt="アップされた写真"
-              id="image-preview"
-            />
-          </figure>
-          <div class="level is-mobile">
-            <div class="level-left">
-              <button class="button is-large" @click="close()">
-                やめる
-              </button>
-            </div>
-            <div class="level-right">
-              <button class="button is-large is-primary" @click="post()">
-                これでぬりえをつくる
-              </button>
-            </div>
-          </div>
+      <div class="modal" id="modal-preview">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">ぬりえにしたい<ruby>画像<rt>がぞう</rt></ruby></p>
+            <button class="delete" aria-label="close"></button>
+          </header>
+          <section class="modal-card-body">
+            <figure class="image">
+              <img
+                src="https://placehold.jp/3024x4032.png?text=アップされた写真(3024x4032)"
+                alt="アップされた写真"
+                id="image-preview"
+              />
+            </figure>
+          </section>
+          <footer class="modal-card-foot">
+            <button class="button is-large is-primary" @click="post()">これでぬりえをつくる</button>
+            <button class="button is-medium is-outline" @click="closePreview()">やめる</button>
+          </footer>
         </div>
-        <button
-          class="modal-close is-large"
-          @click="close()"
-          aria-label="close"
-        ></button>
       </div>
       <div x-show="hasResult()">
         <h2 class="title">

@@ -4,6 +4,9 @@ const url = window.URL || window.webkitURL;
 const fileInput = document.getElementById("file-input");
 const imagePreview = document.getElementById("image-preview");
 const imageResult = document.getElementById("image-result");
+const modalPreview = Bulma.create('modal', {
+  element: document.querySelector('#modal-preview')
+});
 
 function trace(s) {
   if (DEBUG_MODE && this.console && typeof console.log != "undefined") {
@@ -13,20 +16,7 @@ function trace(s) {
 
 function selectPhoto() {
   return {
-    show: false,
     loading: "",
-    open() {
-      trace("selectPhoto.open()");
-      this.show = true;
-    },
-    close() {
-      trace("selectPhoto.close()");
-      this.show = false;
-    },
-    isOpen() {
-      trace("selectPhoto.isOpen()");
-      return this.show;
-    },
     startLoading() {
       trace("selectPhoto.startLoading()");
       this.loading = "is-active";
@@ -47,12 +37,12 @@ function selectPhoto() {
       trace("selectPhoto.preview()");
       if (fileInput) {
         imagePreview.src = url.createObjectURL(fileInput.files[0]);
-      }
+        modalPreview.open();
+        }
     },
-    previewAndOpen() {
-      trace("selectPhoto.previewAndOpen()");
-      this.preview();
-      this.open();
+    closePreview() {
+      trace("selectPhoto.closePreview()");
+      modalPreview.close();
     },
     post() {
       trace("selectPhoto.post()");
@@ -70,12 +60,12 @@ function selectPhoto() {
         .then((response) => {
           const blob = new Blob([response.data], { type: "image/png" });
           imageResult.src = url.createObjectURL(blob);
-          this.close();
+          this.closePreview();
           this.stopLoading();
         })
         .catch((error) => {
           trace(error);
-          this.close();
+          this.closePreview();
           this.stopLoading();
           Bulma.create('alert', {
             type: 'danger',
