@@ -4,6 +4,8 @@
 
 import cv2
 
+cv2.setUseOptimized(True)
+
 A4_WIDTH: int = 2894
 A4_HEIGHT: int = 4092
 PROCESSING_RESOLUTION: int = 512
@@ -49,11 +51,25 @@ def convert(image):
 if __name__ == "__main__":
     from pathlib import Path
     import main
+    import time
 
     sample_dir = Path("./sample")
-    output_dir = Path("./sample/output")
+    output_dir = sample_dir / "output"
+    output_dir.mkdir(parents=True)
+    thinning_dir = output_dir / "thinning"
+    thinning_dir.mkdir(parents=True)
 
     for sample_img in (x for x in sample_dir.glob("*") if main.allowed_file(x.name)):
+        start = time.time()
         print(f"Converting: {sample_img}")
-        img = cv2.imread(str(sample_img))
-        cv2.imwrite(str(output_dir / sample_img.name), convert(img))
+        original_img = cv2.imread(str(sample_img))
+        converted_img = convert(original_img)
+        cv2.imwrite(str(output_dir / sample_img.name), converted_img)
+        print(f"Converting Elapsed Time: {time.time() - start}")
+        print(f"Thinning: {sample_img}")
+        start = time.time()
+        converted_img = cv2.bitwise_not(converted_img)
+        thinning_img = cv2.ximgproc.thinning(converted_img)
+        thinning_img = cv2.bitwise_not(thinning_img)
+        cv2.imwrite(str(thinning_dir / sample_img.name), thinning_img)
+        print(f"Thinning Elapsed Time: {time.time() - start}")

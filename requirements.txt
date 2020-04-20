@@ -2,5 +2,6 @@ Flask
 google-cloud-logging
 numpy
 opencv-python
+opencv-contrib-python
 pytest
 pytest-cov
