@@ -330,3 +330,6 @@ modules.xml
 
 ### Google Cloud Platform ###
 nuricame-web-*.json
+
+### Sample ###
+sample/output/
