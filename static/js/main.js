@@ -75,6 +75,14 @@ function selectPhoto() {
         })
         .catch((error) => {
           trace(error);
+          this.close();
+          this.stopLoading();
+          Bulma.create('alert', {
+            type: 'danger',
+            title: 'つくるのしっぱい！',
+            body: 'すこし<ruby>時間<rt>じかん</rt></ruby>がたってから、また<ruby>試<rt>ため</rt></ruby>してみてね。',
+            confirm: 'わかりました',
+          });
         });
     },
   };
