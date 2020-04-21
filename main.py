@@ -78,7 +78,7 @@ def index():
             app.logger.warning("No image has been selected!")
             return jsonify({"code": 2, "message": "Warning: No image has been selected!"}), 400
         if not allowed_file(image.filename):
-            app.logger.warning("No image has been selected!")
+            app.logger.warning("Unauthorized extensions!")
             return jsonify({"code": 3, "message": "Warning: Unauthorized extensions!"}), 400
 
         img = np.frombuffer(image.read(), dtype=np.uint8)
