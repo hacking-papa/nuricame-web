@@ -4,8 +4,8 @@ const url = window.URL || window.webkitURL;
 const fileInput = document.getElementById("file-input");
 const imagePreview = document.getElementById("image-preview");
 const imageResult = document.getElementById("image-result");
-const modalPreview = Bulma.create('modal', {
-  element: document.querySelector('#modal-preview')
+const modalPreview = Bulma.create("modal", {
+  element: document.querySelector("#modal-preview"),
 });
 
 function trace(s) {
@@ -38,7 +38,7 @@ function selectPhoto() {
       if (fileInput) {
         imagePreview.src = url.createObjectURL(fileInput.files[0]);
         modalPreview.open();
-        }
+      }
     },
     closePreview() {
       trace("selectPhoto.closePreview()");
@@ -67,11 +67,12 @@ function selectPhoto() {
           trace(error);
           this.closePreview();
           this.stopLoading();
-          Bulma.create('alert', {
-            type: 'danger',
-            title: 'つくるのしっぱい！',
-            body: 'すこし<ruby>時間<rt>じかん</rt></ruby>がたってから、また<ruby>試<rt>ため</rt></ruby>してみてね。',
-            confirm: 'わかりました',
+          Bulma.create("alert", {
+            type: "danger",
+            title: "しっぱい！",
+            body:
+              "すこし<ruby>時間<rt>じかん</rt></ruby>がたってから、また<ruby>試<rt>ため</rt></ruby>してみてね。",
+            confirm: "わかりました",
           });
         });
     },

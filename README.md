@@ -16,6 +16,8 @@ Make a contour by pictures, Web version.
   - Python3
     - OpenCV
     - NumPy
+  - [Bulma CSS](https://bulma.io/)
+  - [Alpine.js](https://github.com/alpinejs/alpine)
 
 ## How to
 

@@ -1,6 +1,13 @@
 {
   "cSpell.words": [
-    "nuricame"
+    "allowfullscreen",
+    "bulma",
+    "fullheight",
+    "fullwidth",
+    "gcloud",
+    "nuricame",
+    "pageloader",
+    "pytest"
   ],
   "python.pythonPath": "venv/bin/python3"
 }

@@ -55,9 +55,9 @@
 </section>
 <section>
   <div class="container has-text-centered">
-    <h1 class="title">＼さっそくぬりえをつくる／</h1>
+    <h2 class="title">＼さっそくぬりえをつくる／</h2>
     <div x-data="selectPhoto()">
-      <div class="pageloader is-warning" x-bind:class="activeLoading()">
+      <div id="pageloader" class="pageloader" x-bind:class="activeLoading()">
         <span class="title"
           >ぬりえを<ruby>作<rt>つく</rt></ruby
           >ってるよ！ちょっと<ruby>待<rt>ま</rt></ruby
@@ -97,8 +97,8 @@
             </figure>
           </section>
           <footer class="modal-card-foot">
-            <button class="button is-large is-primary" @click="post()">これでぬりえをつくる</button>
-            <button class="button is-medium is-outline" @click="closePreview()">やめる</button>
+            <button id="cancel" class="button is-medium is-outline" @click="closePreview()">やめる</button>
+            <button id="submit" class="button is-large is-primary" @click="post()">これでぬりえをつくる</button>
           </footer>
         </div>
       </div>
@@ -107,7 +107,7 @@
           ぬりえの<ruby>完成<rt>かんせい</rt></ruby
           >！
         </h2>
-        <figure class="image">
+        <figure class="box image">
           <img src="" alt="ぬりえになった画像" id="image-result" />
         </figure>
       </div>
@@ -224,7 +224,7 @@
             src="static/img/envelope-regular.svg"
             alt="メール"
           />
-          <span class="is-size-3">team.hacking.papa@gmail.com</span>
+          <span class="is-size-4">team.hacking.papa@gmail.com</span>
         </a>
       </div>
     </div>

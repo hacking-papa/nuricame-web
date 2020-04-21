@@ -1,0 +1,20 @@
+@charset "utf-8";
+
+body {
+  background: #fefef1;
+  background-color: #fefef1;
+  font-family: "M PLUS Rounded 1c";
+}
+
+#pageloader {
+  background: #fff100;
+  background-color: #fff100;
+}
+
+button#cancel {
+  margin-right: auto;
+}
+
+button#submit {
+  margin-left: auto;
+}
