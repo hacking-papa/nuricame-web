@@ -1,10 +1,246 @@
 {% extends "base.html" %} {% block content %}
-<div class="container">
-  <div class="notification">
-    <form enctype="multipart/form-data" method="post">
-      <input accept="image/*" name="image" required type="file" />
-      <input type="submit" />
-    </form>
+<section class="section">
+  <nav class="navbar">
+    <nav class="navbar-brand">
+      <img
+        src="https://placehold.jp/120x120.png?text=はっきんぐパパのロゴ(120x120)"
+        alt="はっきんぐパパ"
+      />
+    </nav>
+  </nav>
+</section>
+<section class="hero">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <div>
+        <img
+          src="https://placehold.jp/350x240.png?text=ぬりカメのロゴ(350x240)"
+          alt="ぬりカメ"
+        />
+      </div>
+      <div>
+        <img
+          src="https://placehold.jp/350x200.png?text=WEBばん(350x200)"
+          alt="WEBばん"
+        />
+      </div>
+      <div class="content is-medium">
+        <p>
+          <ruby>外出<rt>がいしゅつ</rt></ruby
+          >できなくて<ruby>遊<rt>あそ</rt></ruby
+          >ぶものがない！<br /><ruby>家遊<rt>いえあそ</rt></ruby
+          >びに<ruby>飽<rt>あ</rt></ruby
+          >きた！<br />という<ruby>子<rt>こ</rt></ruby
+          >どもたちのために。
+        </p>
+        <p>
+          <ruby>撮<rt>と</rt></ruby
+          >ったものをなんでも<br />ぬりえにしてくれる、<br /><ruby
+            >魔法<rt>まほう</rt></ruby
+          >のカメラ「ぬりカメ」を<br /><ruby>WEB<rt>うぇぶ</rt></ruby
+          >ばんで<ruby>公開<rt>こうかい</rt></ruby
+          >します。
+        </p>
+        <p>
+          ぜひ、ご<ruby>家庭<rt>かてい</rt></ruby
+          >で<ruby>子<rt>こ</rt></ruby
+          >どもたちと<ruby>一緒<rt>いっしょ</rt></ruby
+          >に、<br />ぬりえを<ruby>作<rt>つく</rt></ruby
+          >って<ruby>遊<rt>あそ</rt></ruby
+          >んでください。
+        </p>
+      </div>
+    </div>
   </div>
-</div>
+</section>
+<section>
+  <div class="container has-text-centered">
+    <h2 class="title">＼さっそくぬりえをつくる／</h2>
+    <div x-data="selectPhoto()">
+      <div id="pageloader" class="pageloader" x-bind:class="activeLoading()">
+        <span class="title"
+          >ぬりえを<ruby>作<rt>つく</rt></ruby
+          >ってるよ！ちょっと<ruby>待<rt>ま</rt></ruby
+          >っててね。</span
+        >
+      </div>
+      <div class="file is-large is-light is-centered">
+        <label class="file-label">
+          <input
+            class="file-input"
+            type="file"
+            accept="image/*"
+            name="image"
+            id="file-input"
+            x-on:change="preview()"
+          />
+          <img
+            src="https://placehold.jp/300x250.png?text=画像をアップする(300x250)"
+            alt="画像をアップする"
+          />
+        </label>
+      </div>
+      <div class="modal" id="modal-preview">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">ぬりえにしたい<ruby>画像<rt>がぞう</rt></ruby></p>
+            <button class="delete" aria-label="close"></button>
+          </header>
+          <section class="modal-card-body">
+            <figure class="image">
+              <img
+                src="https://placehold.jp/3024x4032.png?text=アップされた写真(3024x4032)"
+                alt="アップされた写真"
+                id="image-preview"
+              />
+            </figure>
+          </section>
+          <footer class="modal-card-foot">
+            <button id="cancel" class="button is-medium is-outline" @click="closePreview()">やめる</button>
+            <button id="submit" class="button is-large is-primary" @click="post()">これでぬりえをつくる</button>
+          </footer>
+        </div>
+      </div>
+      <div x-show="hasResult()">
+        <h2 class="title">
+          ぬりえの<ruby>完成<rt>かんせい</rt></ruby
+          >！
+        </h2>
+        <figure class="box image">
+          <img src="" alt="ぬりえになった画像" id="image-result" />
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="container has-text-centered">
+    <h1 class="title">
+      ぬりカメ<ruby>WEB<rt>うぇぶ</rt></ruby
+      >ばんの<ruby>使<rt>つか</rt></ruby
+      >い<ruby>方<rt>かた</rt></ruby>
+    </h1>
+    <div class="box">
+      <figure class="image is-4by3">
+        <img
+          src="https://placehold.jp/800x600.png?text=サンプルの画像(800x600)"
+          alt="サンプルの画像"
+        />
+      </figure>
+      <div class="content is-medium">
+        スマホやパソコンのカメラで<ruby>写真<rt>しゃしん</rt></ruby
+        >を<ruby>撮<rt>と</rt></ruby
+        >る<br />
+        または<br />
+        お<ruby>気<rt>き</rt></ruby
+        >に<ruby>入<rt>い</rt></ruby
+        >りの<ruby>画像<rt>がぞう</rt></ruby
+        >をアップ
+      </div>
+    </div>
+    <figure class="container image is-64x64 is-flex">
+      <img class="" src="static/img/arrow-down.svg" alt="下向き矢印" />
+    </figure>
+    <div class="box">
+      <figure class="image is-4by3">
+        <img
+          src="https://placehold.jp/800x600.png?text=ぬりえになった画像(800x600)"
+          alt="ぬりえになった画像"
+        />
+      </figure>
+      <div class="content is-medium">
+        ぬりえ<ruby>化<rt>か</rt></ruby
+        ><ruby>完了<rt>かんりょう</rt></ruby
+        >！
+      </div>
+    </div>
+    <figure class="container image is-64x64 is-flex">
+      <img class="" src="static/img/arrow-down.svg" alt="下向き矢印" />
+    </figure>
+    <div class="box">
+      <figure class="image is-4by3">
+        <img
+          src="https://placehold.jp/800x600.png?text=印刷風景(800x600)"
+          alt="印刷風景"
+        />
+      </figure>
+      <div class="content is-medium">
+        プリンターで<ruby>印刷<rt>いんさつ</rt></ruby
+        >。<br />
+        <ruby>存分<rt>ぞんぶん</rt></ruby
+        >に<ruby>塗<rt>ぬ</rt></ruby
+        >ってね。
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="container has-text-centered">
+    <h1 class="title">ぬりカメとは</h1>
+    <figure class="image is-16by9">
+      <iframe
+        class="has-ratio"
+        width="640"
+        height="360"
+        src="https://www.youtube.com/embed/M2JKckXSP6g?showinfo=0"
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
+    </figure>
+    <div class="box">
+      <figure class="image">
+        <img
+          src="https://placehold.jp/800x600.png?text=1号機(800x600)"
+          alt="1号機"
+        />
+      </figure>
+      <div class="content is-medium">
+        ぬりカメ1<ruby>号機<rt>ごうき</rt></ruby>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="is-fullheight">
+  <div class="image is-fullwidth">
+    <img
+      src="https://placehold.jp/1920x1080.png?text=ぬりえしてる様子(1920x1080)"
+      alt="ぬりえしてる様子"
+    />
+  </div>
+</section>
+<section>
+  <div class="container has-text-centered">
+    <h1 class="title">
+      お<ruby>問<rt>と</rt></ruby
+      >い<ruby>合<rt>あ</rt></ruby
+      >わせはこちら
+    </h1>
+    <div class="container is-inline-block">
+      <div class="container is-flex">
+        <a href="mailto:team.hacking.papa@gmail.com?subject=【ぬりカメ】 ">
+          <img
+            class="container image is-128x128"
+            src="static/img/envelope-regular.svg"
+            alt="メール"
+          />
+          <span class="is-size-4">team.hacking.papa@gmail.com</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+<footer class="footer">
+  <div class="content has-text-centered">
+    <figure>
+      <img
+        src="https://placehold.jp/120x120.png?text=はっきんぐパパのロゴ(120x120)"
+        alt="はっきんぐパパ"
+      />
+    </figure>
+    <p>
+      &copy; 2020 はっきんぐパパ おーるらいつりざーぶど
+    </p>
+  </div>
+</footer>
 {% endblock %}
