@@ -35,23 +35,21 @@ if os.getenv("GAE_ENV", "").startswith("standard"):
     client = logging.Client()
     client.setup_logging()
 
-    # TODO: Profiler for Debug.
-    # It starts a daemon thread which continuously collects and uploads profiles.
-    # Best done as early as possible.
     try:
         googlecloudprofiler.start(verbose=3)
     except (ValueError, NotImplementedError) as exc:
         app.logger.error(exc)
 else:
     """ Local execution """
+    app.debug = True
+
     import flask_monitoringdashboard as dashboard
 
-    dashboard.bind(app)  # TODO: for Profiling
+    dashboard.bind(app)  # for Profiling
+    toolbar = DebugToolbarExtension(app)  # for Profiling
+    app.config["DEBUG_TB_PROFILER_ENABLED"] = True  # for Profiling
 
-app.config["TRACER"] = initialize_tracer("nuricame-web")  # TODO: for Profiling
-app.debug = True
-toolbar = DebugToolbarExtension(app)  # TODO: for Profiling
-app.config["DEBUG_TB_PROFILER_ENABLED"] = True
+app.config["TRACER"] = initialize_tracer("nuricame-web")  # for Profiling
 
 app.config["MAX_CONTENT_LENGTH"] = 10 * 1024 * 1024  # 10MiB
 ALLOWED_EXTENSIONS = {"bmp", "dib", "jpg", "jpeg", "jpe", "jp2", "png", "webp", "pbm", "pgm", "ppm", "pxm", "pnm",
@@ -71,10 +69,10 @@ def redirect_with_flash(url, message, category):
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "GET":
-        app.logger.info("GET /index")
+        app.logger.debug("GET /index")
         return render_template("index.html")
     elif request.method == "POST":
-        app.logger.info("POST /index")
+        app.logger.debug("POST /index")
         start = time.time()
 
         if "image" not in request.files:
@@ -93,7 +91,7 @@ def index():
         response = make_response()
         response.data = data
         response.mimetype = "image/png"
-        app.logger.info(f"Elapsed Time: {time.time() - start}")
+        app.logger.debug(f"Elapsed Time: {time.time() - start}")
         return response
 
 

@@ -37,6 +37,7 @@ class CropLayer:
 
 @profile(precision=4)
 def convert(image):
+    # TODO: Profiling for Debug!
     cv2.dnn_registerLayer("Crop", CropLayer)
     net = cv2.dnn.readNetFromCaffe("hed.prototxt", "hed.caffemodel")
     blob = cv2.dnn.blobFromImage(image, scalefactor=1.0, size=(PROCESSING_RESOLUTION, PROCESSING_RESOLUTION),
