@@ -2,6 +2,8 @@ Flask
 google-cloud-logging
 google-cloud-profiler
 numpy
+opencensus
+opencensus-ext-stackdriver
 opencv-python
 opencv-contrib-python
 pytest

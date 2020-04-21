@@ -5,7 +5,9 @@ import time
 
 import cv2
 import numpy as np
+import opencensus.trace.tracer
 from flask import Flask, flash, render_template, request, redirect, make_response
+from opencensus.ext.stackdriver import trace_exporter as stackdriver_exporter
 
 import HED
 
@@ -32,6 +34,17 @@ ALLOWED_EXTENSIONS = {"bmp", "dib", "jpg", "jpeg", "jpe", "jp2", "png", "webp", 
                       "pfm", "sr", "ras", "tiff", "tif", "exr", "hdr", "pic"}
 
 
+def initialize_tracer(project_id):
+    exporter = stackdriver_exporter.StackdriverExporter(
+        project_id=project_id
+    )
+    tracer = opencensus.trace.tracer.Tracer(
+        exporter=exporter,
+        sampler=opencensus.trace.tracer.samplers.AlwaysOnSampler()
+    )
+    return tracer
+
+
 def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
@@ -44,6 +57,7 @@ def redirect_with_flash(url, message, category):
 
 app = Flask(__name__)
 app.secret_key = b"}\xa8\xc3\xc3\xf60%\xe95\xfb\xb2}7\xdbb\xf7"
+app.config["TRACER"] = initialize_tracer("nuricame-web")
 app.config["MAX_CONTENT_LENGTH"] = 10 * 1024 * 1024  # 10MB
 
 
