@@ -67,13 +67,34 @@ function selectPhoto() {
           trace(error);
           this.closePreview();
           this.stopLoading();
-          Bulma.create("alert", {
-            type: "danger",
-            title: "しっぱい！",
-            body:
-              "すこし<ruby>時間<rt>じかん</rt></ruby>がたってから、また<ruby>試<rt>ため</rt></ruby>してみてね。",
-            confirm: "わかりました",
-          });
+          const reader = new FileReader();
+          reader.readAsText(error.response.data);
+          reader.onload = () => {
+            trace(reader.result);
+            const json = JSON.parse(reader.result);
+            let alertType, message;
+            switch (json.code) {
+              case 1:
+                alertType = "error";
+                message = "イメージパラメータがありません";
+              case 2:
+                alertType = "warning";
+                message =
+                  "<ruby>画像<rt>がぞう</rt></ruby>が<ruby>選<rt>えら</rt></ruby>ばれていません";
+              case 3:
+                alertType = "warning";
+                message =
+                  "ぬりえにできない<ruby>画像<rt>がぞう</rt></ruby>の<ruby>種類<rt>しゅるい</rt></ruby>です";
+            }
+            Bulma.create("alert", {
+              type: alertType,
+              title: "しっぱい！",
+              body:
+                message +
+                "<br />すこし<ruby>時間<rt>じかん</rt></ruby>がたってから、また<ruby>試<rt>ため</rt></ruby>してみてね",
+              confirm: "わかりました",
+            });
+          };
         });
     },
   };
