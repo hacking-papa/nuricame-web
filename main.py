@@ -42,7 +42,7 @@ app.config["MAX_CONTENT_LENGTH"] = 10 * 1024 * 1024  # 10MB
 def index():
     if request.method == "GET":
         app.logger.info("GET /index")
-        return render_template("index.html", title="ぬりカメ")
+        return render_template("index.html", title="ぬりカメ", url_root=request.url_root)
     elif request.method == "POST":
         app.logger.info("POST /index")
         start = time.time()

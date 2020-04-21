@@ -1,17 +1,20 @@
 <!DOCTYPE html>
-<html class="no-js" lang="ja">
+<html class="no-js" lang="ja" prefix="og: http://ogp.me/ns#">
   <head>
-    <meta charset="utf-8">
-    <meta content="ie=edge" http-equiv="x-ua-compatible">
-    <link rel="icon" type="image/png" href="{{ url_for("static", filename="img/favicon.png") }}">
+    <meta charset="utf-8" />
+    <meta content="ie=edge" http-equiv="x-ua-compatible" />
+    <link rel="icon" type="image/png" href="{{ url_for("static", filename="img/favicon.png") }}" />
     <title>{{ title }}</title>
-    <!-- TODO: OGP -->
-    <meta content="TODO: 説明文" name="description">
-    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
-    <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet">
-    <link href="{{ url_for("static", filename="css/bulma-0.8.2/css/bulma.min.css") }}" rel="stylesheet">
-    <link href="{{ url_for("static", filename="css/bulma-0.8.2/css/bulma-pageloader.min.css") }}" rel="stylesheet">
-    <link href="{{ url_for("static", filename="css/base.css") }}" rel="stylesheet">
+    <meta property="og:title" content="{{ title }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ url_root }}" />
+    <meta property="og:image" content="{{ url_root }}static/img/OGP.png" />
+    <meta content="TODO: 説明文" name="description" />
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
+    <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet" />
+    <link href="{{ url_for("static", filename="css/bulma-0.8.2/css/bulma.min.css") }}" rel="stylesheet" />
+    <link href="{{ url_for("static", filename="css/bulma-0.8.2/css/bulma-pageloader.min.css") }}" rel="stylesheet" />
+    <link href="{{ url_for("static", filename="css/base.css") }}" rel="stylesheet" />
   </head>
   <body>
     <!-- IE9未満への配慮が不要であれば、削除 -->
