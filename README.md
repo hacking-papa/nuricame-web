@@ -67,7 +67,18 @@ gcloud app logs tail -s default
 
 ## Misc
 
-### Holistically-Nested Edge Detection
+### [Holistically-Nested Edge Detection](https://github.com/s9xie/hed)
+
+Special thanks to Saining Xie.
+
+```text
+@InProceedings{xie15hed,
+  author = {"Xie, Saining and Tu, Zhuowen"},
+  Title = {Holistically-Nested Edge Detection},
+  Booktitle = "Proceedings of IEEE International Conference on Computer Vision",
+  Year  = {2015},
+}
+```
 
 ![hed prototxt](https://user-images.githubusercontent.com/32637762/79853360-eb421900-8402-11ea-8872-4cf733871fdc.png)
 

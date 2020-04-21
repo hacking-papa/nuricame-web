@@ -1,4 +1,5 @@
 Flask
+flask_monitoringdashboard
 google-cloud-logging
 google-cloud-profiler
 numpy

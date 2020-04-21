@@ -4,12 +4,16 @@ import os
 import time
 
 import cv2
+import flask_monitoringdashboard as dashboard
 import numpy as np
 import opencensus.trace.tracer
 from flask import Flask, flash, render_template, request, redirect, make_response
 from opencensus.ext.stackdriver import trace_exporter as stackdriver_exporter
 
 import HED
+
+app = Flask(__name__)
+app.secret_key = b"}\xa8\xc3\xc3\xf60%\xe95\xfb\xb2}7\xdbb\xf7"
 
 if os.getenv("GAE_ENV", "").startswith("standard"):
     """ Production in the standard environment """
@@ -30,8 +34,8 @@ else:
     """ Local execution """
     pass
 
-ALLOWED_EXTENSIONS = {"bmp", "dib", "jpg", "jpeg", "jpe", "jp2", "png", "webp", "pbm", "pgm", "ppm", "pxm", "pnm",
-                      "pfm", "sr", "ras", "tiff", "tif", "exr", "hdr", "pic"}
+app.config["MAX_CONTENT_LENGTH"] = 10 * 1024 * 1024  # 10MB
+dashboard.bind(app)
 
 
 def initialize_tracer(project_id):
@@ -45,6 +49,12 @@ def initialize_tracer(project_id):
     return tracer
 
 
+app.config["TRACER"] = initialize_tracer("nuricame-web")
+
+ALLOWED_EXTENSIONS = {"bmp", "dib", "jpg", "jpeg", "jpe", "jp2", "png", "webp", "pbm", "pgm", "ppm", "pxm", "pnm",
+                      "pfm", "sr", "ras", "tiff", "tif", "exr", "hdr", "pic"}
+
+
 def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
@@ -53,12 +63,6 @@ def redirect_with_flash(url, message, category):
     app.logger.debug(message)
     flash(message, category)
     return redirect(url)
-
-
-app = Flask(__name__)
-app.secret_key = b"}\xa8\xc3\xc3\xf60%\xe95\xfb\xb2}7\xdbb\xf7"
-app.config["TRACER"] = initialize_tracer("nuricame-web")
-app.config["MAX_CONTENT_LENGTH"] = 10 * 1024 * 1024  # 10MB
 
 
 @app.route("/", methods=["GET", "POST"])
