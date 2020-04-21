@@ -25,6 +25,7 @@ venv/
 
 # Mac OS:
 .DS_Store
+._*
 
 # Editor:
 .idea/

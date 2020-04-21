@@ -36,7 +36,7 @@ class CropLayer:
 
 def convert(image):
     cv2.dnn_registerLayer("Crop", CropLayer)
-    net = cv2.dnn.readNetFromCaffe("deploy.prototxt", "hed_pretrained_bsds.caffemodel")
+    net = cv2.dnn.readNetFromCaffe("hed.prototxt", "hed.caffemodel")
     blob = cv2.dnn.blobFromImage(image, scalefactor=1.0, size=(PROCESSING_RESOLUTION, PROCESSING_RESOLUTION),
                                  mean=(104.00698793, 116.66876762, 122.67891434), swapRB=False, crop=True)
     net.setInput(blob)

@@ -1,5 +1,6 @@
 Flask
 google-cloud-logging
+google-cloud-profiler
 numpy
 opencv-python
 opencv-contrib-python

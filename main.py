@@ -12,9 +12,18 @@ import HED
 if os.getenv("GAE_ENV", "").startswith("standard"):
     """ Production in the standard environment """
     from google.cloud import logging
+    import googlecloudprofiler
 
     client = logging.Client()
     client.setup_logging()
+
+    # TODO: Profiler for Debug.
+    # It starts a daemon thread which continuously collects and uploads profiles.
+    # Best done as early as possible.
+    try:
+        googlecloudprofiler.start(verbose=3)
+    except (ValueError, NotImplementedError) as exc:
+        app.logger.error(exc)
 else:
     """ Local execution """
     pass
@@ -42,7 +51,7 @@ app.config["MAX_CONTENT_LENGTH"] = 10 * 1024 * 1024  # 10MB
 def index():
     if request.method == "GET":
         app.logger.info("GET /index")
-        return render_template("index.html", title="ぬりカメ")
+        return render_template("index.html")
     elif request.method == "POST":
         app.logger.info("POST /index")
         start = time.time()
