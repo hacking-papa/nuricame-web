@@ -19,14 +19,19 @@
     <![endif]-->
 
     <!-- Flash Message -->
-    {% with messages = get_flashed_messages(with_categories=true) %} {% if
-    messages %} {% for category, message in messages %}
-    <div class="notification {{ category }}">
-      <button @click="$el.innerHTML=''" class="delete"></button>
-      {{ message }}
-    </div>
-    {% endfor %} {% endif %} {% endwith %} {% block content %}
-    <!-- Contents Here! -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="notification {{ category }}">
+            <button @click="$el.innerHTML=''" class="delete"></button>
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}
+      <!-- Contents Here! -->
     {% endblock %}
 
     <script src="{{ url_for("static", filename="js/alpine-2.2.5/alpine.js") }}"></script>

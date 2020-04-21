@@ -2,6 +2,7 @@ Flask
 flask_monitoringdashboard
 google-cloud-logging
 google-cloud-profiler
+memory_profiler
 numpy
 opencensus
 opencensus-ext-stackdriver

@@ -3,6 +3,7 @@
 """ Holistically-Nested Edge Detection """
 
 import cv2
+from memory_profiler import profile
 
 cv2.setUseOptimized(True)
 
@@ -34,6 +35,7 @@ class CropLayer:
         return [inputs[0][:, :, self.start_y:self.end_y, self.start_x:self.end_x]]
 
 
+@profile(precision=4)
 def convert(image):
     cv2.dnn_registerLayer("Crop", CropLayer)
     net = cv2.dnn.readNetFromCaffe("hed.prototxt", "hed.caffemodel")
