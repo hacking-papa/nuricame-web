@@ -60,12 +60,6 @@ def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-# def redirect_with_flash(url, message, category):
-#     app.logger.debug(message)
-#     flash(message, category)
-#     return redirect(url)
-
-
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "GET":
@@ -76,17 +70,14 @@ def index():
         start = time.time()
 
         if "image" not in request.files:
-            # return redirect_with_flash(request.url, "Warning: Image parameter not POSTed!", "is-warning")
             app.logger.warning("Image parameter not POSTed!")
             return jsonify({"code": 1, "message": "Warning: Image parameter not POSTed!"}), 400
         image = request.files.get("image")
         app.logger.debug(f"Uploaded: {image}")
         if image.filename == "":
-            # return redirect_with_flash(request.url, "Warning: No image has been selected!", "is-warning")
             app.logger.warning("No image has been selected!")
             return jsonify({"code": 2, "message": "Warning: No image has been selected!"}), 400
         if not allowed_file(image.filename):
-            # return redirect_with_flash(request.url, "Warning: Unauthorized extensions!", "is-warning")
             app.logger.warning("No image has been selected!")
             return jsonify({"code": 3, "message": "Warning: Unauthorized extensions!"}), 400
 
