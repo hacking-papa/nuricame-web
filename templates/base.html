@@ -3,34 +3,31 @@
   <head>
     <meta charset="utf-8" />
     <meta content="ie=edge" http-equiv="x-ua-compatible" />
-    <link rel="icon" type="image/png" href="{{ url_for("static", filename="img/favicon.png") }}" />
-    <link rel="apple-touch-icon" type="image/png" href="{{ url_for("static", filename="img/homeicon.png") }}" />　
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='img/favicon-16x16.png') }}">
+    <link rel="apple-touch-icon" type="image/png" href="{{ url_for('static', filename='img/apple-touch-icon.png') }}" />
     <title>ぬりカメ - はっきんぐパパ</title>
     <meta property="og:title" content="ぬりカメ - はっきんぐパパ" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="{{ url_root }}" />
-    <meta property="og:image" content="{{ url_root }}static/img/OGP.png" />
+    <meta property="og:url" content="{{ request.url_root }}" />
+    <meta property="og:image" content="{{ request.url_root }}static/img/OGP.png" />
     <meta content="TODO: 説明文" name="description" />
     <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
     <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet" />
-    <link href="{{ url_for("static", filename="css/bulma-0.8.2/css/bulma.min.css") }}" rel="stylesheet" />
-    <link href="{{ url_for("static", filename="css/bulma-0.8.2/css/bulma-pageloader.min.css") }}" rel="stylesheet" />
-    <link href="{{ url_for("static", filename="css/base.css") }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/bulma-0.8.2/css/bulma.min.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/bulma-0.8.2/css/bulma-pageloader.min.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/base.css') }}" rel="stylesheet" />
   </head>
   <body>
-    <!-- IE9未満への配慮が不要であれば、削除 -->
-    <!--[if lte IE 9]>
-    <p class="browserupgrade">IE9未満用のメッセージ</p>
-    <![endif]-->
-
     {% block content %}
       <!-- Contents Here! -->
     {% endblock %}
 
-    <script src="{{ url_for("static", filename="js/alpine-2.2.5/alpine.js") }}"></script>
-    <script src="{{ url_for("static", filename="js/axios-0.19.2/axios.min.js") }}"></script>
-    <script src="{{ url_for("static", filename="js/BulmaJS-0.10.3/bulma.js") }}"></script>
-    <script src="{{ url_for("static", filename="js/main.js") }}"></script>
+    <script src="{{ url_for('static', filename='js/alpine-2.2.5/alpine.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/axios-0.19.2/axios.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/BulmaJS-0.10.3/bulma.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
     <!-- TODO: Google Analytics -->
     <script>

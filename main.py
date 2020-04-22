@@ -60,12 +60,17 @@ def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
+@app.route("/favicon.ico")
+def favicon():
+    return send_from_directory("/static/img/favicon.ico", mimetype="image/vnd.microsoft.icon")
+
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "GET":
         app.logger.debug("GET /index")
-        allowed_extensions = ",".join(["." + x for x in ALLOWED_EXTENSIONS])
-        return render_template("index.html", allowed_extensions=allowed_extensions, url_root=request.url_root)
+        allowed_extensions = ["." + x for x in ALLOWED_EXTENSIONS]
+        return render_template("index.html", allowed_extensions=allowed_extensions)
     elif request.method == "POST":
         app.logger.debug("POST /index")
         start = time.time()

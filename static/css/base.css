@@ -7,8 +7,20 @@ body {
 }
 
 #pageloader {
-  background: #fff100;
-  background-color: #fff100;
+  background-color: #ffdd57;
+  background: #ffdd57;
+}
+
+#pageloader::after {
+  border-color: rgba(0, 0, 0, 0.7);
+  -webkit-animation: loader-figure-warning 1.15s infinite
+    cubic-bezier(0.215, 0.61, 0.355, 1);
+  animation: loader-figure-warning 1.15s infinite
+    cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+#pageloader .title {
+  color: rgba(0, 0, 0, 0.7);
 }
 
 button#cancel {
