@@ -90,6 +90,12 @@ function selectPhoto() {
                     "お<ruby>問<rt>と</rt></ruby>い<ruby>合<rt>あ</rt></ruby>わせください";
                   break;
                 case 41500:
+                    type = "warning";
+                    message =
+                      "<ruby>画像<rt>がぞう</rt></ruby>が<ruby>選<rt>えら</rt></ruby>ばれていません<br />" +
+                      "もう<ruby>一度<rt>いちど</rt></ruby>はじめからやりなおしてください";
+                    break;
+                case 41501:
                   type = "warning";
                   message =
                     "ぬりえにできない<ruby>種類<rt>しゅるい</rt></ruby>の<ruby>画像<rt>がぞう</rt></ruby>です<br />" +

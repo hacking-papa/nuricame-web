@@ -74,9 +74,12 @@ def index():
             return jsonify({"error_code": 40000, "message": "Warning: Image parameter not POSTed!"}), 400
         image = request.files.get("image")
         app.logger.debug(f"Uploaded: {image}")
+        if image.filename == "":
+            app.logger.warning("No image has been selected!")
+            return jsonify({"error_code": 41500, "message": "Warning: No image has been selected!"}), 415
         if not allowed_file(image.filename):
             app.logger.warning("Unauthorized extensions!")
-            return jsonify({"error_code": 41500, "message": "Warning: Unauthorized extensions!"}), 415
+            return jsonify({"error_code": 41501, "message": "Warning: Unauthorized extensions!"}), 415
 
         img = np.frombuffer(image.read(), dtype=np.uint8)
         img = cv2.imdecode(img, 1)
