@@ -6,7 +6,7 @@ import time
 import cv2
 import numpy as np
 import opencensus.trace.tracer
-from flask import Flask, flash, render_template, request, redirect, make_response, jsonify
+from flask import Flask, render_template, request, make_response, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 from opencensus.ext.stackdriver import trace_exporter as stackdriver_exporter
 
@@ -64,7 +64,8 @@ def allowed_file(filename):
 def index():
     if request.method == "GET":
         app.logger.debug("GET /index")
-        return render_template("index.html")
+        allowed_extensions = ",".join(["." + x for x in ALLOWED_EXTENSIONS])
+        return render_template("index.html", allowed_extensions=allowed_extensions)
     elif request.method == "POST":
         app.logger.debug("POST /index")
         start = time.time()
