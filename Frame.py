@@ -1,26 +1,28 @@
 #!/usr/bin/env python3
 
-""" Frame """
+""" Compose Image and Frame """
 
 from pathlib import Path
 
 import cv2
 
 FRAME_PATH: Path = Path("frame.png")
-TARGET_WIDTH: int = 2000
-TARGET_X: int =
+TARGET_WIDTH: int = 2500
 
 
 def compose(img):
     frame = cv2.imread(str(FRAME_PATH))
-    frame_height, frame_width, frame_ch = frame.shape
-    img_height, img_width, img_ch = img.shape
+    frame_height, frame_width, *_ = frame.shape
+    img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
+    img_height, img_width, *_ = img.shape
     if img_height != TARGET_WIDTH or img_width != TARGET_WIDTH:
         img = cv2.resize(img, (TARGET_WIDTH, TARGET_WIDTH), interpolation=cv2.INTER_LINEAR_EXACT)
-    return img
+        img_height, img_width, *_ = img.shape
+    target_x = int((frame_width - img_width) / 2)
+    target_y = int((frame_height - img_height) / 2)
+    frame[target_y:target_y + img_height, target_x:target_x + img_width] = img
+    return frame
 
-
-output_dir_path = Path("sample/output")
 
 if __name__ == "__main__":
     sample_dir_path = Path("./sample")
