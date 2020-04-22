@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta content="ie=edge" http-equiv="x-ua-compatible">
-    <title>{{ title }}</title>
+    <title>ぬりカメ - はっきんぐパパ</title>
     <!-- TODO: OGP -->
     <meta content="TODO: 説明文" name="description">
     <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
@@ -18,15 +18,8 @@
     <p class="browserupgrade">IE9未満用のメッセージ</p>
     <![endif]-->
 
-    <!-- Flash Message -->
-    {% with messages = get_flashed_messages(with_categories=true) %} {% if
-    messages %} {% for category, message in messages %}
-    <div class="notification {{ category }}">
-      <button @click="$el.innerHTML=''" class="delete"></button>
-      {{ message }}
-    </div>
-    {% endfor %} {% endif %} {% endwith %} {% block content %}
-    <!-- Contents Here! -->
+    {% block content %}
+      <!-- Contents Here! -->
     {% endblock %}
 
     <script src="{{ url_for("static", filename="js/alpine-2.2.5/alpine.js") }}"></script>

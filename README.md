@@ -5,9 +5,11 @@ Make a contour by pictures, Web version.
 - [Dependencies](#dependencies)
 - [How to](#how-to)
   - [Develop](#develop)
+  - [Launch](#launch)
   - [Test](#test)
   - [Deploy](#deploy)
 - [Misc](#misc)
+  - [Holistically-Nested Edge Detection](#holistically-nested-edge-detection)
   - [License](#license)
 
 ## Dependencies
@@ -24,7 +26,17 @@ Make a contour by pictures, Web version.
 ### Develop
 
 ```shell
+export GOOGLE_APPLICATION_CREDENTIALS=[path-to-your-service-accounts-private-key]
+```
+
+```shell
 pip install --upgrade -r requirements.txt
+```
+
+### Launch
+
+```shell
+python main.py
 ```
 
 ### Test
@@ -38,13 +50,13 @@ The above command will search for all `test_*.py` to test.
 ### Deploy
 
 ```shell
-gcloud app deploy --project nuricame-web
+gcloud app deploy --project [project-id]
 ```
 
-And then, you can browse `https://nuricame-web.appspot.com/`, or type below.
+And then, you can browse `https://[project-id].appspot.com/`, or type below.
 
 ```shell
-gcloud app browse --project nuricame-web
+gcloud app browse --project [project-id]
 ```
 
 If you want to check logs, type below.
@@ -55,6 +67,21 @@ gcloud app logs tail -s default
 
 ## Misc
 
+### [Holistically-Nested Edge Detection](https://github.com/s9xie/hed)
+
+Special thanks to Saining Xie.
+
+```text
+@InProceedings{xie15hed,
+  author = {"Xie, Saining and Tu, Zhuowen"},
+  Title = {Holistically-Nested Edge Detection},
+  Booktitle = "Proceedings of IEEE International Conference on Computer Vision",
+  Year  = {2015},
+}
+```
+
+![hed prototxt](https://user-images.githubusercontent.com/32637762/79853360-eb421900-8402-11ea-8872-4cf733871fdc.png)
+
 ### License
 
-[GOOD HACKING DADDY LICENSE](LICENSE.md)
+[GOOD HACKING PAPA LICENSE](LICENSE.md)

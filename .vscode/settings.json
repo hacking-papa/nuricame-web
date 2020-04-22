@@ -1,13 +1,17 @@
 {
   "cSpell.words": [
+    "Zhuowen",
     "allowfullscreen",
     "bulma",
+    "editorconfig",
     "fullheight",
     "fullwidth",
     "gcloud",
+    "gcloudignore",
     "nuricame",
     "pageloader",
-    "pytest"
+    "pytest",
+    "saining"
   ],
   "python.pythonPath": "venv/bin/python3"
 }
