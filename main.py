@@ -6,7 +6,7 @@ import time
 import cv2
 import numpy as np
 import opencensus.trace.tracer
-from flask import Flask, render_template, request, make_response, jsonify
+from flask import Flask, render_template, request, make_response, jsonify, send_from_directory
 from flask_debugtoolbar import DebugToolbarExtension
 from opencensus.ext.stackdriver import trace_exporter as stackdriver_exporter
 
