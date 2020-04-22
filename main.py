@@ -10,6 +10,7 @@ from flask import Flask, render_template, request, make_response, jsonify, send_
 from flask_debugtoolbar import DebugToolbarExtension
 from opencensus.ext.stackdriver import trace_exporter as stackdriver_exporter
 
+import Frame
 import HED
 
 app = Flask(__name__)
@@ -94,7 +95,8 @@ def index():
         img = np.frombuffer(image.read(), dtype=np.uint8)
         img = cv2.imdecode(img, 1)
         img = HED.convert(img)
-        data = cv2.imencode(".png", img)[1].tostring()
+        framed = Frame.compose(img)
+        data = cv2.imencode(".png", framed)[1].tostring()
         response = make_response()
         response.data = data
         response.mimetype = "image/png"
