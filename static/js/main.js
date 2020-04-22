@@ -68,7 +68,8 @@ function selectPhoto() {
           this.closePreview();
           this.stopLoading();
 
-          if (error.response.status !== 400) {
+          const errorStatus = [400, 415];
+          if (!errorStatus.includes(error.response.status)) {
             this.createAlert();
           } else {
             const reader = new FileReader();
@@ -77,9 +78,9 @@ function selectPhoto() {
               trace(reader.result);
               const json = JSON.parse(reader.result);
               let type = "danger";
-              let message = "";
+              let message =
                 "すこし<ruby>時間<rt>じかん</rt></ruby>がたってから、また<ruby>試<rt>ため</rt></ruby>してみてね";
-              switch (json.code) {
+              switch (json.error_code) {
                 case 1:
                   type = "danger";
                   message =
