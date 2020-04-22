@@ -3,10 +3,19 @@
   <head>
     <meta charset="utf-8" />
     <meta content="ie=edge" http-equiv="x-ua-compatible" />
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}" />
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='img/favicon-16x16.png') }}">
-    <link rel="apple-touch-icon" type="image/png" href="{{ url_for('static', filename='img/apple-touch-icon.png') }}" />
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32x32.png') }}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon-16x16.png') }}" />
+    <link rel="apple-touch-icon" type="image/png" href="{{ url_for('static', filename='apple-touch-icon.png') }}" />
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="ぬりカメ" />
+    <meta name="apple-mobile-web-app-title" content="ぬりカメ" />
+    <meta name="theme-color" content="#f1f1f0" />
+    <meta name="msapplication-navbutton-color" content="#f1f1f0" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="msapplication-starturl" content="/" />
     <title>ぬりカメ - はっきんぐパパ</title>
     <meta property="og:title" content="ぬりカメ - はっきんぐパパ" />
     <meta property="og:type" content="website" />
