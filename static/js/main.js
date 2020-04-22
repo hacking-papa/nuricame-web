@@ -44,10 +44,12 @@ function selectPhoto() {
       trace("selectPhoto.closePreview()");
       modalPreview.close();
     },
-    post() {
+    post(dummy_post = false) {
       trace("selectPhoto.post()");
       const params = new FormData();
-      params.append("image", fileInput.files[0]);
+      if (!dummy_post) {
+        params.append("image", fileInput.files[0]);
+      }
       trace(params);
       axios
         .post("/", params, {
