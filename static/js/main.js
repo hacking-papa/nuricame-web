@@ -4,6 +4,7 @@ const url = window.URL || window.webkitURL;
 const fileInput = document.getElementById("file-input");
 const imagePreview = document.getElementById("image-preview");
 const imageResult = document.getElementById("image-result");
+const imageResultForPwa = document.getElementById("image-result-for-pwa");
 const downloadLink = document.getElementById("download-link");
 const modalPreview = Bulma.create("modal", {
   element: document.querySelector("#modal-preview"),
@@ -18,6 +19,9 @@ function trace(s) {
 function selectPhoto() {
   return {
     loading: "",
+    isPwa() {
+      return window.navigator.standalone ? true : false;
+    },
     startLoading() {
       trace("selectPhoto.startLoading()");
       this.loading = "is-active";
@@ -60,8 +64,10 @@ function selectPhoto() {
         .then(this.startLoading())
         .then((response) => {
           const blob = new Blob([response.data], { type: "image/png" });
-          imageResult.src = url.createObjectURL(blob);
-          downloadLink.href = url.createObjectURL(blob);
+          const imageUrl = url.createObjectURL(blob);
+          imageResult.src = imageUrl
+          imageResultForPwa.src = imageUrl
+          downloadLink.href = imageUrl
           this.closePreview();
           this.stopLoading();
         })
