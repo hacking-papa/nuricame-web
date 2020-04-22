@@ -3,7 +3,7 @@
   "short_name": "ぬりカメ",
   "lang": "ja",
   "start_url": "/",
-  "display": "minimal-ui",
+  "display": "standalone",
   "theme_color": "#fefef1",
   "icons": [
     {

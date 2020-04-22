@@ -4,6 +4,7 @@ const url = window.URL || window.webkitURL;
 const fileInput = document.getElementById("file-input");
 const imagePreview = document.getElementById("image-preview");
 const imageResult = document.getElementById("image-result");
+const downloadLink = document.getElementById("download-link");
 const modalPreview = Bulma.create("modal", {
   element: document.querySelector("#modal-preview"),
 });
@@ -60,6 +61,7 @@ function selectPhoto() {
         .then((response) => {
           const blob = new Blob([response.data], { type: "image/png" });
           imageResult.src = url.createObjectURL(blob);
+          downloadLink.href = url.createObjectURL(blob);
           this.closePreview();
           this.stopLoading();
         })
