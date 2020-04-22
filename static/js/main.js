@@ -81,19 +81,13 @@ function selectPhoto() {
               let message =
                 "すこし<ruby>時間<rt>じかん</rt></ruby>がたってから、また<ruby>試<rt>ため</rt></ruby>してみてね";
               switch (json.error_code) {
-                case 1:
+                case 40000:
                   type = "danger";
                   message =
                     "イメージパラメータがありません<br />" +
                     "お<ruby>問<rt>と</rt></ruby>い<ruby>合<rt>あ</rt></ruby>わせください";
                   break;
-                case 2:
-                  type = "warning";
-                  message =
-                    "<ruby>画像<rt>がぞう</rt></ruby>が<ruby>選<rt>えら</rt></ruby>ばれていません<br />" +
-                    "もう<ruby>一度<rt>いちど</rt></ruby>はじめからやりなおしてください";
-                  break;
-                case 3:
+                case 41500:
                   type = "warning";
                   message =
                     "ぬりえにできない<ruby>種類<rt>しゅるい</rt></ruby>の<ruby>画像<rt>がぞう</rt></ruby>です<br />" +
