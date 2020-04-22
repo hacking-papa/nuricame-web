@@ -1,5 +1,5 @@
 {% extends "base.html" %} {% block content %}
-<section class="section">
+<section class="section is-hidden-mobile">
   <nav class="navbar">
     <nav class="navbar-brand">
       <img src="static/img/01_hackingpapa_logo.png" alt="はっきんぐパパ" />
@@ -124,11 +124,11 @@
 </section>
 <section>
   <div class="container has-text-centered">
-    <h1 class="title">
+    <h2 class="title">
       ぬりカメ<ruby>WEB<rt>うぇぶ</rt></ruby
       >ばんの<ruby>使<rt>つか</rt></ruby
       >い<ruby>方<rt>かた</rt></ruby>
-    </h1>
+    </h2>
     <div class="box">
       <figure class="image is-4by3">
         <img src="static/img/05_saruphoto.png" alt="サンプルの画像" />
@@ -176,7 +176,7 @@
 </section>
 <section>
   <div class="container has-text-centered">
-    <h1 class="title">ぬりカメとは</h1>
+    <h2 class="title">ぬりカメとは</h2>
     <figure class="image is-16by9">
       <iframe
         class="has-ratio"
@@ -202,12 +202,11 @@
     <img src="static/img/09_photo.png" alt="ぬりえしてる様子" />
   </div>
 </section>
-</section>
 <section>
   <div class="columns">
-    <div class="column">
+    <div class="column is-half">
       <div class="container has-text-centered">
-        <h1 class="title">おといあわせはこちら</h1>
+        <h2 class="title">おといあわせはこちら</h2>
         <div class="container is-inline-block">
           <div class="container is-flex">
             <a href="mailto:team.hacking.papa@gmail.com?subject=【ぬりカメ】 ">
@@ -216,19 +215,25 @@
                 src="static/img/envelope-regular.svg"
                 alt="メール"
               />
-              <span class="is-size-5 has-text-info">team.hacking.papa@gmail.com</span>
+              <span class="is-size-5 has-text-info"
+                >team.hacking.papa@gmail.com</span
+              >
             </a>
           </div>
         </div>
       </div>
     </div>
-    <div class="column is-hidden-mobile">
+    <div class="column is-half is-hidden-mobile">
       <div class="container has-text-centered">
-        <h1 class="title">スマートフォンはこちら</h1>
+        <h2 class="title">スマートフォンはこちら</h2>
         <figure class="container image is-128x128">
           <img class="" src="static/img/qr-code.svg" alt="QRコード" />
         </figure>
-        <a href="https://nuricame.hacking-papa.com" class="is-size-5 has-text-info">https://nuricame.hacking-papa.com</a>
+        <a
+          href="https://nuricame.hacking-papa.com"
+          class="is-size-5 has-text-info"
+          >https://nuricame.hacking-papa.com</a
+        >
       </div>
     </div>
   </div>
