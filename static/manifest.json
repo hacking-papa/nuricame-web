@@ -7,7 +7,7 @@
   "theme_color": "#fefef1",
   "icons": [
     {
-      "src": "static/apple-touch-icon.png.png",
+      "src": "static/apple-touch-icon.png",
       "type": "image/png"
     },
     {

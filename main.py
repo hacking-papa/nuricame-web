@@ -62,7 +62,11 @@ def allowed_file(filename):
 
 @app.route("/favicon.ico")
 def favicon():
-    return send_from_directory("/static/favicon.ico", mimetype="image/vnd.microsoft.icon")
+    return send_from_directory("/static/favicon.ico")
+
+@app.route("/manifest.json")
+def manifest():
+    return send_from_directory("/static/manifest.json")
 
 
 @app.route("/", methods=["GET", "POST"])

@@ -6,6 +6,9 @@ handlers:
 - url: /favicon\.ico
   static_files: static/favicon.ico
   upload: static/favicon\.ico
+- url: /manifest\.json
+  static_files: static/manifest.json
+  upload: static/manifest\.json
 - url: /.*
   secure: always
   redirect_http_response_code: 301

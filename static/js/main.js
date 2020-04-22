@@ -20,7 +20,7 @@ function selectPhoto() {
   return {
     loading: "",
     isPwa() {
-      return window.navigator.standalone ? true : false;
+      return window.navigator.standalone;
     },
     startLoading() {
       trace("selectPhoto.startLoading()");
@@ -65,9 +65,9 @@ function selectPhoto() {
         .then((response) => {
           const blob = new Blob([response.data], { type: "image/png" });
           const imageUrl = url.createObjectURL(blob);
-          imageResult.src = imageUrl
-          imageResultForPwa.src = imageUrl
-          downloadLink.href = imageUrl
+          imageResult.src = imageUrl;
+          imageResultForPwa.src = imageUrl;
+          downloadLink.href = imageUrl;
           this.closePreview();
           this.stopLoading();
         })
