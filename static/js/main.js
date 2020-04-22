@@ -67,19 +67,15 @@ function selectPhoto() {
           trace(error);
           this.closePreview();
           this.stopLoading();
-
-          const errorStatus = [400, 415];
-          if (!errorStatus.includes(error.response.status)) {
-            this.createAlert();
-          } else {
-            const reader = new FileReader();
-            reader.readAsText(error.response.data);
-            reader.onload = () => {
-              trace(reader.result);
+          const reader = new FileReader();
+          reader.readAsText(error.response.data);
+          reader.onload = () => {
+            let type = "danger";
+            let message =
+              "すこし<ruby>時間<rt>じかん</rt></ruby>がたってから、また<ruby>試<rt>ため</rt></ruby>してみてね";
+            try {
               const json = JSON.parse(reader.result);
-              let type = "danger";
-              let message =
-                "すこし<ruby>時間<rt>じかん</rt></ruby>がたってから、また<ruby>試<rt>ため</rt></ruby>してみてね";
+              trace(JSON.stringify(json));
               switch (json.error_code) {
                 case 40000:
                   type = "danger";
@@ -100,9 +96,11 @@ function selectPhoto() {
                     "<ruby>違<rt>ちが</rt></ruby>う<ruby>画像<rt>がぞう</rt></ruby>でお<ruby>試<rt>ため</rt></ruby>しください";
                   break;
               }
-              this.createAlert(type, message);
-            };
-          }
+            } catch(error) {
+              trace(error);
+            }
+            this.createAlert(type, message);
+          };
         });
     },
     createAlert(
