@@ -96,7 +96,7 @@ function selectPhoto() {
                     "<ruby>違<rt>ちが</rt></ruby>う<ruby>画像<rt>がぞう</rt></ruby>でお<ruby>試<rt>ため</rt></ruby>しください";
                   break;
               }
-            } catch(error) {
+            } catch (error) {
               trace(error);
             }
             this.createAlert(type, message);
