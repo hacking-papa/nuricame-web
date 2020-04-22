@@ -67,14 +67,52 @@ function selectPhoto() {
           trace(error);
           this.closePreview();
           this.stopLoading();
-          Bulma.create("alert", {
-            type: "danger",
-            title: "しっぱい！",
-            body:
-              "すこし<ruby>時間<rt>じかん</rt></ruby>がたってから、また<ruby>試<rt>ため</rt></ruby>してみてね。",
-            confirm: "わかりました",
-          });
+          const reader = new FileReader();
+          reader.readAsText(error.response.data);
+          reader.onload = () => {
+            let type = "danger";
+            let message =
+              "すこし<ruby>時間<rt>じかん</rt></ruby>がたってから、また<ruby>試<rt>ため</rt></ruby>してみてね";
+            try {
+              const json = JSON.parse(reader.result);
+              trace(JSON.stringify(json));
+              switch (json.error_code) {
+                case 40000:
+                  type = "danger";
+                  message =
+                    "イメージパラメータがありません<br />" +
+                    "お<ruby>問<rt>と</rt></ruby>い<ruby>合<rt>あ</rt></ruby>わせください";
+                  break;
+                case 41500:
+                  type = "warning";
+                  message =
+                    "<ruby>画像<rt>がぞう</rt></ruby>が<ruby>選<rt>えら</rt></ruby>ばれていません<br />" +
+                    "もう<ruby>一度<rt>いちど</rt></ruby>はじめからやりなおしてください";
+                  break;
+                case 41501:
+                  type = "warning";
+                  message =
+                    "ぬりえにできない<ruby>種類<rt>しゅるい</rt></ruby>の<ruby>画像<rt>がぞう</rt></ruby>です<br />" +
+                    "<ruby>違<rt>ちが</rt></ruby>う<ruby>画像<rt>がぞう</rt></ruby>でお<ruby>試<rt>ため</rt></ruby>しください";
+                  break;
+              }
+            } catch(error) {
+              trace(error);
+            }
+            this.createAlert(type, message);
+          };
         });
+    },
+    createAlert(
+      type = "danger",
+      message = "すこし<ruby>時間<rt>じかん</rt></ruby>がたってから、また<ruby>試<rt>ため</rt></ruby>してみてね"
+    ) {
+      Bulma.create("alert", {
+        type: type,
+        title: "しっぱい！",
+        body: message,
+        confirm: "わかりました",
+      });
     },
   };
 }

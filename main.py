@@ -6,7 +6,7 @@ import time
 import cv2
 import numpy as np
 import opencensus.trace.tracer
-from flask import Flask, flash, render_template, request, redirect, make_response
+from flask import Flask, render_template, request, make_response, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 from opencensus.ext.stackdriver import trace_exporter as stackdriver_exporter
 
@@ -60,29 +60,27 @@ def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-def redirect_with_flash(url, message, category):
-    app.logger.debug(message)
-    flash(message, category)
-    return redirect(url)
-
-
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "GET":
         app.logger.debug("GET /index")
-        return render_template("index.html")
+        allowed_extensions = ",".join(["." + x for x in ALLOWED_EXTENSIONS])
+        return render_template("index.html", allowed_extensions=allowed_extensions)
     elif request.method == "POST":
         app.logger.debug("POST /index")
         start = time.time()
 
         if "image" not in request.files:
-            return redirect_with_flash(request.url, "Warning: Image parameter not POSTed!", "is-warning")
+            app.logger.warning("Image parameter not POSTed!")
+            return jsonify({"error_code": 40000, "message": "Warning: Image parameter not POSTed!"}), 400
         image = request.files.get("image")
         app.logger.debug(f"Uploaded: {image}")
         if image.filename == "":
-            return redirect_with_flash(request.url, "Warning: No image has been selected!", "is-warning")
+            app.logger.warning("No image has been selected!")
+            return jsonify({"error_code": 41500, "message": "Warning: No image has been selected!"}), 428
         if not allowed_file(image.filename):
-            return redirect_with_flash(request.url, "Warning: Unauthorized extensions!", "is-warning")
+            app.logger.warning("Unauthorized extensions!")
+            return jsonify({"error_code": 41501, "message": "Warning: Unauthorized extensions!"}), 415
 
         img = np.frombuffer(image.read(), dtype=np.uint8)
         img = cv2.imdecode(img, 1)
