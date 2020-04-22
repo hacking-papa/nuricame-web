@@ -6,7 +6,7 @@ import time
 import cv2
 import numpy as np
 import opencensus.trace.tracer
-from flask import Flask, render_template, request, make_response, jsonify
+from flask import Flask, render_template, request, make_response, jsonify, send_from_directory
 from flask_debugtoolbar import DebugToolbarExtension
 from opencensus.ext.stackdriver import trace_exporter as stackdriver_exporter
 
@@ -60,11 +60,20 @@ def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
+@app.route("/favicon.ico")
+def favicon():
+    return send_from_directory("/static/favicon.ico")
+
+@app.route("/manifest.json")
+def manifest():
+    return send_from_directory("/static/manifest.json")
+
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "GET":
         app.logger.debug("GET /index")
-        allowed_extensions = ",".join(["." + x for x in ALLOWED_EXTENSIONS])
+        allowed_extensions = ["." + x for x in ALLOWED_EXTENSIONS]
         return render_template("index.html", allowed_extensions=allowed_extensions)
     elif request.method == "POST":
         app.logger.debug("POST /index")
