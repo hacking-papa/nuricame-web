@@ -1,6 +1,12 @@
 Flask
+flask-debugtoolbar
+flask_monitoringdashboard
 google-cloud-logging
+google-cloud-profiler
+memory_profiler
 numpy
+opencensus
+opencensus-ext-stackdriver
 opencv-python
 opencv-contrib-python
 pytest

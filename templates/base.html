@@ -5,8 +5,8 @@
     <meta content="ie=edge" http-equiv="x-ua-compatible" />
     <link rel="icon" type="image/png" href="{{ url_for("static", filename="img/favicon.png") }}" />
     <link rel="apple-touch-icon" type="image/png" href="{{ url_for("static", filename="img/homeicon.png") }}" />　
-    <title>{{ title }}</title>
-    <meta property="og:title" content="{{ title }}" />
+    <title>ぬりカメ - はっきんぐパパ</title>
+    <meta property="og:title" content="ぬりカメ - はっきんぐパパ" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ url_root }}" />
     <meta property="og:image" content="{{ url_root }}static/img/OGP.png" />
@@ -23,15 +23,8 @@
     <p class="browserupgrade">IE9未満用のメッセージ</p>
     <![endif]-->
 
-    <!-- Flash Message -->
-    {% with messages = get_flashed_messages(with_categories=true) %} {% if
-    messages %} {% for category, message in messages %}
-    <div class="notification {{ category }}">
-      <button @click="$el.innerHTML=''" class="delete"></button>
-      {{ message }}
-    </div>
-    {% endfor %} {% endif %} {% endwith %} {% block content %}
-    <!-- Contents Here! -->
+    {% block content %}
+      <!-- Contents Here! -->
     {% endblock %}
 
     <script src="{{ url_for("static", filename="js/alpine-2.2.5/alpine.js") }}"></script>
