@@ -6,6 +6,17 @@ body {
   font-family: "游ゴシック", "Yu Gothic", "游ゴシック体", YuGothic, sans-serif;
 }
 
+figure {
+  max-width: 750px;
+  margin: auto;
+}
+
+#brand-icon {
+  max-width:128px;
+  width: 80%;
+  margin-left: auto;
+}
+
 #pageloader {
   background-color: #ffdd57;
   background: #ffdd57;
@@ -29,4 +40,40 @@ button#cancel {
 
 button#submit {
   margin-left: auto;
+}
+
+.background-thema-color {
+  background-color: #fefef1;
+}
+
+.info-icon {
+  max-width: 128px;
+}
+
+.image-button {
+  width: 50%;
+}
+
+.width-80per {
+  width: 80%;
+}
+
+.margin-bottom-8rem {
+  margin-bottom: 8rem;
+}
+
+.margin-bottom-6rem {
+  margin-bottom: 6rem;
+}
+
+.margin-bottom-4rem {
+  margin-bottom: 4rem;
+}
+
+.margin-bottom-2rem {
+  margin-bottom: 2rem;
+}
+
+.margin-bottom-1rem {
+  margin-bottom: 1rem;
 }
