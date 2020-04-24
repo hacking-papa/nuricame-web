@@ -1,251 +1,260 @@
 {% extends "base.html" %} {% block content %}
-<section class="section is-hidden-mobile">
-  <nav class="navbar">
-    <nav class="navbar-brand">
-      <img src="static/img/01_hackingpapa_logo.png" alt="はっきんぐパパ" />
-    </nav>
-  </nav>
-</section>
-<section class="hero">
-  <div class="hero-body">
-    <div class="container has-text-centered">
-      <div>
-        <img src="static/img/02_logo.png" alt="ぬりカメ" />
-      </div>
-      <div class="content is-medium">
-        <p>
-          <ruby>外出<rt>がいしゅつ</rt></ruby
-          >できなくて<ruby>遊<rt>あそ</rt></ruby
-          >ぶものがない！<br /><ruby>家遊<rt>いえあそ</rt></ruby
-          >びに<ruby>飽<rt>あ</rt></ruby
-          >きた！<br />という<ruby>子<rt>こ</rt></ruby
-          >どもたちのために。
-        </p>
-        <p>
-          <ruby>撮<rt>と</rt></ruby
-          >ったものをなんでも<br />ぬりえにしてくれる、<br /><ruby
-            >魔法<rt>まほう</rt></ruby
-          >のカメラ「ぬりカメ」を<br /><ruby>WEB<rt>うぇぶ</rt></ruby
-          >ばんで<ruby>公開<rt>こうかい</rt></ruby
-          >します。
-        </p>
-        <p>
-          ぜひ、ご<ruby>家庭<rt>かてい</rt></ruby
-          >で<ruby>子<rt>こ</rt></ruby
-          >どもたちと<ruby>一緒<rt>いっしょ</rt></ruby
-          >に、<br />ぬりえを<ruby>作<rt>つく</rt></ruby
-          >って<ruby>遊<rt>あそ</rt></ruby
-          >んでください。
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-<section>
-  <div class="container has-text-centered">
-    <h2 class="title">＼さっそくぬりえをつくる／</h2>
-    <div x-data="selectPhoto()">
-      <div id="pageloader" class="pageloader" x-bind:class="activeLoading()">
-        <span class="title"
-          >ぬりえを<ruby>作<rt>つく</rt></ruby
-          >ってるよ！ちょっと<ruby>待<rt>ま</rt></ruby
-          >っててね。</span
-        >
-      </div>
-      <div class="file is-large is-light is-centered">
-        <label class="file-label">
-          <input
-            class="file-input"
-            type="file"
-            accept="image/{{ allowed_extensions | join(',') }}"
-            name="image"
-            id="file-input"
-            x-on:change="preview()"
-          />
-          <img src="static/img/03_take.png" alt="画像をアップする" />
-        </label>
-      </div>
-      <div class="modal" id="modal-preview">
-        <div class="modal-background"></div>
-        <div class="modal-card">
-          <header class="modal-card-head">
-            <p class="modal-card-title">
-              ぬりえにしたい<ruby>画像<rt>がぞう</rt></ruby>
+<section x-data="baseComponent()">
+  <!-- index -->
+  <section x-show="!hasResult()">
+    <section class="section is-hidden-mobile">
+      <nav class="navbar">
+        <nav class="navbar-brand">
+          <img src="static/img/01_hackingpapa_logo.png" alt="はっきんぐパパ" />
+        </nav>
+      </nav>
+    </section>
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <div>
+            <img src="static/img/02_logo.png" alt="ぬりカメ" />
+          </div>
+          <div class="content is-medium">
+            <p>
+              <ruby>外出<rt>がいしゅつ</rt></ruby
+              >できなくて<ruby>遊<rt>あそ</rt></ruby
+              >ぶものがない！<br /><ruby>家遊<rt>いえあそ</rt></ruby
+              >びに<ruby>飽<rt>あ</rt></ruby
+              >きた！<br />という<ruby>子<rt>こ</rt></ruby
+              >どもたちのために。
             </p>
-            <button class="delete" aria-label="close"></button>
-          </header>
-          <section class="modal-card-body">
-            <figure class="image">
-              <img
-                src="https://placehold.jp/3024x4032.png?text=アップされた写真(3024x4032)"
-                alt="アップされた写真"
-                id="image-preview"
-              />
-            </figure>
-          </section>
-          <footer class="modal-card-foot">
-            <button
-              id="cancel"
-              class="button is-medium is-outline"
-              @click="closePreview()"
-            >
-              やめる
-            </button>
-            <button
-              id="submit"
-              class="button is-large is-primary"
-              @click="post()"
-            >
-              これでぬりえをつくる
-            </button>
-          </footer>
+            <p>
+              <ruby>撮<rt>と</rt></ruby
+              >ったものをなんでも<br />ぬりえにしてくれる、<br /><ruby
+                >魔法<rt>まほう</rt></ruby
+              >のカメラ「ぬりカメ」を<br /><ruby>WEB<rt>うぇぶ</rt></ruby
+              >ばんで<ruby>公開<rt>こうかい</rt></ruby
+              >します。
+            </p>
+            <p>
+              ぜひ、ご<ruby>家庭<rt>かてい</rt></ruby
+              >で<ruby>子<rt>こ</rt></ruby
+              >どもたちと<ruby>一緒<rt>いっしょ</rt></ruby
+              >に、<br />ぬりえを<ruby>作<rt>つく</rt></ruby
+              >って<ruby>遊<rt>あそ</rt></ruby
+              >んでください。
+            </p>
+          </div>
         </div>
       </div>
-      <div x-show="hasResult()">
-        <h2 class="title">
-          ぬりえの<ruby>完成<rt>かんせい</rt></ruby
-          >！
-        </h2>
-        <figure class="box image">
-          <!-- PWA -->
-          <div x-show="isPwa()">
-            <a href="" id="download-link" download>
-              <img src="" alt="ぬりえになった画像" id="image-result-for-pwa" />
-            </a>
-          </div>
-          <!-- Not PWA -->
-          <div x-show="!isPwa()">
-            <img src="" alt="ぬりえになった画像" id="image-result" />
-          </div>
-        </figure>
-      </div>
-    </div>
-  </div>
-</section>
-<section>
-  <div class="container has-text-centered">
-    <h2 class="title">
-      ぬりカメ<ruby>WEB<rt>うぇぶ</rt></ruby
-      >ばんの<ruby>使<rt>つか</rt></ruby
-      >い<ruby>方<rt>かた</rt></ruby>
-    </h2>
-    <div class="box">
-      <figure class="image is-4by3">
-        <img src="static/img/05_saruphoto.png" alt="サンプルの画像" />
-      </figure>
-      <div class="content is-medium">
-        スマホやパソコンのカメラで<ruby>写真<rt>しゃしん</rt></ruby
-        >を<ruby>撮<rt>と</rt></ruby
-        >る<br />
-        または<br />
-        お<ruby>気<rt>き</rt></ruby
-        >に<ruby>入<rt>い</rt></ruby
-        >りの<ruby>画像<rt>がぞう</rt></ruby
-        >をアップ
-      </div>
-    </div>
-    <figure class="container image is-64x64 is-flex">
-      <img class="" src="static/img/arrow-down.svg" alt="下向き矢印" />
-    </figure>
-    <div class="box">
-      <figure class="image is-4by3">
-        <img src="static/img/06_nurieka.png" alt="ぬりえになった画像" />
-      </figure>
-      <div class="content is-medium">
-        ぬりえ<ruby>化<rt>か</rt></ruby
-        ><ruby>完了<rt>かんりょう</rt></ruby
-        >！
-      </div>
-    </div>
-    <figure class="container image is-64x64 is-flex">
-      <img class="" src="static/img/arrow-down.svg" alt="下向き矢印" />
-    </figure>
-    <div class="box">
-      <figure class="image is-4by3">
-        <img src="static/img/07_nurieflam_4093x2894.png" alt="印刷風景" />
-      </figure>
-      <div class="content is-medium">
-        プリンターで<ruby>印刷<rt>いんさつ</rt></ruby
-        >。<br />
-        <ruby>存分<rt>ぞんぶん</rt></ruby
-        >に<ruby>塗<rt>ぬ</rt></ruby
-        >ってね。
-      </div>
-    </div>
-  </div>
-</section>
-<section>
-  <div class="container has-text-centered">
-    <h2 class="title">ぬりカメとは</h2>
-    <figure class="image is-16by9">
-      <iframe
-        class="has-ratio"
-        width="640"
-        height="360"
-        src="https://www.youtube.com/embed/M2JKckXSP6g?showinfo=0"
-        frameborder="0"
-        allowfullscreen
-      ></iframe>
-    </figure>
-    <div class="box">
-      <figure class="image">
-        <img src="static/img/08_products.png" alt="1号機" />
-      </figure>
-      <div class="content is-medium">
-        ぬりカメ1<ruby>号機<rt>ごうき</rt></ruby>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="is-fullheight">
-  <div class="image is-fullwidth">
-    <img src="static/img/09_photo.png" alt="ぬりえしてる様子" />
-  </div>
-</section>
-<section>
-  <div class="columns">
-    <div class="column is-half">
+    </section>
+    <section>
       <div class="container has-text-centered">
-        <h2 class="title">おといあわせはこちら</h2>
-        <div class="container is-inline-block">
-          <div class="container is-flex">
-            <a href="mailto:team.hacking.papa@gmail.com?subject=【ぬりカメ】 ">
-              <img
-                class="container image is-128x128"
-                src="static/img/envelope-regular.svg"
-                alt="メール"
-              />
-              <span class="is-size-5 has-text-info"
-                >team.hacking.papa@gmail.com</span
+        <h2 class="title">＼さっそくぬりえをつくる／</h2>
+        <div id="pageloader" class="pageloader" x-bind:class="activeLoading()">
+          <span class="title"
+            >ぬりえを<ruby>作<rt>つく</rt></ruby
+            >ってるよ！ちょっと<ruby>待<rt>ま</rt></ruby
+            >っててね。</span
+          >
+        </div>
+        <div class="file is-large is-light is-centered">
+          <label class="file-label">
+            <input
+              class="file-input"
+              type="file"
+              accept="image/{{ allowed_extensions | join(',') }}"
+              name="image"
+              id="file-input"
+              x-on:change="preview()"
+            />
+            <img src="static/img/03_take.png" alt="画像をアップする" />
+          </label>
+        </div>
+        <div class="modal" id="modal-preview">
+          <div class="modal-background"></div>
+          <div class="modal-card">
+            <header class="modal-card-head">
+              <p class="modal-card-title">
+                ぬりえにしたい<ruby>画像<rt>がぞう</rt></ruby>
+              </p>
+              <button class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+              <figure class="image">
+                <img
+                  src="https://placehold.jp/3024x4032.png?text=アップされた写真(3024x4032)"
+                  alt="アップされた写真"
+                  id="image-preview"
+                />
+              </figure>
+            </section>
+            <footer class="modal-card-foot">
+              <button
+                id="cancel"
+                class="button is-medium is-outline"
+                @click="closePreview()"
               >
-            </a>
+                やめる
+              </button>
+              <button
+                id="submit"
+                class="button is-large is-primary"
+                @click="post()"
+              >
+                これでぬりえをつくる
+              </button>
+            </footer>
+          </div>
+        </div>
+        <div x-show="hasResult()">
+          <h2 class="title">
+            ぬりえの<ruby>完成<rt>かんせい</rt></ruby
+            >！
+          </h2>
+          <figure class="box image">
+            <!-- PWA -->
+            <div x-show="isPwa()">
+              <a href="" id="download-link" download>
+                <img src="" alt="ぬりえになった画像" id="image-result-for-pwa" />
+              </a>
+            </div>
+            <!-- Not PWA -->
+            <div x-show="!isPwa()">
+              <img src="" alt="ぬりえになった画像" id="image-result" />
+            </div>
+          </figure>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container has-text-centered">
+        <h2 class="title">
+          ぬりカメ<ruby>WEB<rt>うぇぶ</rt></ruby
+          >ばんの<ruby>使<rt>つか</rt></ruby
+          >い<ruby>方<rt>かた</rt></ruby>
+        </h2>
+        <div class="box">
+          <figure class="image is-4by3">
+            <img src="static/img/05_saruphoto.png" alt="サンプルの画像" />
+          </figure>
+          <div class="content is-medium">
+            スマホやパソコンのカメラで<ruby>写真<rt>しゃしん</rt></ruby
+            >を<ruby>撮<rt>と</rt></ruby
+            >る<br />
+            または<br />
+            お<ruby>気<rt>き</rt></ruby
+            >に<ruby>入<rt>い</rt></ruby
+            >りの<ruby>画像<rt>がぞう</rt></ruby
+            >をアップ
+          </div>
+        </div>
+        <figure class="container image is-64x64 is-flex">
+          <img class="" src="static/img/arrow-down.svg" alt="下向き矢印" />
+        </figure>
+        <div class="box">
+          <figure class="image is-4by3">
+            <img src="static/img/06_nurieka.png" alt="ぬりえになった画像" />
+          </figure>
+          <div class="content is-medium">
+            ぬりえ<ruby>化<rt>か</rt></ruby
+            ><ruby>完了<rt>かんりょう</rt></ruby
+            >！
+          </div>
+        </div>
+        <figure class="container image is-64x64 is-flex">
+          <img class="" src="static/img/arrow-down.svg" alt="下向き矢印" />
+        </figure>
+        <div class="box">
+          <figure class="image is-4by3">
+            <img src="static/img/07_nurieflam_4093x2894.png" alt="印刷風景" />
+          </figure>
+          <div class="content is-medium">
+            プリンターで<ruby>印刷<rt>いんさつ</rt></ruby
+            >。<br />
+            <ruby>存分<rt>ぞんぶん</rt></ruby
+            >に<ruby>塗<rt>ぬ</rt></ruby
+            >ってね。
           </div>
         </div>
       </div>
-    </div>
-    <div class="column is-half is-hidden-mobile">
+    </section>
+    <section>
       <div class="container has-text-centered">
-        <h2 class="title">スマートフォンはこちら</h2>
-        <figure class="container image is-128x128">
-          <img class="" src="static/img/qr-code.svg" alt="QRコード" />
+        <h2 class="title">ぬりカメとは</h2>
+        <figure class="image is-16by9">
+          <iframe
+            class="has-ratio"
+            width="640"
+            height="360"
+            src="https://www.youtube.com/embed/M2JKckXSP6g?showinfo=0"
+            frameborder="0"
+            allowfullscreen
+          ></iframe>
         </figure>
-        <a
-          href="https://nuricame.hacking-papa.com"
-          class="is-size-5 has-text-info"
-          >https://nuricame.hacking-papa.com</a
-        >
+        <div class="box">
+          <figure class="image">
+            <img src="static/img/08_products.png" alt="1号機" />
+          </figure>
+          <div class="content is-medium">
+            ぬりカメ1<ruby>号機<rt>ごうき</rt></ruby>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
+    </section>
+    <section class="is-fullheight">
+      <div class="image is-fullwidth">
+        <img src="static/img/09_photo.png" alt="ぬりえしてる様子" />
+      </div>
+    </section>
+    <section>
+      <div class="columns">
+        <div class="column is-half">
+          <div class="container has-text-centered">
+            <h2 class="title">おといあわせはこちら</h2>
+            <div class="container is-inline-block">
+              <div class="container is-flex">
+                <a href="mailto:team.hacking.papa@gmail.com?subject=【ぬりカメ】 ">
+                  <img
+                    class="container image is-128x128"
+                    src="static/img/envelope-regular.svg"
+                    alt="メール"
+                  />
+                  <span class="is-size-5 has-text-info"
+                    >team.hacking.papa@gmail.com</span
+                  >
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-half is-hidden-mobile">
+          <div class="container has-text-centered">
+            <h2 class="title">スマートフォンはこちら</h2>
+            <figure class="container image is-128x128">
+              <img class="" src="static/img/qr-code.svg" alt="QRコード" />
+            </figure>
+            <a
+              href="https://nuricame.hacking-papa.com"
+              class="is-size-5 has-text-info"
+              >https://nuricame.hacking-papa.com</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <figure>
+          <img src="static/img/10_hackingpapa_logo_2.png" alt="はっきんぐパパ" />
+        </figure>
+        <p class="is-size-7">
+          &copy; 2020 はっきんぐパパ おーるらいつりざーぶど
+        </p>
+      </div>
+    </footer>
+  </section>
+
+  <!-- result -->
+  <section x-show="hasResult()">
+    <h1>result page</h1>
+  </section>
+
 </section>
-<footer class="footer">
-  <div class="content has-text-centered">
-    <figure>
-      <img src="static/img/10_hackingpapa_logo_2.png" alt="はっきんぐパパ" />
-    </figure>
-    <p class="is-size-7">
-      &copy; 2020 はっきんぐパパ おーるらいつりざーぶど
-    </p>
-  </div>
-</footer>
 {% endblock %}

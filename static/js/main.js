@@ -16,41 +16,41 @@ function trace(s) {
   }
 }
 
-function selectPhoto() {
+function baseComponent() {
   return {
     loading: "",
     isPwa() {
       return window.navigator.standalone;
     },
     startLoading() {
-      trace("selectPhoto.startLoading()");
+      trace("baseComponent.startLoading()");
       this.loading = "is-active";
     },
     stopLoading() {
-      trace("selectPhoto.stopLoading()");
+      trace("baseComponent.stopLoading()");
       this.loading = "";
     },
     activeLoading() {
-      trace("selectPhoto.activeLoading()");
+      trace("baseComponent.activeLoading()");
       return this.loading;
     },
     hasResult() {
-      trace("selectPhoto.hasResult()");
+      trace("baseComponent.hasResult()");
       return imageResult.src !== window.location.href;
     },
     preview() {
-      trace("selectPhoto.preview()");
+      trace("baseComponent.preview()");
       if (fileInput) {
         imagePreview.src = url.createObjectURL(fileInput.files[0]);
         modalPreview.open();
       }
     },
     closePreview() {
-      trace("selectPhoto.closePreview()");
+      trace("baseComponent.closePreview()");
       modalPreview.close();
     },
     post() {
-      trace("selectPhoto.post()");
+      trace("baseComponent.post()");
       const params = new FormData();
       params.append("image", fileInput.files[0]);
       trace(params);
