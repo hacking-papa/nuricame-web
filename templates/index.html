@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block content %}
 <section x-data="baseComponent()">
   <!-- index -->
-  <section x-show="!hasResult()">
+  <container x-show="!hasResult()">
     <section class="section is-hidden-mobile">
       <nav class="navbar">
         <nav class="navbar-brand">
@@ -249,12 +249,12 @@
         </p>
       </div>
     </footer>
-  </section>
+  </container>
 
   <!-- result -->
-  <section x-show="hasResult()">
+  <container x-show="hasResult()">
     <h1>result page</h1>
-  </section>
+  </container>
 
 </section>
 {% endblock %}
