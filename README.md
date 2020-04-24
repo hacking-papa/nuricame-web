@@ -87,4 +87,4 @@ Special thanks to Saining Xie.
 
 ### License
 
-[GOOD HACKING PAPA LICENSE](LICENSE.md) and [CC-BY-NC](https://creativecommons.org/licenses/by-nc/4.0/legalcode.ja).
+Published in [GOOD HACKING PAPA LICENSE](LICENSE.md) made based on [CC-BY-NC](https://creativecommons.org/licenses/by-nc/4.0/legalcode.ja).
