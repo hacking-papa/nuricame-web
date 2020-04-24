@@ -55,7 +55,7 @@ function selectPhoto() {
       params.append("image", fileInput.files[0]);
       trace(params);
       axios
-        .post("/", params, {
+        .post("/result", params, {
           headers: {
             "Content-Type": "multipart/form-data",
           },

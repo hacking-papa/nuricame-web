@@ -2,11 +2,12 @@
 
 import os
 import time
+from base64 import b64encode
 
 import cv2
 import numpy as np
 import opencensus.trace.tracer
-from flask import Flask, render_template, request, make_response, jsonify, send_from_directory
+from flask import Flask, render_template, request, jsonify, send_from_directory
 from flask_debugtoolbar import DebugToolbarExtension
 from opencensus.ext.stackdriver import trace_exporter as stackdriver_exporter
 
@@ -63,45 +64,52 @@ def allowed_file(filename):
 
 @app.route("/favicon.ico")
 def favicon():
-    return send_from_directory("/static/favicon.ico")
+    return send_from_directory("static", "favicon.ico")
+
 
 @app.route("/manifest.json")
 def manifest():
-    return send_from_directory("/static/manifest.json")
+    return send_from_directory("static", "manifest.json")
 
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/", methods=["GET"])
 def index():
-    if request.method == "GET":
-        app.logger.debug("GET /index")
-        allowed_extensions = ["." + x for x in ALLOWED_EXTENSIONS]
-        return render_template("index.html", allowed_extensions=allowed_extensions)
-    elif request.method == "POST":
-        app.logger.debug("POST /index")
-        start = time.time()
+    app.logger.debug("GET /index")
+    allowed_extensions = ["." + x for x in ALLOWED_EXTENSIONS]
+    return render_template("index.html", allowed_extensions=allowed_extensions)
 
-        if "image" not in request.files:
-            app.logger.warning("Image parameter not POSTed!")
-            return jsonify({"error_code": 40000, "message": "Warning: Image parameter not POSTed!"}), 400
-        image = request.files.get("image")
-        app.logger.debug(f"Uploaded: {image}")
-        if image.filename == "":
-            app.logger.warning("No image has been selected!")
-            return jsonify({"error_code": 41500, "message": "Warning: No image has been selected!"}), 428
-        if not allowed_file(image.filename):
-            app.logger.warning("Unauthorized extensions!")
-            return jsonify({"error_code": 41501, "message": "Warning: Unauthorized extensions!"}), 415
 
-        img = np.frombuffer(image.read(), dtype=np.uint8)
-        img = cv2.imdecode(img, 1)
-        img = HED.convert(img)
-        framed = Frame.compose(img)
-        data = cv2.imencode(".png", framed)[1].tostring()
-        response = make_response()
-        response.data = data
-        response.mimetype = "image/png"
-        app.logger.debug(f"Elapsed Time: {time.time() - start}")
-        return response
+@app.route("/result", methods=["POST"])
+def result():
+    app.logger.debug("POST /result")
+    start = time.time()
+
+    if "image" not in request.files:
+        app.logger.warning("Image parameter not POSTed!")
+        return jsonify({"error_code": 40000, "message": "Warning: Image parameter not POSTed!"}), 400
+    image = request.files.get("image")
+    app.logger.debug(f"Uploaded: {image}")
+    if image.filename == "":
+        app.logger.warning("No image has been selected!")
+        return jsonify({"error_code": 41500, "message": "Warning: No image has been selected!"}), 428
+    if not allowed_file(image.filename):
+        app.logger.warning("Unauthorized extensions!")
+        return jsonify({"error_code": 41501, "message": "Warning: Unauthorized extensions!"}), 415
+
+    img = np.frombuffer(image.read(), dtype=np.uint8)
+    img = cv2.imdecode(img, 1)
+    img = HED.convert(img)
+    framed = Frame.compose(img)
+    data = cv2.imencode(".png", framed)[1].tostring()
+    nurie = b64encode(data).decode("utf-8")
+    app.logger.debug(f"Elapsed Time: {time.time() - start}")
+    return render_template("result.html", nurie=nurie)
+
+
+@app.route("/sample")
+def sample():
+    """ TODO: for Debug!! """
+    return render_template("sample.html")
 
 
 if __name__ == "__main__":
