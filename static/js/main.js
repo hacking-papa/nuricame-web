@@ -10,13 +10,13 @@ const modalPreview = Bulma.create("modal", {
   element: document.querySelector("#modal-preview"),
 });
 
-function trace(s) {
+const trace = (s) => {
   if (DEBUG_MODE && this.console && typeof console.log != "undefined") {
     console.log(s);
   }
-}
+};
 
-function selectPhoto() {
+const selectPhoto = () => {
   return {
     loading: false,
     isPwa() {
@@ -42,4 +42,4 @@ function selectPhoto() {
       modalPreview.close();
     },
   };
-}
+};
