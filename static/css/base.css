@@ -58,6 +58,10 @@ button#submit {
   margin-bottom: 0.5rem;
 }
 
+#twitter-hash {
+  color: #18b131;
+}
+
 .background-theme-color {
   background-color: #fefef1;
 }
@@ -73,6 +77,10 @@ button#submit {
 
 .width-60vw {
   width: 60vw;
+}
+
+.width-40vw {
+  width: 40vw;
 }
 
 .padding-1_5rem-1_5rem {
