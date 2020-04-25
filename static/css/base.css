@@ -3,7 +3,7 @@
 body {
   background: #fefef1;
   background-color: #fefef1;
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: "Noto Sans JP", sans-serif;
 }
 
 figure {
@@ -12,9 +12,17 @@ figure {
 }
 
 #brand-icon {
-  max-width:128px;
-  width: 80%;
+  max-width: 128px;
+  width: 15vw;
+  height: 15vw;
   margin-left: auto;
+}
+
+#footer-brand-icon {
+  max-width: 128px;
+  width: 25vw;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #pageloader {
