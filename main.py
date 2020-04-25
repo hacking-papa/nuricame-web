@@ -7,7 +7,7 @@ from base64 import b64encode
 import cv2
 import numpy as np
 import opencensus.trace.tracer
-from flask import Flask, render_template, request, jsonify, send_from_directory
+from flask import Flask, flash, redirect, render_template, request, send_from_directory
 from flask_debugtoolbar import DebugToolbarExtension
 from opencensus.ext.stackdriver import trace_exporter as stackdriver_exporter
 
@@ -62,6 +62,12 @@ def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
+def redirect_with_flash(url, message, category):
+    app.logger.debug(message)
+    flash(message, category)
+    return redirect(url)
+
+
 @app.route("/favicon.ico")
 def favicon():
     return send_from_directory("static", "favicon.ico")
@@ -86,15 +92,15 @@ def result():
 
     if "image" not in request.files:
         app.logger.warning("Image parameter not POSTed!")
-        return jsonify({"error_code": 40000, "message": "Warning: Image parameter not POSTed!"}), 400
+        return redirect_with_flash("/", "Warning: Image parameter not POSTed!", "is-warning")
     image = request.files.get("image")
     app.logger.debug(f"Uploaded: {image}")
     if image.filename == "":
         app.logger.warning("No image has been selected!")
-        return jsonify({"error_code": 41500, "message": "Warning: No image has been selected!"}), 428
+        return redirect_with_flash("/", "Warning: No image has been selected!", "is-warning")
     if not allowed_file(image.filename):
         app.logger.warning("Unauthorized extensions!")
-        return jsonify({"error_code": 41501, "message": "Warning: Unauthorized extensions!"}), 415
+        return redirect_with_flash("/", "Warning: Unauthorized extensions!", "is-warning")
 
     img = np.frombuffer(image.read(), dtype=np.uint8)
     img = cv2.imdecode(img, 1)

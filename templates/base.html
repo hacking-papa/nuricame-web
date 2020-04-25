@@ -71,75 +71,88 @@
     />
   </head>
   <body>
-  {% block content %}
-  <!-- Contents Here! -->
-  {% endblock %}
-  <section>
-    <div class="columns">
-      <div class="column is-half">
-        <div class="container has-text-centered">
-          <h2 class="title">おといあわせはこちら</h2>
-          <div class="container is-inline-block">
-            <div class="container is-flex">
-              <a href="mailto:team.hacking.papa@gmail.com?subject=【ぬりカメ】 ">
-                <img
-                  alt="メール"
-                  class="container image is-128x128"
-                  src="static/img/envelope-regular.svg"
-                />
-                <span class="is-size-5 has-text-info"
-                >team.hacking.papa@gmail.com</span
+    <!-- Flash Message -->
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %} {% for category, message in messages %}
+    <div class="notification {{ category }}">
+      <button @click="$el.innerHTML=''" class="delete"></button>
+      {{ message }}
+    </div>
+    {% endfor %} {% endif %} {% endwith %} {% block content %}
+    <!-- Contents Here! -->
+    {% endblock %}
+
+    <section>
+      <div class="columns">
+        <div class="column is-half">
+          <div class="container has-text-centered">
+            <h2 class="title">おといあわせはこちら</h2>
+            <div class="container is-inline-block">
+              <div class="container is-flex">
+                <a
+                  href="mailto:team.hacking.papa@gmail.com?subject=【ぬりカメ】 "
                 >
-              </a>
+                  <img
+                    alt="メール"
+                    class="container image is-128x128"
+                    src="static/img/envelope-regular.svg"
+                  />
+                  <span class="is-size-5 has-text-info"
+                    >team.hacking.papa@gmail.com</span
+                  >
+                </a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="column is-half is-hidden-mobile">
-        <div class="container has-text-centered">
-          <h2 class="title">スマートフォンはこちら</h2>
-          <figure class="container image is-128x128">
-            <img alt="QRコード" class="" src="static/img/qr-code.svg"/>
-          </figure>
-          <a
-            class="is-size-5 has-text-info"
-            href="https://nuricame.hacking-papa.com"
-          >https://nuricame.hacking-papa.com</a
-          >
+        <div class="column is-half is-hidden-mobile">
+          <div class="container has-text-centered">
+            <h2 class="title">スマートフォンはこちら</h2>
+            <figure class="container image is-128x128">
+              <img alt="QRコード" class="" src="static/img/qr-code.svg" />
+            </figure>
+            <a
+              class="is-size-5 has-text-info"
+              href="https://nuricame.hacking-papa.com"
+              >https://nuricame.hacking-papa.com</a
+            >
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-  <footer class="footer">
-    <div class="content has-text-centered">
-      <figure>
-        <img alt="はっきんぐパパ" src="static/img/10_hackingpapa_logo_2.png"/>
-      </figure>
-      <p class="is-size-7">
-        &copy; 2020 はっきんぐパパ おーるらいつりざーぶど
-      </p>
-    </div>
-  </footer>
+    </section>
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <figure>
+          <img
+            alt="はっきんぐパパ"
+            src="static/img/10_hackingpapa_logo_2.png"
+          />
+        </figure>
+        <p class="is-size-7">
+          &copy; 2020 はっきんぐパパ おーるらいつりざーぶど
+        </p>
+      </div>
+    </footer>
 
-  <script src="{{ url_for('static', filename='js/alpine-2.2.5/alpine.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/axios-0.19.2/axios.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/BulmaJS-0.10.3/bulma.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/alpine-2.2.5/alpine.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/axios-0.19.2/axios.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/BulmaJS-0.10.3/bulma.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
-  <!-- Google Analytics -->
-  <script
-    async
-    src="https://www.googletagmanager.com/gtag/js?id=UA-133451341-1"
-  ></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
+    <!-- Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-133451341-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
 
-    function gtag() {
-      dataLayer.push(arguments);
-    }
+      function gtag() {
+        dataLayer.push(arguments);
+      }
 
-    gtag("js", new Date());
-    gtag("config", "UA-133451341-1");
-  </script>
+      gtag("js", new Date());
+      gtag("config", "UA-133451341-1");
+    </script>
   </body>
 </html>
