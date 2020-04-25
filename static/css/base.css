@@ -50,6 +50,14 @@ button#submit {
   margin-left: auto;
 }
 
+#disclaimer {
+  line-height: 0.75rem;
+}
+
+#disclaimer > .title {
+  margin-bottom: 0.5rem;
+}
+
 .background-thema-color {
   background-color: #fefef1;
 }
