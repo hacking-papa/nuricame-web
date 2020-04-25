@@ -1,17 +1,58 @@
-{% extends "base.html" %}
-{% block content %}
+{% extends "base.html" %} {% block content %}
 <section class="hero">
   <div class="hero-body">
     <div class="container has-text-centered">
-      <div>
-        <img alt="ぬりカメ" src="static/img/02_logo.png"/>
-      </div>
+      <img src="static/img/02_logo.png" alt="ぬりカメ" />
     </div>
   </div>
 </section>
-<section>
+<section class="section" x-data="showResult()">
   <div class="container has-text-centered">
-    <figure><img src="data:image/png;base64,{{ nurie }}"/></figure>
+    <figure class="image">
+      <!-- PWA -->
+      <div x-show="isPwa()">
+        <a href="data:image/png;base64,{{ nurie }}" download>
+          <img
+            src="data:image/png;base64,{{ nurie }}"
+            alt="ぬりえになった画像"
+          />
+        </a>
+      </div>
+      <!-- Not PWA -->
+      <div x-show="!isPwa()">
+        <img src="data:image/png;base64,{{ nurie }}" alt="ぬりえになった画像" />
+      </div>
+    </figure>
+    <div>
+      ぬりえ<ruby>完成<rt>かんせい</rt></ruby
+      >したよ！<br />
+      ダウンロードして<ruby>印刷<rt>いんさつ</rt></ruby
+      >しよう！
+    </div>
+  </div>
+</section>
+<section class="section has-text-centered">
+  <div class="container is-inline-block">
+    <div class="container is-flex">
+      <a href="/">
+        <img src="static/img/03_button2.png" alt="トップへ戻る" />
+      </a>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container has-text-centered">
+    <div>
+      せっかく<ruby>作<rt>つく</rt></ruby
+      >ったあなただけのぬりえ、<br /><ruby>塗<rt>ぬ</rt></ruby
+      >った<ruby>作品<rt>さくひん</rt></ruby
+      >は。ぜひ<ruby>SNS<rt>えすえぬえす</rt></ruby
+      >でシェアして<br />みんなに<ruby>自慢<rt>じまん</rt></ruby
+      >しよう！
+    </div>
+    <h2 class="title">
+      ＃ぬりカメでぬりえ
+    </h2>
   </div>
 </section>
 {% endblock %}
