@@ -45,109 +45,88 @@
     >
       ＼さっそくぬりえをつくる／
     </h2>
-    <div id="pageloader" class="pageloader" x-bind:class="activeLoading()">
+    <div id="pageloader" class="pageloader is-active" x-show="isLoading()">
       <span class="title has-text-weight-bold is-size-3 is-size-5-mobile"
         >ぬりえを<ruby>作<rt>つく</rt></ruby
         >ってるよ！<br />ちょっと<ruby>待<rt>ま</rt></ruby
         >っててね。</span
       >
     </div>
-    <div class="file is-large is-light is-centered">
-      <label class="file-label">
-        <input
-          class="file-input"
-          type="file"
-          accept="image/{{ allowed_extensions | join(',') }}"
-          name="image"
-          id="file-input"
-          x-on:change="preview()"
-        />
-        <figure class="margin-bottom-1rem">
-          <img
-            src="static/img/003_button.png"
-            alt="画像をアップする"
-            class="width-60vw"
+    <form action="/result" enctype="multipart/form-data" method="post">
+      <div class="file is-large is-light is-centered">
+        <label class="file-label">
+          <input
+            class="file-input"
+            type="file"
+            accept="image/{{ allowed_extensions | join(',') }}"
+            name="image"
+            id="file-input"
+            x-on:change="openPreview()"
           />
-        </figure>
-      </label>
-    </div>
-    <p
-      class="has-text-weight-medium is-size-5 is-size-7-mobile margin-bottom-2rem"
-    >
-      ※<ruby>PC<rt>ぴーしー</rt></ruby
-      >からもご<ruby>利用<rt>りよう</rt></ruby
-      ><ruby>可能<rt>かのう</rt></ruby
-      >です。<br />その<ruby>場合<rt>ばあい</rt></ruby
-      >、<ruby>画像<rt>がぞう</rt></ruby
-      >アップのみになります。
-    </p>
-    <div class="modal" id="modal-preview">
-      <div class="modal-background"></div>
-      <div class="modal-card">
-        <header class="modal-card-head">
-          <p
-            class="modal-card-title has-text-weight-bold is-size-3 is-size-5-mobile"
-          >
-            ぬりえにしたい<ruby>画像<rt>がぞう</rt></ruby>
-          </p>
-          <button class="delete" aria-label="close"></button>
-        </header>
-        <section class="modal-card-body">
-          <div class="container">
-            <figure>
-              <img
-                src="https://placehold.jp/3024x4032.png?text=アップされた写真(3024x4032)"
-                alt="アップされた写真"
-                id="image-preview"
-                class="width-80vw"
-              />
-            </figure>
-          </div>
-        </section>
-        <footer class="modal-card-foot">
-          <button
-            id="cancel"
-            class="button is-medium is-outline"
-            @click="closePreview()"
-          >
-            <span class="has-text-weight-bold is-size-5 is-size-7-mobile"
-              >やめる</span
-            >
-          </button>
-          <button
-            id="submit"
-            class="button is-large is-primary"
-            @click="post()"
-          >
-            <span class="has-text-weight-bold is-size-4 is-size-6-mobile"
-              >これでぬりえをつくる</span
-            >
-          </button>
-        </footer>
+          <figure class="margin-bottom-1rem">
+            <img
+              src="static/img/003_button.png"
+              alt="画像をアップする"
+              class="width-60vw"
+            />
+          </figure>
+        </label>
       </div>
-    </div>
-    <div class="container has-text-centered" x-show="hasResult()">
-      <figure class="margin-bottom-2rem">
-        <!-- PWA -->
-        <div x-show="isPwa()">
-          <a href="" id="download-link" download>
-            <img src="" alt="ぬりえになった画像" id="image-result-for-pwa" />
-          </a>
-        </div>
-        <!-- Not PWA -->
-        <div x-show="!isPwa()">
-          <img src="" alt="ぬりえになった画像" id="image-result" />
-        </div>
-      </figure>
-      <h2
-        class="has-text-weight-bold is-size-3 is-size-5-mobile margin-bottom-2rem"
+      <p
+        class="has-text-weight-medium is-size-5 is-size-7-mobile margin-bottom-2rem"
       >
-        ぬりえ<ruby>完成<rt>かんせい</rt></ruby
-        >したよ！<br />
-        ダウンロードして<ruby>印刷<rt>いんさつ</rt></ruby
-        >しよう！
-      </h2>
-    </div>
+        ※<ruby>PC<rt>ぴーしー</rt></ruby
+        >からもご<ruby>利用<rt>りよう</rt></ruby
+        ><ruby>可能<rt>かのう</rt></ruby
+        >です。<br />その<ruby>場合<rt>ばあい</rt></ruby
+        >、<ruby>画像<rt>がぞう</rt></ruby
+        >アップのみになります。
+      </p>
+      <div class="modal" id="modal-preview">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p
+              class="modal-card-title has-text-weight-bold is-size-3 is-size-5-mobile"
+            >
+              ぬりえにしたい
+              <ruby
+                >画像
+                <rt>がぞう</rt>
+              </ruby>
+            </p>
+            <button type="reset" aria-label="close" class="delete"></button>
+          </header>
+          <section class="modal-card-body">
+            <div class="container">
+              <figure class="image">
+                <img alt="アップされた写真" id="image-preview" src="" />
+              </figure>
+            </div>
+          </section>
+          <footer class="modal-card-foot">
+            <button
+              @click="closePreview()"
+              class="button is-medium is-outline"
+              id="cancel"
+              type="reset"
+            >
+              <span class="has-text-weight-bold is-size-5 is-size-7-mobile"
+                >やめる</span
+              >
+            </button>
+            <button
+              id="submit"
+              type="submit"
+              class="button is-large is-primary"
+              @click="startLoading()"
+            >
+              これでぬりえをつくる
+            </button>
+          </footer>
+        </div>
+      </div>
+    </form>
   </div>
 </section>
 <section class="hero">
@@ -351,67 +330,4 @@
     </div>
   </div>
 </section>
-<section>
-  <div class="columns margin-bottom-4rem">
-    <div class="column is-half">
-      <div class="container has-text-centered">
-        <h2 class="title is-size-4 is-size-6-mobile margin-bottom-2rem">
-          おといあわせはこちら
-        </h2>
-        <div class="container is-inline-block">
-          <div class="container is-flex margin-bottom-2rem">
-            <a href="mailto:team.hacking.papa@gmail.com?subject=【ぬりカメ】 ">
-              <img
-                class="container image info-icon margin-bottom-2rem"
-                src="static/img/011_mail.png"
-                alt="メール"
-              />
-              <span class="is-size-4 is-size-6-mobile has-text-info"
-                >team.hacking.papa@gmail.com</span
-              >
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="column is-half is-hidden-mobile">
-      <div class="container has-text-centered">
-        <h3 class="title is-size-4 is-size-6-mobile margin-bottom-2rem">
-          スマートフォンはこちら
-        </h3>
-        <div class="container">
-          <figure class="margin-bottom-2rem">
-            <img
-              src="static/img/qr-code.svg"
-              alt="QRコード"
-              class="info-icon"
-            />
-          </figure>
-          <a
-            href="https://nuricame.hacking-papa.com"
-            class="is-size-4 is-size-6-mobile has-text-info"
-            >https://nuricame.hacking-papa.com</a
-          >
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<footer class="footer background-theme-color">
-  <div class="content has-text-centered">
-    <div class="container is-inline-block">
-      <div class="container is-flex margin-bottom-2rem" id="footer-brand-icon">
-        <a href="https://hacking-papa.com">
-          <img
-            src="static/img/012_footer_hackingpapa_logo.png"
-            alt="はっきんぐパパ"
-          />
-        </a>
-      </div>
-      <p class="is-size-6 is-size-7-mobile">
-        &copy; 2020 はっきんぐパパ おーるらいつりざーぶど
-      </p>
-    </div>
-  </div>
-</footer>
 {% endblock %}

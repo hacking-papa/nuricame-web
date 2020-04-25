@@ -71,12 +71,87 @@
     />
   </head>
   <body>
-    {% block content %}
+    <!-- Flash Message -->
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %} {% for category, message in messages %}
+    <div class="notification {{ category }}">
+      <button @click="$el.innerHTML=''" class="delete"></button>
+      {{ message }}
+    </div>
+    {% endfor %} {% endif %} {% endwith %} {% block content %}
     <!-- Contents Here! -->
     {% endblock %}
 
+    <section>
+      <div class="columns margin-bottom-4rem">
+        <div class="column is-half">
+          <div class="container has-text-centered">
+            <h2 class="title is-size-4 is-size-6-mobile margin-bottom-2rem">
+              おといあわせはこちら
+            </h2>
+            <div class="container is-inline-block">
+              <div class="container is-flex margin-bottom-2rem">
+                <a
+                  href="mailto:team.hacking.papa@gmail.com?subject=【ぬりカメ】 "
+                >
+                  <img
+                    class="container image info-icon margin-bottom-2rem"
+                    src="static/img/011_mail.png"
+                    alt="メール"
+                  />
+                  <span class="is-size-4 is-size-6-mobile has-text-info"
+                    >team.hacking.papa@gmail.com</span
+                  >
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-half is-hidden-mobile">
+          <div class="container has-text-centered">
+            <h3 class="title is-size-4 is-size-6-mobile margin-bottom-2rem">
+              スマートフォンはこちら
+            </h3>
+            <div class="container">
+              <figure class="margin-bottom-2rem">
+                <img
+                  src="static/img/qr-code.svg"
+                  alt="QRコード"
+                  class="info-icon"
+                />
+              </figure>
+              <a
+                href="https://nuricame.hacking-papa.com"
+                class="is-size-4 is-size-6-mobile has-text-info"
+                >https://nuricame.hacking-papa.com</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="footer background-theme-color">
+      <div class="content has-text-centered">
+        <div class="container is-inline-block">
+          <div
+            class="container is-flex margin-bottom-2rem"
+            id="footer-brand-icon"
+          >
+            <a href="https://hacking-papa.com">
+              <img
+                src="static/img/012_footer_hackingpapa_logo.png"
+                alt="はっきんぐパパ"
+              />
+            </a>
+          </div>
+          <p class="is-size-6 is-size-7-mobile">
+            &copy; 2020 はっきんぐパパ おーるらいつりざーぶど
+          </p>
+        </div>
+      </div>
+    </footer>
+
     <script src="{{ url_for('static', filename='js/alpine-2.2.5/alpine.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/axios-0.19.2/axios.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/BulmaJS-0.10.3/bulma.js') }}"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
@@ -87,11 +162,12 @@
     ></script>
     <script>
       window.dataLayer = window.dataLayer || [];
+
       function gtag() {
         dataLayer.push(arguments);
       }
-      gtag("js", new Date());
 
+      gtag("js", new Date());
       gtag("config", "UA-133451341-1");
     </script>
   </body>

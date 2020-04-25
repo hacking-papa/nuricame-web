@@ -1,0 +1,76 @@
+<form action="/result" enctype="multipart/form-data" method="post">
+    <div class="file is-large is-light is-centered">
+        <label class="file-label">
+            <input
+                class="file-input"
+                type="file"
+                accept="image/{{ allowed_extensions | join(',') }}"
+                name="image"
+                id="file-input"
+                x-on:change="openPreview()"
+            />
+            <figure class="margin-bottom-1rem">
+                <img
+                    src="static/img/03_take.png"
+                    alt="画像をアップする"
+                    class="width-60vw"
+                />
+            </figure>
+        </label>
+    </div>
+    <p
+        class="has-text-weight-medium is-size-5 is-size-7-mobile margin-bottom-2rem"
+    >
+        ※<ruby>PC<rt>ぴーしー</rt></ruby
+        >からもご<ruby>利用<rt>りよう</rt></ruby
+        ><ruby>可能<rt>かのう</rt></ruby
+        >です。<br />その<ruby>場合<rt>ばあい</rt></ruby
+        >、<ruby>画像<rt>がぞう</rt></ruby
+        >アップのみになります。
+    </p>
+    <div class="modal" id="modal-preview">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p
+                    class="modal-card-title has-text-weight-bold is-size-3 is-size-5-mobile"
+                >
+                    ぬりえにしたい
+                    <ruby
+                        >画像
+                        <rt>がぞう</rt>
+                    </ruby>
+                </p>
+                <button type="reset" aria-label="close" class="delete"></button>
+            </header>
+            <section class="modal-card-body">
+                <div class="container">
+                    <figure class="image">
+                        <img alt="アップされた写真" id="image-preview" src="" />
+                    </figure>
+                </div>
+            </section>
+            <footer class="modal-card-foot">
+                <button
+                    @click="closePreview()"
+                    class="button is-medium is-outline"
+                    id="cancel"
+                    type="reset"
+                >
+                    <span
+                        class="has-text-weight-bold is-size-5 is-size-7-mobile"
+                        >やめる</span
+                    >
+                </button>
+                <button
+                    id="submit"
+                    type="submit"
+                    class="button is-large is-primary"
+                    @click="startLoading()"
+                >
+                    これでぬりえをつくる
+                </button>
+            </footer>
+        </div>
+    </div>
+</form>
