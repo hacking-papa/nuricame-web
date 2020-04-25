@@ -78,6 +78,21 @@ def manifest():
     return send_from_directory("static", "manifest.json")
 
 
+@app.route("/apple-touch-icon.png")
+def apple_touch_icon():
+    return send_from_directory("static", "apple-touch-icon.png")
+
+
+@app.route("/android-chrome-192x192.png")
+def android_chrome_192x192():
+    return send_from_directory("static", "android-chrome-192x192.png")
+
+
+@app.route("/android-chrome-512x512.png")
+def android_chrome_512x512():
+    return send_from_directory("static", "android-chrome-512x512.png")
+
+
 @app.route("/", methods=["GET"])
 def index():
     app.logger.debug("GET /index")
