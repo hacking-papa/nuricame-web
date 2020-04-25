@@ -112,11 +112,5 @@ def result():
     return render_template("result.html", nurie=nurie)
 
 
-@app.route("/sample")
-def sample():
-    """ TODO: for Debug!! """
-    return render_template("sample.html")
-
-
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=8080, debug=True)
