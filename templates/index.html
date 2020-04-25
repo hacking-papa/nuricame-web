@@ -58,7 +58,7 @@
             <input
               class="file-input"
               type="file"
-              accept="image/*"
+              accept="image/{{ allowed_extensions | join(',') }}"
               name="image"
               id="file-input"
               x-on:change="openPreview()"
