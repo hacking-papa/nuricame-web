@@ -55,6 +55,10 @@ button#submit {
   width: 80vw;
 }
 
+.width-60vw {
+  width: 60vw;
+}
+
 .margin-bottom-8rem {
   margin-bottom: 8rem;
 }
