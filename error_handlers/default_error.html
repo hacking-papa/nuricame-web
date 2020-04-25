@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ぬりカメ - はっきんぐパパ</title>
+    <link
+      rel="stylesheet"
+      href="http://fonts.googleapis.com/earlyaccess/notosansjp.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Chango"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+      }
+      body {
+        background: #fefef1;
+        background-color: #fefef1;
+        padding: 0;
+        margin: 0;
+      }
+      #error {
+        position: relative;
+        height: 96vh;
+      }
+      #error .error {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      }
+      .error {
+        max-width: 640px;
+        width: 100%;
+        line-height: 1.4;
+      }
+      .error > div:first-child {
+        padding-left: 200px;
+        padding-top: 12px;
+        height: 170px;
+        margin-bottom: 20px;
+      }
+      .error .error-500 {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 170px;
+        height: 170px;
+        background: #e01818;
+        border-radius: 7px;
+        -webkit-box-shadow: 0px 0px 0px 10px #e01818 inset,
+          0px 0px 0px 20px #fff inset;
+        box-shadow: 0px 0px 0px 10px #e01818 inset, 0px 0px 0px 20px #fff inset;
+      }
+      .error .error-500 h1 {
+        font-family: "Chango", cursive;
+        color: #fff;
+        font-size: 118px;
+        margin: 0px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        display: inline-block;
+        height: 60px;
+        line-height: 60px;
+      }
+      .error h2 {
+        font-family: "Chango", cursive;
+        font-size: 48px;
+        color: #222;
+        font-weight: 400;
+        text-transform: uppercase;
+        margin: 0px;
+        line-height: 1.1;
+      }
+      .error p {
+        font-family: "Noto Sans JP", sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        color: #222;
+        margin-top: 5px;
+      }
+      .error a {
+        font-family: "Noto Sans JP", sans-serif;
+        color: #e01818;
+        font-weight: 400;
+        text-decoration: none;
+      }
+      .footer {
+        height: 3vh;
+      }
+      .footer > p {
+        width: 450px;
+        margin: auto;
+      }
+      @media only screen and (max-width: 480px) {
+        .error {
+          padding-left: 15px;
+          padding-right: 15px;
+        }
+        .error > div:first-child {
+          padding: 0px;
+          height: auto;
+        }
+        .error .error-500 {
+          position: relative;
+          margin-bottom: 15px;
+        }
+        .error h2 {
+          font-size: 42px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="error">
+      <div class="error">
+        <div>
+          <div class="error-500">
+            <h1>!</h1>
+          </div>
+          <h2>しっぱい！</h2>
+          <h3>500: Internal Server Error</h3>
+          <h4>Something Wrong!!</h4>
+        </div>
+        <p>
+          すこし<ruby>時間<rt>じかん</rt></ruby
+          >がたってから、また<ruby>試<rt>ため</rt></ruby
+          >してみてね。&rArr;
+          <a href="/">トップページにもどる。</a>
+        </p>
+      </div>
+    </div>
+    <footer class="footer">
+      <p>
+        &copy; 2020
+        <a href="https://hacking-papa.com/" target="_blank">はっきんぐパパ</a>
+        おーるらいつりざーぶど
+      </p>
+    </footer>
+    <!-- Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-133451341-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "UA-133451341-1");
+    </script>
+  </body>
+</html>
