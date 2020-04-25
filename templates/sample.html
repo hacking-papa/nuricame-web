@@ -9,68 +9,113 @@
   />
 </head>
 <body>
-<section x-data="photoSelect()">
-  <form action="/result" enctype="multipart/form-data" method="post">
-    <input @click="startPreview()" name="image" type="file"/>
-  </form>
-  <div class="modal" id="modal-preview">
-    <div class="modal-background"></div>
-    <div class="modal-card">
-      <header class="modal-card-head">
-        <p class="modal-card-title">
-          ぬりえにしたい
-          <ruby>画像
-            <rt>がぞう</rt>
-          </ruby>
-        </p>
-        <button aria-label="close" class="delete"></button>
-      </header>
-      <section class="modal-card-body">
-        <figure class="image">
-          <img alt="アップされた写真" id="image-preview" src=""/>
-        </figure>
-      </section>
-      <footer class="modal-card-foot">
-        <button
-          @click="closePreview()"
-          class="button is-medium is-outline"
-          id="cancel"
-        >
-          やめる
-        </button>
-        <input @click="" name="submit" type="submit" value="submit"/>
-      </footer>
-    </div>
-  </div>
-  <div class="pageloader is-active" x-show="isLoading()">
+  <section x-data="selectPhoto()">
+    <form action="/result" enctype="multipart/form-data" method="post">
+      <div class="file is-large is-light is-centered">
+        <label class="file-label">
+          <input
+            class="file-input"
+            type="file"
+            accept="image/*"
+            name="image"
+            id="file-input"
+            x-on:change="openPreview()"
+          />
+          <img src="static/img/03_take.png" alt="画像をアップする" />
+        </label>
+      </div>
+      <div class="modal" id="modal-preview">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">
+              ぬりえにしたい
+              <ruby
+                >画像
+                <rt>がぞう</rt>
+              </ruby>
+            </p>
+            <button type="reset" aria-label="close" class="delete"></button>
+          </header>
+          <section class="modal-card-body">
+            <figure class="image">
+              <img alt="アップされた写真" id="image-preview" src="" />
+            </figure>
+          </section>
+          <footer class="modal-card-foot">
+            <button
+              @click="closePreview()"
+              class="button is-medium is-outline"
+              id="cancel"
+              type="reset"
+            >
+              やめる
+            </button>
+            <button
+              id="submit"
+              type="submit"
+              class="button is-large is-primary"
+              @click="startLoading()"
+            >
+              これでぬりえをつくる
+            </button>
+          </footer>
+        </div>
+      </div>
+    </form>
+
+    <div class="pageloader is-active" x-show="isLoading()">
       <span class="title"
-      >ぬりえを<ruby>作<rt>つく</rt></ruby
-      >ってるよ！ちょっと<ruby>待<rt>ま</rt></ruby
-      >っててね。</span
+        >ぬりえを<ruby>作<rt>つく</rt></ruby
+        >ってるよ！ちょっと<ruby>待<rt>ま</rt></ruby
+        >っててね。</span
       >
-  </div>
-</section>
-<script
-  defer
-  src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v1.10.1/dist/alpine.js"
-></script>
-<script>
-  function photoSelect() {
-    return {
-      loading: false,
-      startLoading() {
-        this.loading = true;
-      },
-      isLoading() {
-        return this.loading;
-      },
-      openPreview() {
-        // TODO: Not Implemented!
-      },
-      closePreview() {
-        // TODO: Not Implemented!
-      },
-    };
-  }
-</script>
+    </div>
+  </section>
+  <script
+    defer
+    src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v1.10.1/dist/alpine.js"
+  ></script>
+  <script src="{{ url_for('static', filename='js/BulmaJS-0.10.3/bulma.js') }}"></script>
+  <script>
+    const DEBUG_MODE = window.location.href.indexOf("nuricame") <= 0;
+
+    const url = window.URL || window.webkitURL;
+    const fileInput = document.getElementById("file-input");
+    const imagePreview = document.getElementById("image-preview");
+    const modalPreview = Bulma.create("modal", {
+      element: document.querySelector("#modal-preview"),
+    });
+
+    function trace(s) {
+      if (DEBUG_MODE && this.console && typeof console.log != "undefined") {
+        console.log(s);
+      }
+    }
+
+    function selectPhoto() {
+      return {
+        loading: false,
+        startLoading() {
+          trace("selectPhoto.startLoading()");
+          this.loading = true;
+        },
+        isLoading() {
+          trace("selectPhoto.isLoading()");
+          return this.loading;
+        },
+        openPreview() {
+          trace("selectPhoto.preview()");
+          if (fileInput) {
+            imagePreview.src = url.createObjectURL(fileInput.files[0]);
+            modalPreview.open();
+          }
+        },
+        closePreview() {
+          trace("selectPhoto.closePreview()");
+          modalPreview.close();
+        },
+      };
+    }
+  </script>
 </body>
