@@ -50,12 +50,8 @@ button#submit {
   max-width: 128px;
 }
 
-.image-button {
-  width: 50%;
-}
-
-.width-80per {
-  width: 80%;
+.width-80vw {
+  width: 80vw;
 }
 
 .margin-bottom-8rem {
