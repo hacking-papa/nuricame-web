@@ -18,27 +18,19 @@ function trace(s) {
 
 function selectPhoto() {
   return {
-    loading: "",
+    loading: false,
     isPwa() {
       return window.navigator.standalone;
     },
     startLoading() {
       trace("selectPhoto.startLoading()");
-      this.loading = "is-active";
+      this.loading = true;
     },
-    stopLoading() {
-      trace("selectPhoto.stopLoading()");
-      this.loading = "";
-    },
-    activeLoading() {
+    isLoading() {
       trace("selectPhoto.activeLoading()");
       return this.loading;
     },
-    hasResult() {
-      trace("selectPhoto.hasResult()");
-      return imageResult.src !== window.location.href;
-    },
-    preview() {
+    openPreview() {
       trace("selectPhoto.preview()");
       if (fileInput) {
         imagePreview.src = url.createObjectURL(fileInput.files[0]);
@@ -48,79 +40,6 @@ function selectPhoto() {
     closePreview() {
       trace("selectPhoto.closePreview()");
       modalPreview.close();
-    },
-    post() {
-      trace("selectPhoto.post()");
-      const params = new FormData();
-      params.append("image", fileInput.files[0]);
-      trace(params);
-      axios
-        .post("/result", params, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-          responseType: "blob",
-        })
-        .then(this.startLoading())
-        .then((response) => {
-          const blob = new Blob([response.data], { type: "image/png" });
-          const imageUrl = url.createObjectURL(blob);
-          imageResult.src = imageUrl;
-          imageResultForPwa.src = imageUrl;
-          downloadLink.href = imageUrl;
-          this.closePreview();
-          this.stopLoading();
-        })
-        .catch((error) => {
-          trace(error);
-          this.closePreview();
-          this.stopLoading();
-          const reader = new FileReader();
-          reader.readAsText(error.response.data);
-          reader.onload = () => {
-            let type = "danger";
-            let message =
-              "すこし<ruby>時間<rt>じかん</rt></ruby>がたってから、また<ruby>試<rt>ため</rt></ruby>してみてね";
-            try {
-              const json = JSON.parse(reader.result);
-              trace(JSON.stringify(json));
-              switch (json.error_code) {
-                case 40000:
-                  type = "danger";
-                  message =
-                    "イメージパラメータがありません<br />" +
-                    "お<ruby>問<rt>と</rt></ruby>い<ruby>合<rt>あ</rt></ruby>わせください";
-                  break;
-                case 41500:
-                  type = "warning";
-                  message =
-                    "<ruby>画像<rt>がぞう</rt></ruby>が<ruby>選<rt>えら</rt></ruby>ばれていません<br />" +
-                    "もう<ruby>一度<rt>いちど</rt></ruby>はじめからやりなおしてください";
-                  break;
-                case 41501:
-                  type = "warning";
-                  message =
-                    "ぬりえにできない<ruby>種類<rt>しゅるい</rt></ruby>の<ruby>画像<rt>がぞう</rt></ruby>です<br />" +
-                    "<ruby>違<rt>ちが</rt></ruby>う<ruby>画像<rt>がぞう</rt></ruby>でお<ruby>試<rt>ため</rt></ruby>しください";
-                  break;
-              }
-            } catch (error) {
-              trace(error);
-            }
-            this.createAlert(type, message);
-          };
-        });
-    },
-    createAlert(
-      type = "danger",
-      message = "すこし<ruby>時間<rt>じかん</rt></ruby>がたってから、また<ruby>試<rt>ため</rt></ruby>してみてね"
-    ) {
-      Bulma.create("alert", {
-        type: type,
-        title: "しっぱい！",
-        body: message,
-        confirm: "わかりました",
-      });
     },
   };
 }
