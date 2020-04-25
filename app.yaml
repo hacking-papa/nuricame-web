@@ -22,9 +22,9 @@ handlers:
   secure: always
   redirect_http_response_code: 301
   script: auto
-  error_handlers:
-    - file: error_handlers/default_error.html
-    - error_code: over_quota
-      file: error_handlers/over_quota.html
-    - error_code: timeout
-      file: error_handlers/timeout.html
+error_handlers:
+  - file: error_handlers/default_error.html
+  - error_code: over_quota
+    file: error_handlers/over_quota.html
+  - error_code: timeout
+    file: error_handlers/timeout.html
