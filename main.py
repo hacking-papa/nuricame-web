@@ -48,7 +48,7 @@ else:
 
     dashboard.bind(app)  # for Profiling
     toolbar = DebugToolbarExtension(app)  # for Profiling
-    app.config["DEBUG_TB_PROFILER_ENABLED"] = True  # for Profiling
+    app.config["DEBUG_TB_PROFILER_ENABLED"] = False  # for Profiling
 
 app.config["TRACER"] = initialize_tracer("nuricame-web")  # for Profiling
 

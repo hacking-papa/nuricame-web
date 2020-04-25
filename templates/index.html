@@ -1,21 +1,23 @@
 {% extends "base.html" %} {% block content %}
-<section class="section">
-  <nav class="margin-bottom-6rem" id="brand-icon">
+<section class="section padding-1_5rem-1_5rem">
+  <nav id="brand-icon">
     <img src="static/img/001_hackingpapa_logo.png" alt="はっきんぐパパ" />
   </nav>
 </section>
 <section class="hero">
   <div class="hero-body">
     <div class="container has-text-centered">
-      <figure class="margin-bottom-6rem">
-        <img src="static/img/002_logo.png" alt="ぬりカメ" class="width-80vw" />
+      <figure class="image">
+        <img src="static/img/002_logo.png" alt="ぬりカメ" class="" />
       </figure>
     </div>
   </div>
 </section>
 <section class="section">
   <div class="container has-text-centered">
-    <div class="has-text-weight-bold is-size-4 is-size-6-mobile margin-bottom-4rem">
+    <div
+      class="has-text-weight-bold is-size-4 is-size-6-mobile"
+    >
       <ruby>外出<rt>がいしゅつ</rt></ruby
       >できなくて、<br />おうち<ruby>遊<rt>あそ</rt></ruby
       >びにも<ruby>飽<rt>あ</rt></ruby
@@ -38,7 +40,7 @@
     </div>
   </div>
 </section>
-<section x-data="selectPhoto()" class="section">
+<section x-data="selectPhoto()" class="section padding-1_5rem-1_5rem">
   <div class="container has-text-centered">
     <h2 class="title has-text-weight-bold is-size-3 is-size-5-mobile margin-bottom-2rem">
       ＼さっそくぬりえをつくる／
@@ -60,7 +62,7 @@
           id="file-input"
           x-on:change="preview()"
         />
-        <figure class="margin-bottom-4rem">
+        <figure class="margin-bottom-1rem">
           <img
             src="static/img/003_button.png"
             alt="画像をアップする"
@@ -69,11 +71,23 @@
         </figure>
       </label>
     </div>
+    <p
+      class="has-text-weight-medium is-size-5 is-size-7-mobile margin-bottom-2rem"
+    >
+      ※<ruby>PC<rt>ぴーしー</rt></ruby
+      >からもご<ruby>利用<rt>りよう</rt></ruby
+      ><ruby>可能<rt>かのう</rt></ruby
+      >です。<br />その<ruby>場合<rt>ばあい</rt></ruby
+      >、<ruby>画像<rt>がぞう</rt></ruby
+      >アップのみになります。
+      </p>
     <div class="modal" id="modal-preview">
       <div class="modal-background"></div>
       <div class="modal-card">
         <header class="modal-card-head">
-          <p class="modal-card-title has-text-weight-bold is-size-3 is-size-5-mobile">
+          <p
+            class="modal-card-title has-text-weight-bold is-size-3 is-size-5-mobile"
+          >
             ぬりえにしたい<ruby>画像<rt>がぞう</rt></ruby>
           </p>
           <button class="delete" aria-label="close"></button>
@@ -96,7 +110,9 @@
             class="button is-medium is-outline"
             @click="closePreview()"
           >
-            <span class="has-text-weight-bold is-size-5 is-size-7-mobile">やめる</span>
+            <span class="has-text-weight-bold is-size-5 is-size-7-mobile"
+              >やめる</span
+            >
           </button>
           <button
             id="submit"
@@ -123,7 +139,9 @@
           <img src="" alt="ぬりえになった画像" id="image-result" />
         </div>
       </figure>
-      <h2 class="has-text-weight-bold is-size-3 is-size-5-mobile margin-bottom-2rem">
+      <h2
+        class="has-text-weight-bold is-size-3 is-size-5-mobile margin-bottom-2rem"
+      >
         ぬりえ<ruby>完成<rt>かんせい</rt></ruby
         >したよ！<br />
         ダウンロードして<ruby>印刷<rt>いんさつ</rt></ruby
@@ -133,7 +151,7 @@
   </div>
 </section>
 <section class="hero">
-  <div class="hero-body">
+  <div class="hero-body padding-1_5rem-1_5rem">
     <div class="container has-text-centered">
       <h2 class="has-text-weight-bold is-size-3 is-size-5-mobile">
         ぬりカメ<ruby>WEB<rt>うぇぶ</rt></ruby
@@ -143,7 +161,7 @@
     </div>
   </div>
 </section>
-<section class="section">
+<section class="section padding-1_5rem-1_5rem">
   <div class="container has-text-centered">
     <div class="container">
       <figure class="margin-bottom-2rem">
@@ -154,7 +172,9 @@
         />
       </figure>
     </div>
-    <div class="has-text-weight-bold is-size-4 is-size-6-mobile margin-bottom-2rem">
+    <div
+      class="has-text-weight-bold is-size-4 is-size-6-mobile margin-bottom-2rem"
+    >
       ぬりえにしたいものが<br /><ruby>出来<rt>でき</rt></ruby
       >るだけ<ruby>真<rt>ま</rt></ruby
       >ん<ruby>中<rt>なか</rt></ruby
@@ -162,7 +182,9 @@
       >るように<br />カメラで<ruby>撮影<rt>さつえい</rt></ruby
       >、<br />または<ruby>画像<rt>がぞう</rt></ruby
       >をアップしよう！
-      <p class="has-text-weight-medium is-size-5 is-size-7-mobile margin-bottom-2rem">
+      <p
+        class="has-text-weight-medium is-size-5 is-size-7-mobile margin-bottom-2rem"
+      >
         ※ぬりえになるのは<ruby>中央<rt>ちゅうおう</rt></ruby
         >の<ruby>正方形<rt>せいほうけい</rt></ruby
         ><ruby>領域<rt>りょういき</rt></ruby
@@ -184,7 +206,9 @@
           class="width-80vw"
         />
       </figure>
-      <div class="has-text-weight-bold is-size-4 is-size-6-mobile margin-bottom-2rem">
+      <div
+        class="has-text-weight-bold is-size-4 is-size-6-mobile margin-bottom-2rem"
+      >
         ぬりえ<ruby>完成<rt>かんせい</rt></ruby
         >！<br />ダウンロードしてね。
       </div>
@@ -203,7 +227,9 @@
         />
       </figure>
     </div>
-    <div class="has-text-weight-bold is-size-4 is-size-6-mobile margin-bottom-2rem">
+    <div
+      class="has-text-weight-bold is-size-4 is-size-6-mobile margin-bottom-2rem"
+    >
       ダウンロードしたぬりえを、<br />プリンター<ruby
         >印刷<rt>いんさつ</rt></ruby
       >するだけ！<br /><ruby>自由<rt>じゆう</rt></ruby
@@ -214,15 +240,17 @@
   </div>
 </section>
 <section class="hero">
-  <div class="hero-body">
+  <div class="hero-body padding-1_5rem-1_5rem">
     <div class="container has-text-centered">
-      <h2 class="title has-text-weight-bold is-size-3 is-size-5-mobile">ぬりカメとは</h2>
+      <h2 class="title has-text-weight-bold is-size-3 is-size-5-mobile">
+        ぬりカメとは
+      </h2>
     </div>
   </div>
 </section>
-<section class="section">
+<section class="section padding-1_5rem-1_5rem">
   <div class="container has-text-centered">
-    <div class="has-text-weight-bold is-size-4 is-size-6-mobile margin-bottom-6rem">
+    <div class="has-text-weight-bold is-size-4 is-size-6-mobile">
       <p class="margin-bottom-2rem">
         <ruby>好<rt>す</rt></ruby
         >きなものを、パシャっとぬりえに。
@@ -256,34 +284,42 @@
         >のカメラです。
       </p>
     </div>
-    <figure class="image is-5by3 margin-bottom-6rem">
-      <iframe
-        class="has-ratio"
-        src="https://www.youtube.com/embed/M2JKckXSP6g?showinfo=0"
-        frameborder="0"
-        allowfullscreen
-      ></iframe>
+  </div>
+</section>
+<section class="section padding-1_5rem-1_5rem">
+  <figure class="image is-5by3">
+    <iframe
+      class="has-ratio"
+      src="https://www.youtube.com/embed/M2JKckXSP6g?showinfo=0"
+      frameborder="0"
+      allowfullscreen
+    ></iframe>
+  </figure>
+</section>
+<section class="section padding-1_5rem-1_5rem">
+  <div class="container has-text-centered">
+    <figure>
+      <img src="static/img/009_products.png" alt="1号機" class="width-60vw" />
     </figure>
-    <figure class="margin-bottom-2rem">
-      <img src="static/img/009_products.png" alt="1号機" class="width-80vw" />
-    </figure>
-    <div class="has-text-weight-bold is-size-5 is-size-7-mobile margin-bottom-6rem">
+    <div
+      class="has-text-weight-bold is-size-5 is-size-7-mobile margin-bottom-2rem"
+    >
       ぬりカメ1<ruby>号機<rt>ごうき</rt></ruby>
     </div>
-    <figure class="margin-bottom-6rem">
-      <img
-        src="static/img/010_nuriephoto.png"
-        alt="ぬりえしてる様子"
-        class="width-80vw"
-      />
-    </figure>
   </div>
+</section>
+<section>
+  <figure class="image margin-bottom-4rem">
+    <img src="static/img/010_nuriephoto.png" alt="ぬりえしてる様子" />
+  </figure>
 </section>
 <section>
   <div class="columns margin-bottom-4rem">
     <div class="column is-half">
       <div class="container has-text-centered">
-        <h2 class="title is-size-4 is-size-6-mobile margin-bottom-2rem">おといあわせはこちら</h2>
+        <h2 class="title is-size-4 is-size-6-mobile margin-bottom-2rem">
+          おといあわせはこちら
+        </h2>
         <div class="container is-inline-block">
           <div class="container is-flex margin-bottom-2rem">
             <a href="mailto:team.hacking.papa@gmail.com?subject=【ぬりカメ】 ">
