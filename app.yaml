@@ -9,7 +9,22 @@ handlers:
 - url: /manifest\.json
   static_files: static/manifest.json
   upload: static/manifest\.json
+- url: /apple-touch-icon\.png
+  static_files: static/apple-touch-icon.png
+  upload: static/apple-touch-icon\.png
+- url: /android-chrome-192x192\.png
+  static_files: static/android-chrome-192x192.png
+  upload: static/android-chrome-192x192\.png
+- url: /android-chrome-512x512\.png
+  static_files: static/android-chrome-512x512.png
+  upload: static/android-chrome-512x512\.png
 - url: /.*
   secure: always
   redirect_http_response_code: 301
   script: auto
+error_handlers:
+  - file: error_handlers/default_error.html
+  - error_code: over_quota
+    file: error_handlers/over_quota.html
+  - error_code: timeout
+    file: error_handlers/timeout.html
