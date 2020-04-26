@@ -45,80 +45,66 @@
   <div class="container has-text-centered">
     <h2 class="title">＼さっそくぬりえをつくる／</h2>
     <div x-data="selectPhoto()">
-      <div id="pageloader" class="pageloader" x-bind:class="activeLoading()">
+      <div id="pageloader" class="pageloader is-active" x-show="isLoading()">
         <span class="title"
           >ぬりえを<ruby>作<rt>つく</rt></ruby
           >ってるよ！ちょっと<ruby>待<rt>ま</rt></ruby
           >っててね。</span
         >
       </div>
-      <div class="file is-large is-light is-centered">
-        <label class="file-label">
-          <input
-            class="file-input"
-            type="file"
-            accept="image/{{ allowed_extensions | join(',') }}"
-            name="image"
-            id="file-input"
-            x-on:change="preview()"
-          />
-          <img src="static/img/03_take.png" alt="画像をアップする" />
-        </label>
-      </div>
-      <div class="modal" id="modal-preview">
-        <div class="modal-background"></div>
-        <div class="modal-card">
-          <header class="modal-card-head">
-            <p class="modal-card-title">
-              ぬりえにしたい<ruby>画像<rt>がぞう</rt></ruby>
-            </p>
-            <button class="delete" aria-label="close"></button>
-          </header>
-          <section class="modal-card-body">
-            <figure class="image">
-              <img
-                src="https://placehold.jp/3024x4032.png?text=アップされた写真(3024x4032)"
-                alt="アップされた写真"
-                id="image-preview"
-              />
-            </figure>
-          </section>
-          <footer class="modal-card-foot">
-            <button
-              id="cancel"
-              class="button is-medium is-outline"
-              @click="closePreview()"
-            >
-              やめる
-            </button>
-            <button
-              id="submit"
-              class="button is-large is-primary"
-              @click="post()"
-            >
-              これでぬりえをつくる
-            </button>
-          </footer>
+      <form action="/result" enctype="multipart/form-data" method="post">
+        <div class="file is-large is-light is-centered">
+          <label class="file-label">
+            <input
+              class="file-input"
+              type="file"
+              accept="image/{{ allowed_extensions | join(',') }}"
+              name="image"
+              id="file-input"
+              x-on:change="openPreview()"
+            />
+            <img src="static/img/03_take.png" alt="画像をアップする" />
+          </label>
         </div>
-      </div>
-      <div x-show="hasResult()">
-        <h2 class="title">
-          ぬりえの<ruby>完成<rt>かんせい</rt></ruby
-          >！
-        </h2>
-        <figure class="box image">
-          <!-- PWA -->
-          <div x-show="isPwa()">
-            <a href="" id="download-link" download>
-              <img src="" alt="ぬりえになった画像" id="image-result-for-pwa" />
-            </a>
+        <div class="modal" id="modal-preview">
+          <div class="modal-background"></div>
+          <div class="modal-card">
+            <header class="modal-card-head">
+              <p class="modal-card-title">
+                ぬりえにしたい
+                <ruby
+                  >画像
+                  <rt>がぞう</rt>
+                </ruby>
+              </p>
+              <button type="reset" aria-label="close" class="delete"></button>
+            </header>
+            <section class="modal-card-body">
+              <figure class="image">
+                <img alt="アップされた写真" id="image-preview" src="" />
+              </figure>
+            </section>
+            <footer class="modal-card-foot">
+              <button
+                @click="closePreview()"
+                class="button is-medium is-outline"
+                id="cancel"
+                type="reset"
+              >
+                やめる
+              </button>
+              <button
+                id="submit"
+                type="submit"
+                class="button is-large is-primary"
+                @click="startLoading()"
+              >
+                これでぬりえをつくる
+              </button>
+            </footer>
           </div>
-          <!-- Not PWA -->
-          <div x-show="!isPwa()">
-            <img src="" alt="ぬりえになった画像" id="image-result" />
-          </div>
-        </figure>
-      </div>
+        </div>
+      </form>
     </div>
   </div>
 </section>
@@ -202,50 +188,4 @@
     <img src="static/img/09_photo.png" alt="ぬりえしてる様子" />
   </div>
 </section>
-<section>
-  <div class="columns">
-    <div class="column is-half">
-      <div class="container has-text-centered">
-        <h2 class="title">おといあわせはこちら</h2>
-        <div class="container is-inline-block">
-          <div class="container is-flex">
-            <a href="mailto:team.hacking.papa@gmail.com?subject=【ぬりカメ】 ">
-              <img
-                class="container image is-128x128"
-                src="static/img/envelope-regular.svg"
-                alt="メール"
-              />
-              <span class="is-size-5 has-text-info"
-                >team.hacking.papa@gmail.com</span
-              >
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="column is-half is-hidden-mobile">
-      <div class="container has-text-centered">
-        <h2 class="title">スマートフォンはこちら</h2>
-        <figure class="container image is-128x128">
-          <img class="" src="static/img/qr-code.svg" alt="QRコード" />
-        </figure>
-        <a
-          href="https://nuricame.hacking-papa.com"
-          class="is-size-5 has-text-info"
-          >https://nuricame.hacking-papa.com</a
-        >
-      </div>
-    </div>
-  </div>
-</section>
-<footer class="footer">
-  <div class="content has-text-centered">
-    <figure>
-      <img src="static/img/10_hackingpapa_logo_2.png" alt="はっきんぐパパ" />
-    </figure>
-    <p class="is-size-7">
-      &copy; 2020 はっきんぐパパ おーるらいつりざーぶど
-    </p>
-  </div>
-</footer>
 {% endblock %}
