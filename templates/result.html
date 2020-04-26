@@ -1,16 +1,16 @@
 {% extends "base.html" %} {% block content %}
 <section class="hero">
   <div class="hero-body padding-1_5rem-1_5rem">
-    <div class="container has-text-centered">
+    <div class="container figure has-text-centered">
       <a href="/">
-        <img src="static/img/101_nuricame_logo.png" alt="ぬりカメ" />
+        <img src="static/img/nuricame-web_logo.png" alt="ぬりカメ" />
       </a>
     </div>
   </div>
 </section>
 <section class="section padding-1_5rem-1_5rem" x-data="showResult()">
   <div class="container has-text-centered">
-    <figure class="box image margin-bottom-2rem">
+    <figure class="box image figure margin-bottom-2rem">
       <!-- PWA -->
       <div x-show="isPwa()">
         <a href="data:image/png;base64,{{ nurie }}" download>
@@ -39,10 +39,10 @@
 </section>
 <section class="section padding-1_5rem-1_5rem">
   <div class="container has-text-centered">
-    <figure class="container">
+    <figure class="container figure">
       <a href="/">
         <img
-          src="static/img/103_button2.png"
+          src="static/img/button_gotoTOP.png"
           alt="トップへ戻る"
           id="goto-top"
         />
