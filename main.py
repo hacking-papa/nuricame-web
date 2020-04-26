@@ -78,6 +78,21 @@ def manifest():
     return send_from_directory("static", "manifest.json")
 
 
+@app.route("/apple-touch-icon.png")
+def apple_touch_icon():
+    return send_from_directory("static", "apple-touch-icon.png")
+
+
+@app.route("/android-chrome-192x192.png")
+def android_chrome_192x192():
+    return send_from_directory("static", "android-chrome-192x192.png")
+
+
+@app.route("/android-chrome-512x512.png")
+def android_chrome_512x512():
+    return send_from_directory("static", "android-chrome-512x512.png")
+
+
 @app.route("/", methods=["GET"])
 def index():
     app.logger.debug("GET /index")
@@ -92,15 +107,15 @@ def result():
 
     if "image" not in request.files:
         app.logger.warning("Image parameter not POSTed!")
-        return redirect_with_flash("/", "Warning: Image parameter not POSTed!", "is-warning")
+        return redirect_with_flash("/", "Warning: イメージパラメータがありません！", "is-warning")
     image = request.files.get("image")
     app.logger.debug(f"Uploaded: {image}")
     if image.filename == "":
         app.logger.warning("No image has been selected!")
-        return redirect_with_flash("/", "Warning: No image has been selected!", "is-warning")
+        return redirect_with_flash("/", "Warning: 画像が選ばれていません。もう一度はじめからやりなおしてください。", "is-warning")
     if not allowed_file(image.filename):
         app.logger.warning("Unauthorized extensions!")
-        return redirect_with_flash("/", "Warning: Unauthorized extensions!", "is-warning")
+        return redirect_with_flash("/", "Warning: ぬりえにできない種類の画像です。違う画像で試しください。", "is-warning")
 
     img = np.frombuffer(image.read(), dtype=np.uint8)
     img = cv2.imdecode(img, 1)
