@@ -14,19 +14,37 @@ figure {
 .video {
   max-width: 400px;
   max-height: 200px;
-  margin: auto
+  margin: auto;
 }
 
 img#selectPhoto {
   max-width: 250px;
   min-width: 200px;
-  width: 20vw;
+  width: 30vw;
 }
 
 img#gotoTop {
   max-width: 200px;
   min-width: 150px;
   width: 20vw;
+}
+
+.arrow-icon {
+  width: 12vw;
+  max-width: 120px;
+  min-width: 80px;
+}
+
+.info-icon {
+  width: 12vw;
+  max-width: 128px;
+  max-height: 128px;
+}
+
+.info-icon-box {
+  height: 8vw;
+  display: flex;
+  align-items: center;
 }
 
 #brand-icon {
@@ -66,6 +84,7 @@ button#cancel {
 
 button#submit {
   margin-left: auto;
+  background-color: #18b131;
 }
 
 #disclaimer {
@@ -82,11 +101,6 @@ button#submit {
 
 .background-theme-color {
   background-color: #fefef1;
-}
-
-.info-icon {
-  max-width: 128px;
-  width: 15vw;
 }
 
 .padding-1_5rem-1_5rem {

@@ -50,7 +50,8 @@
     />
     <meta
       content="外出できなくて遊ぶものがない！家遊びに飽きた！という子どもたちのために。撮ったものをなんでもぬりえにしてくれる魔法のカメラ「ぬりカメ」をWEBばんで公開します。ぜひ、ご家庭でぬりえを作って遊んでください。"
-      name="description"/>
+      name="description"
+    />
     <meta
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
       name="viewport"
@@ -85,10 +86,10 @@
     {% endblock %}
 
     <section>
-      <div class="columns margin-bottom-4rem">
-        <div class="column is-half">
+      <div class="columns is-centered margin-bottom-4rem">
+        <div class="column is-narrow">
           <div class="container has-text-centered">
-            <h2 class="title is-size-4 is-size-6-mobile margin-bottom-2rem">
+            <h2 class="title is-size-4 is-size-6-mobile">
               おといあわせはこちら
             </h2>
             <div class="container is-inline-block">
@@ -96,11 +97,15 @@
                 <a
                   href="mailto:team.hacking.papa@gmail.com?subject=【ぬりカメ】 "
                 >
-                  <img
-                    class="container image info-icon margin-bottom-2rem"
-                    src="static/img/011_mail.png"
-                    alt="メール"
-                  />
+                  <div class="is-flex">
+                    <figure class="info-icon-box margin-bottom-1rem">
+                      <img
+                        class="container image info-icon"
+                        src="static/img/011_mail.png"
+                        alt="メール"
+                      />
+                    </figure>
+                  </div>
                   <span class="is-size-4 is-size-6-mobile has-text-info"
                     >team.hacking.papa@gmail.com</span
                   >
@@ -109,25 +114,25 @@
             </div>
           </div>
         </div>
-        <div class="column is-half is-hidden-mobile">
+        <div class="column is-narrow is-hidden-mobile">
           <div class="container has-text-centered">
-            <h3 class="title is-size-4 is-size-6-mobile margin-bottom-2rem">
+            <h3 class="title is-size-4 is-size-6-mobile">
               スマートフォンはこちら
             </h3>
-            <div class="container">
-              <figure class="margin-bottom-2rem">
+            <div class="is-flex">
+              <figure class="info-icon-box margin-bottom-1rem">
                 <img
+                  class="container info-icon"
                   src="static/img/qr-code.svg"
                   alt="QRコード"
-                  class="info-icon"
                 />
               </figure>
-              <a
-                href="https://nuricame.hacking-papa.com"
-                class="is-size-4 is-size-6-mobile has-text-info"
-                >https://nuricame.hacking-papa.com</a
-              >
             </div>
+            <a
+              href="https://nuricame.hacking-papa.com"
+              class="is-size-4 is-size-6-mobile has-text-info"
+              >https://nuricame.hacking-papa.com</a
+            >
           </div>
         </div>
       </div>
