@@ -7,8 +7,20 @@ body {
 }
 
 figure {
-  max-width: 750px;
+  max-width: 400px;
   margin: auto;
+}
+
+img#selectPhoto {
+  max-width: 250px;
+  min-width: 200px;
+  width: 20vw;
+}
+
+img#gotoTop {
+  max-width: 200px;
+  min-width: 150px;
+  width: 20vw;
 }
 
 #brand-icon {
@@ -85,6 +97,10 @@ button#submit {
 
 .padding-1_5rem-1_5rem {
   padding: 1.5rem 1.5rem;
+}
+
+.padding-0rem-3rem {
+  padding: 0rem 3rem;
 }
 
 .margin-bottom-8rem {
