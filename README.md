@@ -1,5 +1,8 @@
 # nuricame-web
 
+![](https://github.com/hacking-papa/nuricame-web/workflows/on%20Push/badge.svg)
+![](https://mirrors.creativecommons.org/presskit/buttons/88x31/svg/by-nc.eu.svg)
+
 ![logo](https://user-images.githubusercontent.com/32637762/80259456-96332b00-86c0-11ea-96c1-92ac7be7e228.png)
 
 Make a contour by pictures, Web version.
@@ -86,4 +89,4 @@ Special thanks to Saining Xie.
 
 ### License
 
-[GOOD HACKING PAPA LICENSE](LICENSE.md)
+Published in [GOOD HACKING PAPA LICENSE](LICENSE.md) made based on [CC-BY-NC](https://creativecommons.org/licenses/by-nc/4.0/legalcode.ja).
