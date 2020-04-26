@@ -9,8 +9,8 @@
   </div>
 </section>
 <section class="section padding-1_5rem-1_5rem" x-data="showResult()">
-  <div class="container has-text-centered">
-    <figure class="image margin-bottom-2rem">
+  <div class="el-icon-plus has-text-centered">
+    <figure class="box image margin-bottom-2rem">
       <!-- PWA -->
       <div x-show="isPwa()">
         <a href="data:image/png;base64,{{ nurie }}" download>
@@ -22,10 +22,15 @@
       </div>
       <!-- Not PWA -->
       <div x-show="!isPwa()">
-        <img src="data:image/png;base64,{{ nurie }}" alt="ぬりえになった画像" />
+        <img
+          src="data:image/png;base64,{{ nurie }}"
+          alt="ぬりえになった画像"
+        />
       </div>
     </figure>
-    <div class="has-text-weight-bold is-size-4 is-size-6-mobile line-height-2rem">
+    <div
+      class="has-text-weight-bold is-size-4 is-size-6-mobile line-height-2rem"
+    >
       ぬりえが<ruby>完成<rt>かんせい</rt></ruby
       >したよ！<br />ダウンロードして<ruby>印刷<rt>いんさつ</rt></ruby
       >しよう！
@@ -36,11 +41,7 @@
   <div class="container has-text-centered">
     <figure class="container">
       <a href="/">
-        <img
-          src="static/img/103_button2.png"
-          alt="トップへ戻る"
-          id="gotoTop"
-        />
+        <img src="static/img/103_button2.png" alt="トップへ戻る" id="gotoTop" />
       </a>
     </figure>
   </div>
