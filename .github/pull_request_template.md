@@ -18,10 +18,10 @@ A clear and concise description of where may be affected by the changes.
 
 Steps to check the behavior:
 
-1. Update Libraries '...'
-2. Import Database '....'
-3. Reload Pages '....'
-4. Click on '...'
+1. Update Libraries `...`
+2. Import Database `...`
+3. Reload Pages `...`
+4. Click on `...`
 
 ## Additional context
 
