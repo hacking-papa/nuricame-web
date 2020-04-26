@@ -11,6 +11,12 @@ figure {
   margin: auto;
 }
 
+.video {
+  max-width: 400px;
+  max-height: 200px;
+  margin: auto
+}
+
 img#selectPhoto {
   max-width: 250px;
   min-width: 200px;
@@ -81,18 +87,6 @@ button#submit {
 .info-icon {
   max-width: 128px;
   width: 15vw;
-}
-
-.width-80vw {
-  width: 80vw;
-}
-
-.width-60vw {
-  width: 60vw;
-}
-
-.width-40vw {
-  width: 40vw;
 }
 
 .padding-1_5rem-1_5rem {
