@@ -11,19 +11,24 @@ figure {
   margin: auto;
 }
 
+figure#top-logo {
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
 .video {
   max-width: 400px;
   max-height: 200px;
   margin: auto;
 }
 
-img#selectPhoto {
+img#select-photo {
   max-width: 250px;
   min-width: 200px;
   width: 30vw;
 }
 
-img#gotoTop {
+img#goto-top {
   max-width: 200px;
   min-width: 150px;
   width: 20vw;
@@ -50,7 +55,6 @@ img#gotoTop {
 #brand-icon {
   max-width: 128px;
   width: 15vw;
-  height: 15vw;
   margin-left: auto;
 }
 
