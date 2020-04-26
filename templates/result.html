@@ -1,16 +1,16 @@
 {% extends "base.html" %} {% block content %}
 <section class="hero">
-  <div class="hero-body">
-    <div class="container has-text-centered">
+  <div class="hero-body padding-1_5rem-1_5rem">
+    <div class="container figure has-text-centered">
       <a href="/">
-        <img src="static/img/02_logo.png" alt="ぬりカメ"/>
+        <img src="static/img/nuricame-web_logo.png" alt="ぬりカメ" />
       </a>
     </div>
   </div>
 </section>
-<section class="section" x-data="showResult()">
+<section class="section padding-1_5rem-1_5rem" x-data="showResult()">
   <div class="container has-text-centered">
-    <figure class="image">
+    <figure class="box image figure margin-bottom-2rem">
       <!-- PWA -->
       <div x-show="isPwa()">
         <a href="data:image/png;base64,{{ nurie }}" download>
@@ -22,67 +22,56 @@
       </div>
       <!-- Not PWA -->
       <div x-show="!isPwa()">
-        <img src="data:image/png;base64,{{ nurie }}" alt="ぬりえになった画像"/>
+        <img src="data:image/png;base64,{{ nurie }}" alt="ぬりえになった画像" />
       </div>
     </figure>
-    <div>
-      ぬりえ
-      <ruby>完成
-        <rt>かんせい</rt>
-      </ruby
-      >
-      したよ！<br/>
-      ダウンロードして
-      <ruby>印刷
-        <rt>いんさつ</rt>
-      </ruby
-      >
-      しよう！
+    <div
+      class="has-text-weight-bold is-size-4 is-size-6-mobile line-height-2rem"
+    >
+      ぬりえが<ruby>完成<rt>かんせい</rt></ruby
+      >したよ！<br /><ruby>上<rt>うえ</rt></ruby
+      >の<ruby>画像<rt>がぞう</rt></ruby
+      >を<ruby>保存<rt>ほぞん</rt></ruby
+      >して<ruby>印刷<rt>いんさつ</rt></ruby
+      >しよう！
     </div>
   </div>
 </section>
-<section class="section has-text-centered">
-  <div class="container is-inline-block">
-    <div class="container is-flex">
-      <a href="/">
-        <img src="static/img/03_button2.png" alt="トップへ戻る"/>
-      </a>
-    </div>
-  </div>
-</section>
-<section class="section">
+<section class="section padding-1_5rem-1_5rem">
   <div class="container has-text-centered">
-    <div>
-      せっかく
-      <ruby>作
-        <rt>つく</rt>
-      </ruby
-      >
-      ったあなただけのぬりえ、<br/>
-      <ruby>塗
-        <rt>ぬ</rt>
-      </ruby
-      >
-      った
-      <ruby>作品
-        <rt>さくひん</rt>
-      </ruby
-      >
-      は。ぜひ
-      <ruby>SNS
-        <rt>えすえぬえす</rt>
-      </ruby
-      >
-      でシェアして<br/>みんなに
-      <ruby>自慢
-        <rt>じまん</rt>
-      </ruby
-      >
-      しよう！
+    <figure class="container figure">
+      <a href="/">
+        <img
+          src="static/img/button_gotoTOP.png"
+          alt="トップへ戻る"
+          id="goto-top"
+        />
+      </a>
+    </figure>
+  </div>
+</section>
+<section class="section padding-1_5rem-1_5rem">
+  <div class="container has-text-centered">
+    <div
+      class="has-text-weight-bold is-size-4 is-size-6-mobile line-height-2rem margin-bottom-2rem"
+    >
+      せっかく<ruby>作<rt>つく</rt></ruby
+      >ったあなただけのぬりえ、<br /><ruby>塗<rt>ぬ</rt></ruby
+      >った<ruby>作品<rt>さくひん</rt></ruby
+      >は、ぜひ<ruby>SNS<rt>えすえぬえす</rt></ruby
+      >でシェアして<br />みんなに<ruby>自慢<rt>じまん</rt></ruby
+      >しよう！
     </div>
-    <h2 class="title">
-      ＃ぬりカメでぬりえ
-    </h2>
+    <a
+      href="https://twitter.com/search?q=%23%E3%81%AC%E3%82%8A%E3%82%AB%E3%83%A1%E3%81%A7%E3%81%AC%E3%82%8A%E3%81%88"
+    >
+      <h2
+        class="title has-text-weight-bold is-size-3 is-size-5-mobile margin-bottom-6rem"
+        id="twitter-hash"
+      >
+        ＃ぬりカメでぬりえ
+      </h2>
+    </a>
   </div>
 </section>
 {% endblock %}

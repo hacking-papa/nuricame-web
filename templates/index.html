@@ -1,191 +1,330 @@
 {% extends "base.html" %} {% block content %}
-<section class="section is-hidden-mobile">
-  <nav class="navbar">
-    <nav class="navbar-brand">
-      <img src="static/img/01_hackingpapa_logo.png" alt="はっきんぐパパ" />
-    </nav>
+<section class="section padding-1_5rem-1_5rem">
+  <nav id="brand-icon">
+    <img src="static/img/hacking-papa_logo.png" alt="はっきんぐパパ" />
   </nav>
 </section>
 <section class="hero">
   <div class="hero-body">
     <div class="container has-text-centered">
-      <div>
-        <img src="static/img/02_logo.png" alt="ぬりカメ" />
-      </div>
-      <div class="content is-medium">
-        <p>
-          <ruby>外出<rt>がいしゅつ</rt></ruby
-          >できなくて<ruby>遊<rt>あそ</rt></ruby
-          >ぶものがない！<br /><ruby>家遊<rt>いえあそ</rt></ruby
-          >びに<ruby>飽<rt>あ</rt></ruby
-          >きた！<br />という<ruby>子<rt>こ</rt></ruby
-          >どもたちのために。
-        </p>
-        <p>
-          <ruby>撮<rt>と</rt></ruby
-          >ったものをなんでも<br />ぬりえにしてくれる、<br /><ruby
-            >魔法<rt>まほう</rt></ruby
-          >のカメラ「ぬりカメ」を<br /><ruby>WEB<rt>うぇぶ</rt></ruby
-          >ばんで<ruby>公開<rt>こうかい</rt></ruby
-          >します。
-        </p>
-        <p>
-          ぜひ、ご<ruby>家庭<rt>かてい</rt></ruby
-          >で<ruby>子<rt>こ</rt></ruby
-          >どもたちと<ruby>一緒<rt>いっしょ</rt></ruby
-          >に、<br />ぬりえを<ruby>作<rt>つく</rt></ruby
-          >って<ruby>遊<rt>あそ</rt></ruby
-          >んでください。
-        </p>
-      </div>
+      <figure id="top-logo" class="image">
+        <img src="static/img/nuricame-web_logo.png" alt="ぬりカメ" />
+      </figure>
     </div>
   </div>
 </section>
-<section>
+<section class="section">
   <div class="container has-text-centered">
-    <h2 class="title">＼さっそくぬりえをつくる／</h2>
-    <div x-data="selectPhoto()">
-      <div id="pageloader" class="pageloader is-active" x-show="isLoading()">
-        <span class="title"
-          >ぬりえを<ruby>作<rt>つく</rt></ruby
-          >ってるよ！ちょっと<ruby>待<rt>ま</rt></ruby
-          >っててね。</span
-        >
-      </div>
-      <form action="/result" enctype="multipart/form-data" method="post">
-        <div class="file is-large is-light is-centered">
-          <label class="file-label">
-            <input
-              class="file-input"
-              type="file"
-              accept="image/{{ allowed_extensions | join(',') }}"
-              name="image"
-              id="file-input"
-              x-on:change="openPreview()"
+    <div
+      class="has-text-weight-bold is-size-4 is-size-6-mobile line-height-2rem"
+    >
+      <ruby>外出<rt>がいしゅつ</rt></ruby
+      >できなくて、<br />おうち<ruby>遊<rt>あそ</rt></ruby
+      >びにも<ruby>飽<rt>あ</rt></ruby
+      >きてきた！<br />そんな<ruby>全国<rt>ぜんこく</rt></ruby
+      >の<ruby>子<rt>こ</rt></ruby
+      >どもたちのために。<br /><ruby>好<rt>す</rt></ruby
+      >きなものをなんでも<br /><ruby>撮<rt>と</rt></ruby
+      >ってぬりえにして<ruby>遊<rt>あそ</rt></ruby
+      >べる<br /><ruby>魔法<rt>まほう</rt></ruby
+      >のカメラ「ぬりカメ」を<ruby>WEB<rt>うぇぶ</rt></ruby
+      >ばんで<br /><ruby>無料<rt>むりょう</rt></ruby
+      ><ruby>公開<rt>こうかい</rt></ruby
+      >します。<br />ぜひ、ご<ruby>家庭<rt>かてい</rt></ruby
+      >で<ruby>子<rt>こ</rt></ruby
+      >どもたちと<br /><ruby>一緒<rt>いっしょ</rt></ruby
+      >にいろんなものをぬりえにして<br />おうち<ruby>時間<rt>じかん</rt></ruby
+      >をたくさん<ruby>楽<rt>たの</rt></ruby
+      >んでください。
+    </div>
+  </div>
+</section>
+<section x-data="selectPhoto()" class="section padding-1_5rem-1_5rem">
+  <div class="container has-text-centered">
+    <h2
+      class="title has-text-weight-bold is-size-3 is-size-5-mobile margin-bottom-2rem"
+    >
+      ＼さっそくぬりえをつくる／
+    </h2>
+    <div id="pageloader" class="pageloader is-active" x-show="isLoading()">
+      <span
+        class="title has-text-weight-bold is-size-3 is-size-5-mobile line-height-2rem"
+        >ぬりえを<ruby>作<rt>つく</rt></ruby
+        >ってるよ！<br />ちょっと<ruby>待<rt>ま</rt></ruby
+        >っててね。</span
+      >
+    </div>
+    <form action="/result" enctype="multipart/form-data" method="post">
+      <div class="file is-large is-light is-centered">
+        <label class="file-label">
+          <input
+            class="file-input"
+            type="file"
+            accept="image/{{ allowed_extensions | join(',') }}"
+            name="image"
+            id="file-input"
+            x-on:change="openPreview()"
+          />
+          <figure class="figure margin-bottom-1rem">
+            <img
+              src="static/img/button_photoSelect.png"
+              alt="画像をアップする"
+              id="select-photo"
             />
-            <img src="static/img/03_take.png" alt="画像をアップする" />
-          </label>
-        </div>
-        <div class="modal" id="modal-preview">
-          <div class="modal-background"></div>
-          <div class="modal-card">
-            <header class="modal-card-head">
-              <p class="modal-card-title">
-                ぬりえにしたい
-                <ruby
-                  >画像
-                  <rt>がぞう</rt>
-                </ruby>
-              </p>
-              <button type="reset" aria-label="close" class="delete"></button>
-            </header>
-            <section class="modal-card-body">
-              <figure class="image">
+          </figure>
+        </label>
+      </div>
+      <p
+        class="has-text-weight-medium is-size-5 is-size-7-mobile line-height-2rem margin-bottom-2rem is-hidden-desktop"
+      >
+        ※<ruby>PC<rt>ぴーしー</rt></ruby
+        >からもご<ruby>利用<rt>りよう</rt></ruby
+        ><ruby>可能<rt>かのう</rt></ruby
+        >です。<br />その<ruby>場合<rt>ばあい</rt></ruby
+        >、<ruby>画像<rt>がぞう</rt></ruby
+        >アップのみになります。
+      </p>
+      <div class="modal" id="modal-preview">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p
+              class="modal-card-title has-text-weight-bold is-size-3 is-size-5-mobile"
+            >
+              ぬりえにしたい
+              <ruby
+                >画像
+                <rt>がぞう</rt>
+              </ruby>
+            </p>
+            <button type="reset" aria-label="close" class="delete"></button>
+          </header>
+          <section class="modal-card-body">
+            <div class="container">
+              <figure class="figure image">
                 <img alt="アップされた写真" id="image-preview" src="" />
               </figure>
-            </section>
-            <footer class="modal-card-foot">
-              <button
-                @click="closePreview()"
-                class="button is-medium is-outline"
-                id="cancel"
-                type="reset"
+            </div>
+          </section>
+          <footer class="modal-card-foot">
+            <button
+              @click="closePreview()"
+              class="button is-medium is-outline"
+              id="cancel"
+              type="reset"
+            >
+              <span class="has-text-weight-bold is-size-5 is-size-7-mobile"
+                >やめる</span
               >
-                やめる
-              </button>
-              <button
-                id="submit"
-                type="submit"
-                class="button is-large is-primary"
-                @click="startLoading()"
-              >
-                これでぬりえをつくる
-              </button>
-            </footer>
-          </div>
+            </button>
+            <button
+              id="submit"
+              type="submit"
+              class="button is-large is-primary"
+              @click="startLoading()"
+            >
+              これでぬりえをつくる
+            </button>
+          </footer>
         </div>
-      </form>
+      </div>
+    </form>
+  </div>
+</section>
+<section class="hero">
+  <div class="hero-body padding-1_5rem-1_5rem">
+    <div class="container has-text-centered">
+      <h2 class="has-text-weight-bold is-size-3 is-size-5-mobile">
+        ぬりカメ<ruby>WEB<rt>うぇぶ</rt></ruby
+        >ばんの<ruby>使<rt>つか</rt></ruby
+        >い<ruby>方<rt>かた</rt></ruby>
+      </h2>
     </div>
   </div>
 </section>
-<section>
+<section class="section padding-1_5rem-1_5rem">
   <div class="container has-text-centered">
-    <h2 class="title">
-      ぬりカメ<ruby>WEB<rt>うぇぶ</rt></ruby
-      >ばんの<ruby>使<rt>つか</rt></ruby
-      >い<ruby>方<rt>かた</rt></ruby>
-    </h2>
-    <div class="box">
-      <figure class="image is-4by3">
-        <img src="static/img/05_saruphoto.png" alt="サンプルの画像" />
+    <div class="container">
+      <figure class="figure margin-bottom-2rem padding-0rem-3rem">
+        <img src="static/img/monkey_original.png" alt="サンプルの画像" />
       </figure>
-      <div class="content is-medium">
-        スマホやパソコンのカメラで<ruby>写真<rt>しゃしん</rt></ruby
-        >を<ruby>撮<rt>と</rt></ruby
-        >る<br />
-        または<br />
-        お<ruby>気<rt>き</rt></ruby
+    </div>
+    <div
+      class="has-text-weight-bold is-size-4 is-size-6-mobile line-height-2rem margin-bottom-2rem"
+    >
+      ぬりえにしたいものが<br /><ruby>出来<rt>でき</rt></ruby
+      >るだけ<ruby>真<rt>ま</rt></ruby
+      >ん<ruby>中<rt>なか</rt></ruby
+      >に<ruby>来<rt>く</rt></ruby
+      >るように<br />カメラで<ruby>撮影<rt>さつえい</rt></ruby
+      >、<br />または<ruby>画像<rt>がぞう</rt></ruby
+      >をアップしよう！
+      <p
+        class="has-text-weight-medium is-size-5 is-size-7-mobile margin-bottom-2rem"
+      >
+        ※ぬりえになるのは<ruby>中央<rt>ちゅうおう</rt></ruby
+        >の<ruby>正方形<rt>せいほうけい</rt></ruby
+        ><ruby>領域<rt>りょういき</rt></ruby
+        >のみです。
+      </p>
+    </div>
+    <div class="container">
+      <figure class="figure margin-bottom-2rem">
+        <img
+          src="static/img/arrow-down.png"
+          alt="下向き矢印"
+          class="arrow-icon"
+        />
+      </figure>
+      <figure class="figure margin-bottom-2rem">
+        <img src="static/img/monkey_converted.png" alt="ぬりえになった画像" />
+      </figure>
+      <div
+        class="has-text-weight-bold is-size-4 is-size-6-mobile margin-bottom-2rem"
+      >
+        ぬりえ<ruby>完成<rt>かんせい</rt></ruby
+        >！<br />ダウンロードしてね。
+      </div>
+      <figure class="figure margin-bottom-2rem">
+        <img
+          src="static/img/arrow-down.png"
+          alt="下向き矢印"
+          class="arrow-icon"
+        />
+      </figure>
+      <figure class="figure margin-bottom-2rem padding-0rem-3rem">
+        <img src="static/img/printer.png" alt="印刷風景" />
+      </figure>
+    </div>
+    <div
+      class="has-text-weight-bold is-size-4 is-size-6-mobile line-height-2rem margin-bottom-2rem"
+    >
+      ダウンロードしたぬりえを、<br />プリンター<ruby
+        >印刷<rt>いんさつ</rt></ruby
+      >するだけ！<br /><ruby>自由<rt>じゆう</rt></ruby
+      >に<ruby>塗<rt>ぬ</rt></ruby
+      >っていっぱい<ruby>楽<rt>たの</rt></ruby
+      >しんでね。
+    </div>
+  </div>
+</section>
+<section class="hero">
+  <div class="hero-body padding-1_5rem-1_5rem">
+    <div class="container has-text-centered">
+      <h2 class="title has-text-weight-bold is-size-3 is-size-5-mobile">
+        ぬりカメとは
+      </h2>
+    </div>
+  </div>
+</section>
+<section class="section padding-1_5rem-1_5rem">
+  <div class="container has-text-centered">
+    <div
+      class="has-text-weight-bold is-size-4 is-size-6-mobile line-height-2rem"
+    >
+      <p class="margin-bottom-2rem">
+        <ruby>好<rt>す</rt></ruby
+        >きなものを、パシャっとぬりえに。
+      </p>
+      <p class="margin-bottom-2rem">
+        <ruby>楽<rt>たの</rt></ruby
+        >しかった<ruby>動物園<rt>どうぶつえん</rt></ruby
+        >。お<ruby>気<rt>き</rt></ruby
         >に<ruby>入<rt>い</rt></ruby
-        >りの<ruby>画像<rt>がぞう</rt></ruby
-        >をアップ
-      </div>
+        >りの<br />ぬいぐるみ。ママとのツーショット。<br /><ruby
+          >子<rt>こ</rt></ruby
+        >どもの<ruby>目<rt>め</rt></ruby
+        >に<ruby>映<rt>うつ</rt></ruby
+        >る<ruby>日々<rt>ひび</rt></ruby
+        >の<ruby>情景<rt>じょうけい</rt></ruby
+        >を<br /><ruby>大好<rt>だいす</rt></ruby
+        >きなぬりえにして<ruby>遊<rt>あそ</rt></ruby
+        >べたらいいなと<br /><ruby>思<rt>おも</rt></ruby
+        >ったのがきっかけです。
+      </p>
+      <p>
+        カメの<ruby>形<rt>かたち</rt></ruby
+        >のカメラで<ruby>写真<rt>しゃしん</rt></ruby
+        >を<ruby>撮<rt>と</rt></ruby
+        >ると、<br />ぬりえになってその<ruby>場<rt>ば</rt></ruby
+        >で<br />プリントされます。<br />じぶんだけのぬりえを<ruby
+          >作<rt>つく</rt></ruby
+        >って、<br /><ruby>塗<rt>ぬ</rt></ruby
+        >って、<ruby>楽<rt>たの</rt></ruby
+        >しめる<ruby>魔法<rt>まほう</rt></ruby
+        >のカメラです。
+      </p>
     </div>
-    <figure class="container image is-64x64 is-flex">
-      <img class="" src="static/img/arrow-down.svg" alt="下向き矢印" />
+  </div>
+</section>
+<section class="section is-marginless is-paddingless">
+  <div class="image is-16by9">
+    <iframe
+      width="560"
+      height="315"
+      class="has-ratio"
+      src="https://www.youtube.com/embed/M2JKckXSP6g?showinfo=0"
+      frameborder="0"
+      allowfullscreen
+    ></iframe>
+  </div>
+</section>
+<section class="section padding-1_5rem-1_5rem">
+  <div class="container has-text-centered">
+    <figure class="figure padding-0rem-3rem">
+      <img src="static/img/products.png" alt="1号機" />
     </figure>
-    <div class="box">
-      <figure class="image is-4by3">
-        <img src="static/img/06_nurieka.png" alt="ぬりえになった画像" />
-      </figure>
-      <div class="content is-medium">
-        ぬりえ<ruby>化<rt>か</rt></ruby
-        ><ruby>完了<rt>かんりょう</rt></ruby
-        >！
-      </div>
-    </div>
-    <figure class="container image is-64x64 is-flex">
-      <img class="" src="static/img/arrow-down.svg" alt="下向き矢印" />
-    </figure>
-    <div class="box">
-      <figure class="image is-4by3">
-        <img src="static/img/07_nurieflam_4093x2894.png" alt="印刷風景" />
-      </figure>
-      <div class="content is-medium">
-        プリンターで<ruby>印刷<rt>いんさつ</rt></ruby
-        >。<br />
-        <ruby>存分<rt>ぞんぶん</rt></ruby
-        >に<ruby>塗<rt>ぬ</rt></ruby
-        >ってね。
-      </div>
+    <div
+      class="has-text-weight-bold is-size-5 is-size-7-mobile margin-bottom-2rem"
+    >
+      ぬりカメ1<ruby>号機<rt>ごうき</rt></ruby>
     </div>
   </div>
 </section>
 <section>
-  <div class="container has-text-centered">
-    <h2 class="title">ぬりカメとは</h2>
-    <figure class="image is-16by9">
-      <iframe
-        class="has-ratio"
-        width="640"
-        height="360"
-        src="https://www.youtube.com/embed/M2JKckXSP6g?showinfo=0"
-        frameborder="0"
-        allowfullscreen
-      ></iframe>
-    </figure>
-    <div class="box">
-      <figure class="image">
-        <img src="static/img/08_products.png" alt="1号機" />
-      </figure>
-      <div class="content is-medium">
-        ぬりカメ1<ruby>号機<rt>ごうき</rt></ruby>
+  <figure class="image margin-bottom-4rem">
+    <img src="static/img/child.png" alt="ぬりえしてる様子" />
+  </figure>
+</section>
+<section>
+  <div class="container is-size-7 margin-bottom-4rem">
+    <div class="columns is-marginless is-paddingless">
+      <div id="disclaimer" class="column content is-half is-offset-one-quarter">
+        <h2 class="title is-7">【本サービスについて】</h2>
+        本サービスは、はっきんぐパパ（以下「運営」といいます）が長引く新型コロナウイルスによる外出自粛に退屈する子どもたちのために開発、提供する、お客さまの撮影する又は保有する写真や画像をぬりえに変換するサービスです。第三者の写真、画像等を使用する場合は、本人の許諾を受けた上で使用いただくようにお願いいたします。本サービスは無料でご利用いただけます。又、ソースコードは全て<a
+          href="https://github.com/hacking-papa/nuricame-web"
+          >GitHub</a
+        >にて公開しております。<br />
+        うっ屈とする日々が続いておりますが、みんなで一緒に乗り切っていきましょう。
+        <h2 class="title is-7">【禁止事項】</h2>
+        本サービス及び作成したぬりえ画像の使用について、以下に定める行為を禁止いたします。
+        <ul>
+          <li>運営又は第三者の知的財産権又は肖像権等の権利の侵害行為</li>
+          <li>商標登録・意匠登録する行為</li>
+          <li>営利・宣伝目的での使用行為</li>
+          <li>性的、差別的不快感を与える行為、又は公序良俗に反する行為</li>
+          <li>運営又は第三者に不快感、不利益を与える行為</li>
+          <li>第三者のプライバシーを侵害する行為</li>
+          <li>政治目的又は宗教目的での使用行為</li>
+          <li>その他、運営が不適切と判断する行為</li>
+        </ul>
+        <h2 class="title is-7">【免責事項】</h2>
+        <ul>
+          <li>
+            運営は、本サービスでお客さまが使用した画像及び作成したぬりえ画像の一切を保持しません。
+          </li>
+          <li>
+            運営は、理由の如何を問わず、予告なく本サービスの提供を中断又は終了できるものとします。
+          </li>
+          <li>
+            運営は、本サービスを使用して生じた、トラブル、不利益、損害等について、一切の責任を負わないものとします。
+          </li>
+          <li>
+            ご利用の環境によっては、本サービスが正常に動作しない場合がございます。正常に動作しない場合でもサポートいたしかねますので、あらかじめご了承ください。
+          </li>
+        </ul>
       </div>
     </div>
-  </div>
-</section>
-<section class="is-fullheight">
-  <div class="image is-fullwidth">
-    <img src="static/img/09_photo.png" alt="ぬりえしてる様子" />
   </div>
 </section>
 {% endblock %}

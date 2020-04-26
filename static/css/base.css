@@ -3,7 +3,60 @@
 body {
   background: #fefef1;
   background-color: #fefef1;
-  font-family: "M PLUS Rounded 1c";
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+.figure {
+  max-width: 400px;
+  margin: auto;
+}
+
+#top-logo {
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+img#select-photo {
+  max-width: 250px;
+  min-width: 200px;
+  width: 30vw;
+}
+
+img#goto-top {
+  max-width: 200px;
+  min-width: 150px;
+  width: 20vw;
+}
+
+.arrow-icon {
+  width: 12vw;
+  max-width: 120px;
+  min-width: 80px;
+}
+
+.info-icon {
+  width: 12vw;
+  max-width: 128px;
+  max-height: 128px;
+}
+
+.info-icon-box {
+  height: 8vw;
+  display: flex;
+  align-items: center;
+}
+
+#brand-icon {
+  max-width: 128px;
+  width: 15vw;
+  margin-left: auto;
+}
+
+#footer-brand-icon {
+  max-width: 128px;
+  width: 25vw;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #pageloader {
@@ -29,4 +82,54 @@ button#cancel {
 
 button#submit {
   margin-left: auto;
+  background-color: #18b131;
+}
+
+#disclaimer {
+  line-height: 0.75rem;
+}
+
+#disclaimer > .title {
+  margin-bottom: 0.5rem;
+}
+
+#twitter-hash {
+  color: #18b131;
+}
+
+.footer {
+  background: #fefef1;
+  background-color: #fefef1;
+}
+
+.padding-1_5rem-1_5rem {
+  padding: 1.5rem 1.5rem;
+}
+
+.padding-0rem-3rem {
+  padding: 0rem 3rem;
+}
+
+.margin-bottom-8rem {
+  margin-bottom: 8rem;
+}
+
+.margin-bottom-6rem {
+  margin-bottom: 6rem;
+}
+
+.margin-bottom-4rem {
+  margin-bottom: 4rem;
+}
+
+.margin-bottom-2rem {
+  margin-bottom: 2rem;
+}
+
+.margin-bottom-1rem {
+  margin-bottom: 1rem;
+}
+
+.line-height-2rem {
+  line-height: 2rem;
 }

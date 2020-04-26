@@ -50,14 +50,15 @@
     />
     <meta
       content="外出できなくて遊ぶものがない！家遊びに飽きた！という子どもたちのために。撮ったものをなんでもぬりえにしてくれる魔法のカメラ「ぬりカメ」をWEBばんで公開します。ぜひ、ご家庭でぬりえを作って遊んでください。"
-      name="description"/>
+      name="description"
+    />
     <meta
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
       name="viewport"
     />
     <link
-      href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c"
       rel="stylesheet"
+      href="https://fonts.googleapis.com/earlyaccess/notosansjp.css"
     />
     <link
       href="{{ url_for('static', filename='css/bulma-0.8.2/css/bulma.min.css') }}"
@@ -85,21 +86,27 @@
     {% endblock %}
 
     <section>
-      <div class="columns">
-        <div class="column is-half">
+      <div class="columns is-centered margin-bottom-4rem">
+        <div class="column is-narrow">
           <div class="container has-text-centered">
-            <h2 class="title">おといあわせはこちら</h2>
+            <h2 class="title is-size-4 is-size-6-mobile">
+              おといあわせはこちら
+            </h2>
             <div class="container is-inline-block">
-              <div class="container is-flex">
+              <div class="container is-flex margin-bottom-2rem">
                 <a
                   href="mailto:team.hacking.papa@gmail.com?subject=【ぬりカメ】 "
                 >
-                  <img
-                    alt="メール"
-                    class="container image is-128x128"
-                    src="static/img/envelope-regular.svg"
-                  />
-                  <span class="is-size-5 has-text-info"
+                  <div class="is-flex">
+                    <figure class="figure info-icon-box margin-bottom-1rem">
+                      <img
+                        class="container image info-icon"
+                        src="static/img/mail.png"
+                        alt="メール"
+                      />
+                    </figure>
+                  </div>
+                  <span class="is-size-4 is-size-6-mobile has-text-info"
                     >team.hacking.papa@gmail.com</span
                   >
                 </a>
@@ -107,15 +114,23 @@
             </div>
           </div>
         </div>
-        <div class="column is-half is-hidden-mobile">
+        <div class="column is-narrow is-hidden-mobile">
           <div class="container has-text-centered">
-            <h2 class="title">スマートフォンはこちら</h2>
-            <figure class="container image is-128x128">
-              <img alt="QRコード" class="" src="static/img/qr-code.svg" />
-            </figure>
+            <h3 class="title is-size-4 is-size-6-mobile">
+              スマートフォンはこちら
+            </h3>
+            <div class="is-flex">
+              <figure class="figure info-icon-box margin-bottom-1rem">
+                <img
+                  class="container info-icon"
+                  src="static/img/qr-code.svg"
+                  alt="QRコード"
+                />
+              </figure>
+            </div>
             <a
-              class="is-size-5 has-text-info"
               href="https://nuricame.hacking-papa.com"
+              class="is-size-4 is-size-6-mobile has-text-info"
               >https://nuricame.hacking-papa.com</a
             >
           </div>
@@ -124,21 +139,28 @@
     </section>
     <footer class="footer">
       <div class="content has-text-centered">
-        <figure>
-          <img
-            alt="はっきんぐパパ"
-            src="static/img/10_hackingpapa_logo_2.png"
-          />
-        </figure>
-        <p class="is-size-7">
-          &copy; 2020 はっきんぐパパ おーるらいつりざーぶど
-        </p>
+        <div class="container is-inline-block">
+          <div
+            class="container is-flex margin-bottom-2rem"
+            id="footer-brand-icon"
+          >
+            <a href="https://hacking-papa.com">
+              <img
+                src="static/img/hacking-papa_logo.png"
+                alt="はっきんぐパパ"
+              />
+            </a>
+          </div>
+          <p class="is-size-6 is-size-7-mobile">
+            &copy; 2020 はっきんぐパパ おーるらいつりざーぶど
+          </p>
+        </div>
       </div>
     </footer>
 
     <script src="{{ url_for('static', filename='js/alpine-2.2.5/alpine.js') }}"></script>
     <script src="{{ url_for('static', filename='js/BulmaJS-0.10.3/bulma.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
 
     <!-- Google Analytics -->
     <script
