@@ -100,8 +100,11 @@ def index():
     return render_template("index.html", allowed_extensions=allowed_extensions)
 
 
-@app.route("/result", methods=["POST"])
+@app.route("/result", methods=["GET", "POST"])
 def result():
+    if request.method == "GET":
+        app.logger.debug("GET /result")
+        return redirect("/")
     app.logger.debug("POST /result")
     start = time.time()
 
