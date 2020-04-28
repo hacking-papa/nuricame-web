@@ -100,8 +100,11 @@ def index():
     return render_template("index.html", allowed_extensions=allowed_extensions)
 
 
-@app.route("/result", methods=["POST"])
+@app.route("/result", methods=["GET", "POST"])
 def result():
+    if request.method == "GET":
+        app.logger.debug("GET /result")
+        return redirect("/")
     app.logger.debug("POST /result")
     start = time.time()
 
@@ -115,10 +118,15 @@ def result():
         return redirect_with_flash("/", "Warning: 画像が選ばれていません。もう一度はじめからやりなおしてください。", "is-warning")
     if not allowed_file(image.filename):
         app.logger.warning("Unauthorized extensions!")
-        return redirect_with_flash("/", "Warning: ぬりえにできない種類の画像です。違う画像で試しください。", "is-warning")
+        return redirect_with_flash("/", "Warning: ぬりえにできない種類の画像です。違う画像でお試しください。", "is-warning")
 
-    img = np.frombuffer(image.read(), dtype=np.uint8)
-    img = cv2.imdecode(img, 1)
+    try:
+        img = image.read()
+        img = np.frombuffer(img, dtype=np.uint8)
+        img = cv2.imdecode(img, 1)
+    except Exception as e:
+        app.logger.error(f"Exception: {e}")
+        return redirect_with_flash("/", "Warning: 画像の読み込みに失敗しました。 もう一度はじめからやりなおしてください。", "is-warning")
     img = HED.convert(img)
     framed = Frame.compose(img)
     data = cv2.imencode(".png", framed)[1].tostring()
